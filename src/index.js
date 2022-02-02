@@ -10,12 +10,15 @@ import "@fontsource/roboto";
 import "@fontsource/roboto-mono";
 
 import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const Home = (props) => (
   <div className="h-screen">
     <Navbar></Navbar>
-    <div className="flex h-full bg-neutral-200">
-      <div className="flex flex-col w-1/3 bg-neutral-350"></div>
+    <div className="flex bg-neutral-200 h-full">
+      <div className="bg-neutral-350 sidebar">
+        <Sidebar />
+      </div>
     </div>
   </div>
 );
