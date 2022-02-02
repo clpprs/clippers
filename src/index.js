@@ -1,26 +1,35 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom";
 
-// import classNames from 'classnames'
+// Router
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import '@fontsource/roboto'
-import '@fontsource/roboto-mono'
+// Styles and fonts
+import "./index.css";
+import "@fontsource/roboto";
+import "@fontsource/roboto-mono";
 
-import Navbar from './Navbar'
-// import SelectedTag from './Components/SelectedTag'
-import Tag from './Components/Tag'
+import Navbar from "./Navbar";
 
-function App(props) {
-    return (<div className='h-screen'>
-        <Navbar></Navbar>
-        <div className='flex h-full bg-neutral-200'>
-            <div className='flex flex-col w-1/3 bg-neutral-350'></div>
-        </div>
-    </div>)
+const Home = (props) => (
+  <div className="h-screen">
+    <Navbar></Navbar>
+    <div className="flex h-full bg-neutral-200">
+      <div className="flex flex-col w-1/3 bg-neutral-350"></div>
+    </div>
+  </div>
+);
+
+function Router(props) {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-);
+ReactDOM.render(<Router />, document.getElementById("root"));
