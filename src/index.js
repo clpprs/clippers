@@ -4,6 +4,11 @@ import ReactDOM from "react-dom";
 // Router
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
+// Recoil
+import { RecoilRoot } from "recoil";
+import { Suspense } from "react";
+import { CircularProgress } from "@mui/material";
+
 // Styles and fonts
 import "./index.css";
 import "@fontsource/roboto";
@@ -11,16 +16,21 @@ import "@fontsource/roboto-mono";
 
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import { Clips } from "./components/Clips";
 
 const App = (props) => (
-  <div className="h-screen">
-    <Navbar></Navbar>
-    <div className="flex bg-neutral-200 h-full">
-      <div className="bg-neutral-350 sidebar">
-        <Sidebar />
-        <Outlet />
+  <div className="app h-screen w-screen overflow-hidden">
+    <RecoilRoot>
+      <Navbar />
+      <div className="main flex flex-row w-full h-full overflow-hidden">
+        <Sidebar className="w-64 flex-shrink-0 flex-grow-0" />
+        <div className="content flex-grow overflow-x-hidden overflow-y-scroll">
+          <Suspense fallback={<CircularProgress />}>
+            <Outlet />
+          </Suspense>
+        </div>
       </div>
-    </div>
+    </RecoilRoot>
   </div>
 );
 
@@ -29,7 +39,7 @@ function Router(props) {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index></Route>
+          <Route index element={<Clips />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
