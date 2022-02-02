@@ -16,31 +16,21 @@ FONT-FAMILIES
 }
 
 /*
-PADDINGS-AND-MARGINS
+MANUAL CLASSES
 */
 
-/*
-COLORS
-*/
+.app {
+}
 
-.bg-neutral-350 {
+.sidebar {
   background-color: #c4c4c4;
 }
 
-/*
-MANUAL CLASSES
-*/
+.content {
+}
 
 #tag-search {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   outline: none;
-}
-
-.fixed-important {
-  position: absolute !important;
-}
-
-.sidebar {
-  width: 18rem;
 }

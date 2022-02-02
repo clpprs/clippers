@@ -1,18 +1,28 @@
-import classNames from "classnames";
-import Tag from "./Components/Tag";
+import Tag from "./components/Tag";
 
 import { IconButton, Autocomplete, Box } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
-import tags from "./tags";
+import tagslist from "./tags";
+import { useSetRecoilState } from "recoil";
+
+// tags atom
+import { tags } from "./recoil";
+import { useState } from "react";
 
 function SearchBar(props) {
+  const setTags = useSetRecoilState(tags);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+
   return (
     <Autocomplete
       id="tag-search"
-      options={props.tags}
       autoHighlight
-      // getOptionLabel={(option) => option.label}
+      className="box-border p-1 w-full"
+      options={props.tags}
+      value={value}
+      inputValue={inputValue}
       renderOption={(props, option) => (
         <Box component="li" {...props}>
           <Tag tag={option} key={option} />
@@ -20,46 +30,42 @@ function SearchBar(props) {
       )}
       renderInput={(params) => (
         <div
-          className={classNames(props.className, [
-            "flex",
-            "m-1",
-            "h-8",
-            "rounded",
-            "bg-neutral-50",
-            "items-center",
-          ])}
-          style={{ width: "17.3rem" }}
+          className="flex h-8 rounded pl-2 bg-neutral-50 items-center"
+          ref={params.InputProps.ref}
         >
-          <div
-            className="flex-1 pl-10 pr-2 h-full w-full"
-            ref={params.InputProps.ref}
-          >
-            <input
-              style={{
-                width: "100%",
-                height: "100%",
-                backgroundColor: "#00000000",
-              }}
-              placeholder="Search tags..."
-              type="text"
-              {...params.inputProps}
-            />
-          </div>
-          <IconButton className="fixed-important p-1">
+          <input
+            className="w-full h-full pl-1"
+            placeholder="Search tags..."
+            type="text"
+            {...params.inputProps}
+          />
+          <IconButton className="absolute p-1">
             <SearchSharpIcon color="#3a3a3a" />
           </IconButton>
         </div>
       )}
+      onChange={(e, value) => {
+        setTags((tags) =>
+          tags.includes(value)
+            ? tags.filter((tag) => tag !== value)
+            : [...tags, value]
+        );
+        setValue(null);
+        setInputValue("");
+      }}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+      }}
     />
   );
 }
 
 export default function Sidebar(props) {
   return (
-    <div className="sidebar">
-      <SearchBar tags={tags} />
-      <ul>
-        {tags.map((tag) => {
+    <div className={`sidebar ${props.className}`}>
+      <SearchBar tags={tagslist} />
+      <ul className="sidebar-taglist">
+        {tagslist.map((tag) => {
           return (
             <li key={tag}>
               <Tag tag={tag} />
