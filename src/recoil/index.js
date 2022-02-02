@@ -2,20 +2,35 @@ import axios from "axios";
 import { atom, selector } from "recoil";
 import { url } from "../config";
 
-const tags = atom({
+import placeholdertaglist from "../tags";
+
+const allTags = atom({
+  key: "alltags",
+  default: placeholdertaglist,
+});
+
+const clipTags = atom({
+  key: "cliptags",
+  default: placeholdertaglist,
+});
+
+const selectedTags = atom({
   key: "tags",
   default: [],
 });
 
-const query = (tags) =>
-  tags.length ? { query: { tags: { $all: tags } } } : { query: {} };
+const query = (tags) => (tags.length ? { tags: { $all: tags } } : {});
 
 const clips = selector({
   key: "clips",
   default: [],
   get: async ({ get }) => {
-    const { results } = (await axios.post(url("api", "clip"), query(get(tags))))
-      .data;
+    const { results } = (
+      await axios.post(url("api", "clip"), {
+        query: query(get(selectedTags)),
+        opts: { sort: { _id: 1 } },
+      })
+    ).data;
     return results;
   },
 });
@@ -25,4 +40,4 @@ const clips = selector({
 // page refreshes. Otherwise recoil throws an error
 module.hot.decline();
 
-export { clips, tags };
+export { clips, selectedTags, clipTags, allTags };
