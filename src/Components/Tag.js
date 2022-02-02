@@ -34,7 +34,7 @@ function Button(props) {
 export default function Tag(props) {
   return (
     <div className={classNames("flex", "w-full", "p-2", "items-center")}>
-      <text className="flex-1 align-middle text-sm">{props.tag}</text>
+      <span className="flex-1 align-middle text-sm">{props.tag}</span>
       <Button add />
       <Button />
     </div>

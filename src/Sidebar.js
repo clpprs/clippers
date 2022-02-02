@@ -4,6 +4,8 @@ import Tag from "./Components/Tag";
 import { IconButton, Autocomplete, Box } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
+import tags from "./tags";
+
 function SearchBar(props) {
   return (
     <Autocomplete
@@ -13,7 +15,7 @@ function SearchBar(props) {
       // getOptionLabel={(option) => option.label}
       renderOption={(props, option) => (
         <Box component="li" {...props}>
-          <Tag tag={option} />
+          <Tag tag={option} key={option} />
         </Box>
       )}
       renderInput={(params) => (
@@ -29,7 +31,7 @@ function SearchBar(props) {
           style={{ width: "17.3rem" }}
         >
           <div
-            class="flex-1 pl-10 pr-2 h-full w-full"
+            className="flex-1 pl-10 pr-2 h-full w-full"
             ref={params.InputProps.ref}
           >
             <input
@@ -52,33 +54,14 @@ function SearchBar(props) {
   );
 }
 
-const tags = [
-  "scenery",
-  "bakemonogatari",
-  "action",
-  "dialogue",
-  "still",
-  "araragi kyomi",
-  "araragi karen",
-  "araragi tsukihi",
-  "kanbaru suruga",
-  "hanekawa tsubasa",
-  "oshino meme",
-  "oshino shinobu",
-  "kiss-shot acerola-orion heart-under-blade",
-  "oshino ougi",
-  "yotsugi ononoki",
-  "mayoi hachikuji",
-];
-
 export default function Sidebar(props) {
   return (
-    <div>
+    <div className="sidebar">
       <SearchBar tags={tags} />
       <ul>
         {tags.map((tag) => {
           return (
-            <li>
+            <li key={tag}>
               <Tag tag={tag} />
             </li>
           );
