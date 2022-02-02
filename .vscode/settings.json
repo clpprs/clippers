@@ -3,6 +3,7 @@
     "node_modules": true,
     "package-lock.json": true
   },
+  "editor.formatOnSave": true,
   "prettier.semi": true,
   "prettier.tabWidth": 2,
   "prettier.singleQuote": false,
