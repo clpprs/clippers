@@ -5,12 +5,14 @@
 /*
 FONT-FAMILIES
 */
-*, *::after, *::before {
-    font-family: 'Roboto';
+*,
+*::after,
+*::before {
+  font-family: "Roboto";
 }
 
 .roboto-mono {
-    font-family: 'Roboto Mono' !important;
+  font-family: "Roboto Mono" !important;
 }
 
 /*
@@ -22,7 +24,7 @@ COLORS
 */
 
 .bg-neutral-350 {
-    background-color: #c4c4c4;
+  background-color: #c4c4c4;
 }
 
 /*
@@ -30,11 +32,15 @@ MANUAL CLASSES
 */
 
 #tag-search {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    outline: none;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
 }
 
 .fixed-important {
-    position: fixed !important;
+  position: absolute !important;
+}
+
+.sidebar {
+  width: 18rem;
 }
