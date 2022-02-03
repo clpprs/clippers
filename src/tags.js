@@ -1,12 +1,18 @@
 // placeholder file
 
 const tags = [
-  "scenery",
   "bakemonogatari",
+  "scenery",
   "action",
   "dialogue",
   "still",
-  "araragi kyomi",
+  "text",
+  "card",
+  "shaft moment",
+  "rating:safe",
+  "rating:questionable",
+  "rating:explicit",
+  "araragi koyomi",
   "araragi karen",
   "araragi tsukihi",
   "kanbaru suruga",
@@ -15,8 +21,8 @@ const tags = [
   "oshino shinobu",
   "kiss-shot acerola-orion heart-under-blade",
   "oshino ougi",
-  "yotsugi ononoki",
-  "mayoi hachikuji",
+  "ononoki yotsugi",
+  "hachikuji mayoi",
 ];
 
 export default tags;
