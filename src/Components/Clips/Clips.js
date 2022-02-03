@@ -1,14 +1,14 @@
 import Clip from "./Clip";
-import { clips } from "../../recoil";
+import { clipAtom } from "../../recoil";
 import { useRecoilValue } from "recoil";
 
 function Clips(props) {
-  const cliplist = useRecoilValue(clips);
+  const clips = useRecoilValue(clipAtom);
   return (
-    <div className="clips-container">
-      <code>
-        <pre>{JSON.stringify(cliplist, null, 2)}</pre>
-      </code>
+    <div className="clips-container w-full justify-around">
+      {clips.map((clip) => (
+        <Clip clip={clip} key={clip._id} />
+      ))}
     </div>
   );
 }

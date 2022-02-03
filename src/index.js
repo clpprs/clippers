@@ -14,8 +14,9 @@ import "./index.css";
 import "@fontsource/roboto";
 import "@fontsource/roboto-mono";
 
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+// Custom components
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 import { Clips } from "./components/Clips";
 
 const App = (props) => (
@@ -24,7 +25,7 @@ const App = (props) => (
       <Navbar />
       <div className="main flex flex-row w-full h-full overflow-hidden">
         <Sidebar className="w-64 flex-shrink-0 flex-grow-0" />
-        <div className="content flex-grow overflow-x-hidden overflow-y-scroll">
+        <div className="content flex-grow overflow-x-hidden overflow-y-auto">
           <Suspense fallback={<CircularProgress />}>
             <Outlet />
           </Suspense>

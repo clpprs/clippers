@@ -1,8 +1,8 @@
-import Tag from "./components/Tag";
-import Search from "./components/Search";
+import Tag from "./Tag";
+import Search from "./Search";
 
 import { useRecoilValue } from "recoil";
-import { clipTags } from "./recoil";
+import { clipTags } from "../recoil";
 
 export default function Sidebar(props) {
   const tags = useRecoilValue(clipTags);

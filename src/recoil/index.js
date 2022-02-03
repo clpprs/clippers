@@ -21,14 +21,14 @@ const selectedTags = atom({
 
 const query = (tags) => (tags.length ? { tags: { $all: tags } } : {});
 
-const clips = selector({
+const clipAtom = selector({
   key: "clips",
   default: [],
   get: async ({ get }) => {
     const { results } = (
       await axios.post(url("api", "clip"), {
         query: query(get(selectedTags)),
-        opts: { sort: { _id: 1 } },
+        opts: { sort: { index: 1 } },
       })
     ).data;
     return results;
@@ -40,4 +40,4 @@ const clips = selector({
 // page refreshes. Otherwise recoil throws an error
 module.hot.decline();
 
-export { clips, selectedTags, clipTags, allTags };
+export { clipAtom, selectedTags, clipTags, allTags };
