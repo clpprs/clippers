@@ -9,7 +9,7 @@ import { useRecoilValue } from "recoil";
 import { allTags } from "../recoil";
 
 // Custom components
-import Tag from "./Tag";
+import { Tag } from "./Tags";
 
 function Search(props) {
   const taglist = useRecoilValue(allTags);

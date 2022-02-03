@@ -24,7 +24,8 @@ const excludedTags = atom({
   default: [],
 });
 
-const query = (tags) => (tags.length ? { tags: { $all: tags } } : {});
+const query = (tags) =>
+  tags.length ? { tags: { $all: tags.filter((tag) => tags.include) } } : {};
 
 const clipAtom = selector({
   key: "clips",

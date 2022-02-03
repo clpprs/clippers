@@ -20,10 +20,10 @@ import Sidebar from "./Components/Sidebar";
 import { Clips } from "./Components/Clips";
 
 const App = (props) => (
-  <div className="app h-screen w-screen overflow-hidden">
+  <div className="app h-full w-full overflow-hidden">
     <RecoilRoot>
       <Navbar />
-      <div className="main flex flex-row w-full h-full overflow-hidden">
+      <div className="main flex flex-row w-full h-full">
         <Sidebar className="w-64 flex-shrink-0 flex-grow-0" />
         <div className="content flex-grow overflow-x-hidden overflow-y-auto">
           <Suspense fallback={<CircularProgress />}>

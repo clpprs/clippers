@@ -4,7 +4,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 // State
 import { useSetRecoilState } from "recoil";
-import { selectedTags, excludedTags } from "../recoil";
+import { selectedTags } from "../../recoil";
 
 function Button(props) {
   return (
@@ -41,18 +41,18 @@ function Button(props) {
 
 export default function Tag(props) {
   const setTags = useSetRecoilState(selectedTags);
-  const setExclusions = useSetRecoilState(excludedTags);
 
   const handleClick = (tag, include = false) => {
-    if (include) {
-      setTags((tags) =>
-        tags.includes(props.tag) ? tags : [...tags, props.tag]
-      );
-    } else {
-      setExclusions((tags) =>
-        tags.includes(props.tag) ? tags : [...tags, props.tag]
-      );
-    }
+    setTags((tags) => {
+      let found = tags.findIndex((tagL) => tagL.tag === tag);
+      if (found === -1) {
+        return [...tags, { tag: props.tag, include: include }];
+      } else {
+        const newtags = tags.slice();
+        newtags[found] = { tag: tag, include: include };
+        return newtags;
+      }
+    });
   };
 
   return (

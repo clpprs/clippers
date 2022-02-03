@@ -19,7 +19,18 @@ FONT-FAMILIES
 MANUAL CLASSES
 */
 
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
 .app {
+}
+
+.main {
+  position: absolute;
+  top: 0;
+  padding-top: 2.75rem;
 }
 
 .sidebar {
@@ -42,4 +53,18 @@ MANUAL CLASSES
   background-color: rgba(0, 0, 0, 0);
   border: none;
   outline: none;
+}
+
+.selected-tag {
+  max-width: 50%;
+}
+
+.selected-tag p {
+  height: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
