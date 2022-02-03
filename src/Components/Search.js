@@ -5,14 +5,13 @@ import { IconButton, Autocomplete, Box } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 // State
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { selectedTags, allTags } from "../recoil";
+import { useRecoilValue } from "recoil";
+import { allTags } from "../recoil";
 
 // Custom components
 import Tag from "./Tag";
 
 function Search(props) {
-  const setTags = useSetRecoilState(selectedTags);
   const taglist = useRecoilValue(allTags);
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
@@ -47,16 +46,11 @@ function Search(props) {
         </div>
       )}
       onChange={(e, value) => {
-        setTags((tags) =>
-          tags.includes(value)
-            ? tags.filter((tag) => tag !== value)
-            : [...tags, value]
-        );
         setValue(null);
-        setInputValue("");
+        setInputValue(inputValue);
       }}
       onInputChange={(event, newInputValue) => {
-        setInputValue(newInputValue);
+        setInputValue(newInputValue.toLowerCase());
       }}
     />
   );

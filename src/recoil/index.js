@@ -19,6 +19,11 @@ const selectedTags = atom({
   default: [],
 });
 
+const excludedTags = atom({
+  key: "excludedtags",
+  default: [],
+});
+
 const query = (tags) => (tags.length ? { tags: { $all: tags } } : {});
 
 const clipAtom = selector({
@@ -40,4 +45,4 @@ const clipAtom = selector({
 // page refreshes. Otherwise recoil throws an error
 module.hot.decline();
 
-export { clipAtom, selectedTags, clipTags, allTags };
+export { clipAtom, selectedTags, excludedTags, clipTags, allTags };

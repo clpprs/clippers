@@ -15,9 +15,9 @@ import "@fontsource/roboto";
 import "@fontsource/roboto-mono";
 
 // Custom components
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import { Clips } from "./components/Clips";
+import Navbar from "./Components/Navbar";
+import Sidebar from "./Components/Sidebar";
+import { Clips } from "./Components/Clips";
 
 const App = (props) => (
   <div className="app h-screen w-screen overflow-hidden">
