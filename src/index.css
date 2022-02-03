@@ -59,6 +59,10 @@ MANUAL CLASSES
   max-width: 50%;
 }
 
+.selected-tag:hover p {
+  text-decoration: line-through;
+}
+
 .selected-tag p {
   height: 16px;
   white-space: nowrap;
@@ -67,4 +71,33 @@ MANUAL CLASSES
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+}
+
+/* Force big tags to not take up the whole row */
+.tag-container .tag-name {
+  max-width: 80%;
+}
+
+/* Animation testing */
+
+.tag-container .tag-button {
+  transition: all 0.2s;
+  position: relative;
+  right: -1rem;
+  opacity: 0;
+}
+
+.tag-container:hover .tag-button {
+  opacity: 1;
+  right: 0rem;
+}
+
+.tag-container {
+  transition: all 0.25s;
+  padding-left: 0.5rem;
+}
+
+.tag-container:hover {
+  background-color: white;
+  padding-left: 1rem;
 }
