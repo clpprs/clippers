@@ -1,5 +1,8 @@
+// Components
 import Clip from "./Clip";
-import { clipAtom } from "../../recoil";
+
+// State
+import { clipsAtom } from "../../recoil";
 import { useRecoilValue } from "recoil";
 
 function NoResult(props) {
@@ -11,7 +14,8 @@ function NoResult(props) {
 }
 
 function Clips(props) {
-  const clips = useRecoilValue(clipAtom);
+  const clips = useRecoilValue(clipsAtom);
+
   return (
     <div
       className={`${

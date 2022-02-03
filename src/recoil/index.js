@@ -4,36 +4,50 @@ import { url } from "../config";
 
 import placeholdertaglist from "../tags";
 
-const allTags = atom({
+/**
+ * All available tags
+ */
+const allTagsAtom = atom({
   key: "alltags",
   default: placeholdertaglist,
 });
 
-const clipTags = atom({
+/**
+ * List of tags found in the current clips
+ */
+const clipTagsAtom = atom({
   key: "cliptags",
   default: placeholdertaglist,
 });
 
-const selectedTags = atom({
+/**
+ * List of selected tag objects `{ name: "tagName", selected: Boolean }`
+ */
+const selectedTagsAtom = atom({
   key: "tags",
   default: [],
 });
 
-const excludedTags = atom({
-  key: "excludedtags",
-  default: [],
-});
-
+/**
+ *
+ * @param {Array} tags Array of tag objects { name: String, selected: Boolean }
+ * @returns
+ */
 const query = (tags) =>
-  tags.length ? { tags: { $all: tags.filter((tag) => tags.include) } } : {};
+  tags.length
+    ? { tags: { $all: tags.filter((tag) => tags.include).map((t) => t.name) } }
+    : {};
 
-const clipAtom = selector({
+/**
+ * List of clips from the API
+ */
+const clipsAtom = selector({
   key: "clips",
   default: [],
   get: async ({ get }) => {
     const { results } = (
       await axios.post(url("api", "clip"), {
-        query: query(get(selectedTags)),
+        query: query(get(selectedTagsAtom)),
         opts: { sort: { index: 1 } },
       })
     ).data;
@@ -46,4 +60,4 @@ const clipAtom = selector({
 // page refreshes. Otherwise recoil throws an error
 module.hot.decline();
 
-export { clipAtom, selectedTags, excludedTags, clipTags, allTags };
+export { clipsAtom, selectedTagsAtom, clipTagsAtom, allTagsAtom };

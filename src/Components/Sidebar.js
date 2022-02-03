@@ -1,41 +1,29 @@
+// Components
 import Search from "./Search";
 import { Tag, SelectedTag } from "./Tags";
 
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { clipTags, selectedTags } from "../recoil";
+// State
+import { useRecoilValue } from "recoil";
+import { clipTagsAtom, selectedTagsAtom } from "../recoil";
 
 export default function Sidebar(props) {
-  const tags = useRecoilValue(clipTags);
-  const selected = useRecoilValue(selectedTags);
-
-  const setTags = useSetRecoilState(selectedTags);
-
-  const handleRemove = (tag) => {
-    setTags((tags) => tags.filter((tagL) => tagL.tag !== tag));
-  };
+  const clipTags = useRecoilValue(clipTagsAtom);
+  const selectedTags = useRecoilValue(selectedTagsAtom);
 
   return (
     <div className={`sidebar flex flex-col ${props.className}`}>
       <Search />
       <div className="flex m-2 max-w-full flex-wrap justify-items-start gap-1">
-        {selected.map((tag) => {
-          return (
-            <SelectedTag
-              tag={tag.tag}
-              included={tag.include}
-              handleRemove={() => handleRemove(tag.tag)}
-            />
-          );
-        })}
+        {selectedTags.map((tag) => (
+          <SelectedTag tag={tag} key={tag.name} />
+        ))}
       </div>
-      <ul className="sidebar-taglist max-h-full overflow-y-auto">
-        {tags.map((tag) => {
-          return (
-            <li key={tag}>
-              <Tag tag={tag} />
-            </li>
-          );
-        })}
+      <ul className="sidebar-taglist h-full overflow-y-auto px-2">
+        {clipTags.map((name) => (
+          <li key={name}>
+            <Tag name={name} />
+          </li>
+        ))}
       </ul>
     </div>
   );

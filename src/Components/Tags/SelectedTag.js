@@ -1,19 +1,32 @@
-import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import classNames from "classnames";
 
+// Components
+import TagButton from "./TagButton";
+
+// State
+import { useSetRecoilState } from "recoil";
+import { selectedTagsAtom } from "../../recoil";
+
 function SelectedTag(props) {
+  const { tag } = props;
+
+  const setSelectedTags = useSetRecoilState(selectedTagsAtom);
+  const removeTag = (name) =>
+    setSelectedTags((tags) => tags.filter((t) => t.name !== name));
+
   return (
     <div
+      title={tag.name}
       className={classNames([
         "selected-tag",
+        tag.include ? "included-tag" : "excluded-tag",
+        tag.include ? "bg-blue-400" : "bg-red-400",
         "inline-flex",
         "w-fit",
         "h-fit",
         "rounded-full",
-        props.included ? "bg-blue-400" : "bg-red-400",
         "items-center",
       ])}
-      title={props.tag}
     >
       <p
         className={classNames([
@@ -22,15 +35,16 @@ function SelectedTag(props) {
           "text-xs",
           "align-middle",
           "text-black",
+          "cursor-pointer",
         ])}
+        onClick={(e) => {
+          e.stopPropagation();
+          removeTag(tag.name);
+        }}
       >
-        {props.tag}
+        {tag.name}
       </p>
-      <ClearOutlinedIcon
-        className="mr-1 cursor-pointer"
-        fontSize="14px"
-        onClick={() => props.handleRemove()}
-      />
+      <TagButton name={tag.name} include={!tag.include} />
     </div>
   );
 }

@@ -6,13 +6,13 @@ import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 // State
 import { useRecoilValue } from "recoil";
-import { allTags } from "../recoil";
+import { allTagsAtom } from "../recoil";
 
 // Custom components
 import { Tag } from "./Tags";
 
 function Search(props) {
-  const taglist = useRecoilValue(allTags);
+  const taglist = useRecoilValue(allTagsAtom);
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
 
