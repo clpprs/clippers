@@ -18,32 +18,34 @@ import "@fontsource/roboto-mono";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import { Clips } from "./components/Clips";
+import Tagging from "./pages/Tagging";
 
 const App = (props) => (
   <div className="app h-full w-full overflow-hidden">
-    <RecoilRoot>
-      <Navbar />
-      <div className="main flex flex-row w-full h-full">
-        <Sidebar className="w-64 flex-shrink-0 flex-grow-0" />
-        <div className="content flex-grow overflow-x-hidden overflow-y-auto">
-          <Suspense fallback={<CircularProgress />}>
-            <Outlet />
-          </Suspense>
-        </div>
+    <Navbar />
+    <div className="main flex flex-row w-full h-full">
+      <Sidebar className="w-64 flex-shrink-0 flex-grow-0" />
+      <div className="content flex-grow overflow-x-hidden overflow-y-auto">
+        <Suspense fallback={<CircularProgress />}>
+          <Outlet />
+        </Suspense>
       </div>
-    </RecoilRoot>
+    </div>
   </div>
 );
 
 function Router(props) {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Clips />}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Clips />} />
+            <Route path="/tagging" element={<Tagging />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 

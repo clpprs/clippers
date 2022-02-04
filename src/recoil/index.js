@@ -8,7 +8,7 @@ import placeholdertaglist from "../tags";
  * All available tags
  */
 const allTagsAtom = atom({
-  key: "alltags",
+  key: "allTags",
   default: placeholdertaglist,
 });
 
@@ -16,7 +16,7 @@ const allTagsAtom = atom({
  * List of tags found in the current clips
  */
 const clipTagsAtom = atom({
-  key: "cliptags",
+  key: "clipTags",
   default: placeholdertaglist,
 });
 
@@ -24,7 +24,7 @@ const clipTagsAtom = atom({
  * List of selected tag objects `{ name: "tagName", selected: Boolean }`
  */
 const selectedTagsAtom = atom({
-  key: "tags",
+  key: "selectedTags",
   default: [],
 });
 
@@ -55,9 +55,20 @@ const clipsAtom = selector({
   },
 });
 
+const selectedClipsAtom = atom({
+  key: "selectedClips",
+  default: [],
+});
+
 // Prevents WebPack from hotloading the recoil module
 // so that when new atoms / selectors are made, the entire
 // page refreshes. Otherwise recoil throws an error
 module.hot.decline();
 
-export { clipsAtom, selectedTagsAtom, clipTagsAtom, allTagsAtom };
+export {
+  clipsAtom,
+  selectedTagsAtom,
+  clipTagsAtom,
+  allTagsAtom,
+  selectedClipsAtom,
+};

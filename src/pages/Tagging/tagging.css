@@ -1,0 +1,14 @@
+.tagging-container {
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  justify-items: start;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.clip-container {
+  display: block;
+}
+
+.clip-container.selected {
+  opacity: 0.5;
+}
