@@ -35,7 +35,7 @@ const selectedTagsAtom = atom({
  */
 const query = (tags) =>
   tags.length
-    ? { tags: { $all: tags.filter((tag) => tags.include).map((t) => t.name) } }
+    ? { tags: { $all: tags.filter((tag) => tag.include).map((t) => t.name) } }
     : {};
 
 /**

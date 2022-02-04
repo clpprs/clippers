@@ -16,8 +16,9 @@ export default function Tag(props) {
     setSelectedTags((tags) => {
       const found = tags.findIndex((t) => t.name === name);
       if (found === -1) return [...tags, { name, include }];
-      tags[found] = { name, include };
-      return tags;
+      const newtags = tags.slice();
+      newtags[found] = { name, include };
+      return newtags;
     });
   };
 
@@ -31,14 +32,15 @@ export default function Tag(props) {
         "py-1",
         "justify-between",
         "items-center",
-        "rounded-full"
+        "rounded-full",
+        "cursor-pointer"
       )}
       onClick={() => toggleTag(name, true)}
     >
       <span className="tag-name align-middle text-sm cursor-pointer">
         {name}
       </span>
-      <TagButton name={name} include={false} />
+      <TagButton name={name} include={false} minusColor="error" />
     </div>
   );
 }

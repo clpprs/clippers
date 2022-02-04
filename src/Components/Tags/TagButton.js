@@ -48,9 +48,13 @@ function TagButton(props) {
       }}
     >
       {include ? (
-        <AddIcon className="p-0.5 cursor-pointer" fontSize="8px" />
+        <AddIcon className="tag-button-icon cursor-pointer" fontSize="8px" />
       ) : (
-        <RemoveIcon className="p-0.5 cursor-pointer" fontSize="8px" />
+        <RemoveIcon
+          className="tag-button-icon cursor-pointer"
+          color={props.minusColor}
+          fontSize="8px"
+        />
       )}
     </div>
   );

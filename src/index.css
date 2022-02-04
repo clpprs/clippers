@@ -101,3 +101,7 @@ MANUAL CLASSES
   background-color: white;
   padding-left: 1rem;
 }
+
+.selected-tag .tag-button-icon {
+  padding: 0.125rem;
+}
