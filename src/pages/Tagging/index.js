@@ -17,7 +17,7 @@ function Tagging(props) {
   const clips = useRecoilValue(clipsAtom);
   const setSelectedClips = useSetRecoilState(selectedClipsAtom);
 
-  const selectedClips = useRecoilValue(selectedClipsAtom);
+  // const selectedClips = useRecoilValue(selectedClipsAtom);
 
   return (
     <>

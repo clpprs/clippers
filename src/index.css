@@ -41,7 +41,9 @@ MANUAL CLASSES
 }
 
 .clips-container {
-  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  padding: 1rem;
+  gap: 1rem;
   justify-items: start;
 }
 
