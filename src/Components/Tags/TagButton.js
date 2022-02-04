@@ -9,7 +9,7 @@ import { useSetRecoilState } from "recoil";
 import { selectedTagsAtom } from "../../recoil";
 
 function TagButton(props) {
-  let { name, include } = props;
+  let { name, include, title } = props;
 
   const setSelectedTags = useSetRecoilState(selectedTagsAtom);
 
@@ -26,13 +26,15 @@ function TagButton(props) {
 
   return (
     <div
+      title={title}
       className={classNames(
         props.className,
         "tag-button",
         "bg-white",
         "inline-flex",
-        "w-5",
-        "h-5",
+        "w-3",
+        "h-3",
+        "mx-1",
         "rounded-full",
         "bg-opacity-0",
         "hover:bg-opacity-50",
@@ -46,9 +48,9 @@ function TagButton(props) {
       }}
     >
       {include ? (
-        <AddIcon className="p-0 cursor-pointer" fontSize="16px" />
+        <AddIcon className="p-0.5 cursor-pointer" fontSize="8px" />
       ) : (
-        <RemoveIcon className="p-0 cursor-pointer" fontSize="16px" />
+        <RemoveIcon className="p-0.5 cursor-pointer" fontSize="8px" />
       )}
     </div>
   );

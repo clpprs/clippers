@@ -59,7 +59,7 @@ MANUAL CLASSES
   max-width: 50%;
 }
 
-.selected-tag:hover p {
+.selected-tag p:hover {
   text-decoration: line-through;
 }
 
@@ -83,7 +83,7 @@ MANUAL CLASSES
 .tag-container .tag-button {
   transition: all 0.2s;
   position: relative;
-  right: -1rem;
+  right: 0rem;
   opacity: 0;
 }
 
@@ -97,7 +97,7 @@ MANUAL CLASSES
   padding-left: 0.5rem;
 }
 
-.tag-container:hover {
+.sidebar-taglist .tag-container:hover {
   background-color: white;
   padding-left: 1rem;
 }

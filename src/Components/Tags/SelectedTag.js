@@ -16,7 +16,6 @@ function SelectedTag(props) {
 
   return (
     <div
-      title={tag.name}
       className={classNames([
         "selected-tag",
         tag.include ? "included-tag" : "excluded-tag",
@@ -29,6 +28,7 @@ function SelectedTag(props) {
       ])}
     >
       <p
+        title={tag.name}
         className={classNames([
           "pl-2",
           "my-0.5",
@@ -44,7 +44,11 @@ function SelectedTag(props) {
       >
         {tag.name}
       </p>
-      <TagButton name={tag.name} include={!tag.include} />
+      <TagButton
+        title={(tag.include ? "exclude:" : "include:") + tag.name}
+        name={tag.name}
+        include={!tag.include}
+      />
     </div>
   );
 }
