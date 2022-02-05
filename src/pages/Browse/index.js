@@ -14,7 +14,9 @@ function SelectableClips(props) {
 
   return (
     <>
-      <Clips />
+      <div id="selectable-container">
+        <Clips />
+      </div>
       <Selecto
         container={"#selectable-container"}
         dragContainer={"#selectable-container"}

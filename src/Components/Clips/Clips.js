@@ -9,12 +9,12 @@ import NoResult from "../NoResult";
 // State
 import { clipsAtom } from "../../recoil";
 import { useRecoilValue } from "recoil";
+
 function Clips(props) {
   const clips = useRecoilValue(clipsAtom);
 
   return (
     <div
-      id="selectable-container"
       className={classNames([
         clips.length ? "grid" : "block",
         "clips-container",

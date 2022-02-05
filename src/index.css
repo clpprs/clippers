@@ -24,9 +24,6 @@ MANUAL CLASSES
   width: 100vw;
 }
 
-.app {
-}
-
 .main {
   position: absolute;
   padding-top: 2.75rem;
@@ -35,9 +32,6 @@ MANUAL CLASSES
 
 .sidebar {
   background-color: #c4c4c4;
-}
-
-.content {
 }
 
 .clips-container {
