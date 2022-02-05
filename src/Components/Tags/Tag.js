@@ -1,26 +1,8 @@
 import classNames from "classnames";
-
-// Components
 import TagButton from "./TagButton";
 
-// State
-import { useSetRecoilState } from "recoil";
-import { selectedTagsAtom } from "../../recoil";
-
 export default function Tag(props) {
-  const { name } = props;
-
-  const setSelectedTags = useSetRecoilState(selectedTagsAtom);
-
-  const toggleTag = (name, include) => {
-    setSelectedTags((tags) => {
-      const found = tags.findIndex((t) => t.name === name);
-      if (found === -1) return [...tags, { name, include }];
-      const newtags = tags.slice();
-      newtags[found] = { name, include };
-      return newtags;
-    });
-  };
+  const { name, count, onClick, button } = props;
 
   return (
     <div
@@ -35,12 +17,16 @@ export default function Tag(props) {
         "rounded-full",
         "cursor-pointer"
       )}
-      onClick={() => toggleTag(name, true)}
+      onClick={onClick}
     >
       <span className="tag-name align-middle text-sm cursor-pointer">
-        {name}
+        {`${name}${!Number.parseInt(count) ? "" : ` (${count})`}`}
       </span>
-      <TagButton name={name} include={false} minusColor="error" />
+      {button && typeof button === "string" ? (
+        <TagButton variant={button} name={name} />
+      ) : typeof button === "object" ? (
+        <TagButton {...button} name={name} />
+      ) : null}
     </div>
   );
 }

@@ -9,8 +9,6 @@ import { useSetRecoilState } from "recoil";
 import { selectedTagsAtom } from "../../recoil";
 
 function TagButton(props) {
-  let { name, include, title } = props;
-
   const setSelectedTags = useSetRecoilState(selectedTagsAtom);
 
   const toggleTag = (name, include) => {
@@ -24,39 +22,81 @@ function TagButton(props) {
     });
   };
 
+  // Overrideable variants
+  function getVariant(variant) {
+    switch (variant) {
+      case "exclude": {
+        return {
+          color: "error",
+          include: false,
+        };
+      }
+      case "include": {
+        return {
+          color: "green",
+          include: true,
+        };
+      }
+      default:
+        return {};
+    }
+  }
+
+  const { include, color, name, title, className } = {
+    ...getVariant(props.variant),
+    ...props,
+  };
+
+  if (!name && !props.onClick) {
+    console.warn("<TagButton /> requires a name or an onClick handler");
+    return null;
+  }
+
+  const {
+    icon: Icon = include ?? include ? AddIcon : RemoveIcon,
+    onClick = (e) => {
+      e.stopPropagation();
+      toggleTag(name, include);
+    },
+  } = { ...props };
+
+  // Only fires if <Tag button={{}}/> is missing an icon
+  if (name && !Icon) {
+    console.warn(
+      "button needs a { variant: String } or { icon: Function } option to render"
+    );
+    return null;
+  }
+
+  // Only render if an icon is supplied
   return (
-    <div
-      title={title}
-      className={classNames(
-        props.className,
-        "tag-button",
-        "bg-white",
-        "inline-flex",
-        "w-3",
-        "h-3",
-        "mx-1",
-        "rounded-full",
-        "bg-opacity-0",
-        "hover:bg-opacity-50",
-        "justify-center",
-        "items-center",
-        "cursor-pointer"
-      )}
-      onClick={(e) => {
-        e.stopPropagation();
-        toggleTag(name, include);
-      }}
-    >
-      {include ? (
-        <AddIcon className="tag-button-icon cursor-pointer" fontSize="8px" />
-      ) : (
-        <RemoveIcon
+    Icon && (
+      <div title={title} className={divClasses(className)} onClick={onClick}>
+        <Icon
           className="tag-button-icon cursor-pointer"
-          color={props.minusColor}
           fontSize="8px"
+          color={color}
         />
-      )}
-    </div>
+      </div>
+    )
+  );
+}
+
+function divClasses(className) {
+  return classNames(
+    className,
+    "tag-button",
+    "bg-white",
+    "inline-flex",
+    "w-3",
+    "h-3",
+    "mx-1",
+    "rounded-full",
+    "bg-opacity-0",
+    "hover:bg-opacity-50",
+    "justify-center",
+    "items-center",
+    "cursor-pointer"
   );
 }
 

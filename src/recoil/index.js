@@ -13,14 +13,6 @@ const allTagsAtom = atom({
 });
 
 /**
- * List of tags found in the current clips
- */
-const clipTagsAtom = atom({
-  key: "clipTags",
-  default: placeholdertaglist,
-});
-
-/**
  * List of selected tag objects `{ name: "tagName", selected: Boolean }`
  */
 const selectedTagsAtom = atom({
@@ -110,6 +102,34 @@ const sharedTagsAtom = selector({
     }
 
     return shared.filter((tag) => !notShared.includes(tag));
+  },
+});
+
+/**
+ * List of tags found in the current clips
+ */
+const clipTagsAtom = selector({
+  key: "clipTags",
+  default: placeholdertaglist,
+  get: ({ get }) => {
+    const clips = get(clipsAtom);
+
+    let tags = [];
+    let counts = {};
+
+    for (const clip of clips) {
+      clip.tags.forEach((tag) => {
+        tags.push(tag);
+        counts[tag] = counts[tag] ? counts[tag] + 1 : 1;
+      });
+    }
+
+    // console.log(tags);
+
+    tags = [...new Set(tags)].sort((a, b) => counts[a] < counts[b]);
+    tags = tags.map((tag) => ({ name: tag, count: counts[tag] }));
+
+    return tags;
   },
 });
 

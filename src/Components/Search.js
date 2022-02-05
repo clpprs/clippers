@@ -26,7 +26,7 @@ function Search(props) {
       inputValue={inputValue}
       renderOption={(props, option) => (
         <Box component="li" {...props}>
-          <Tag name={option} key={option} />
+          <Tag name={option} key={option} button="decline" />
         </Box>
       )}
       renderInput={(params) => (
