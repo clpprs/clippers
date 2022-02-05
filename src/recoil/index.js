@@ -13,7 +13,7 @@ const allTagsAtom = atom({
 });
 
 /**
- * List of selected tag objects `{ name: "tagName", selected: Boolean }`
+ * List of selected tag objects `{ name: "tagName", include: Boolean }`
  */
 const selectedTagsAtom = atom({
   key: "selectedTags",
@@ -22,7 +22,7 @@ const selectedTagsAtom = atom({
 
 /**
  *
- * @param {Array} tags Array of tag objects { name: String, selected: Boolean }
+ * @param {Array} tags Array of tag objects { name: String, include: Boolean }
  * @returns
  */
 const makeQuery = (tags) => {
@@ -41,27 +41,52 @@ const makeQuery = (tags) => {
 };
 
 /**
- * List of clips from the API
+ * Raw query result from API
+ */
+const clipsQuery = selector({
+  key: "clipsQuery",
+  default: [],
+  get: async ({ get }) => {
+    const { data } = await axios.post(url("api", "clip"), {
+      query: makeQuery(get(selectedTagsAtom)),
+      opts: { sort: { index: 1 }, limit: 24 },
+    });
+    return data;
+  },
+});
+
+/**
+ * List of clips from the query
  */
 const clipsAtom = selector({
   key: "clips",
   default: [],
   get: async ({ get }) => {
-    const { results } = (
-      await axios.post(url("api", "clip"), {
-        query: makeQuery(get(selectedTagsAtom)),
-        opts: { sort: { index: 1 }, limit: 24 },
-      })
-    ).data;
-    return results;
+    const query = get(clipsQuery);
+    console.log(query);
+    return query.results;
   },
 });
 
+/**
+ * tagCounts from the query metadata
+ */
+const clipTagsAtom = selector({
+  key: "clipTags",
+  default: placeholdertaglist,
+  get: ({ get }) => {
+    const query = get(clipsQuery);
+    return query.metadata.tagCounts;
+  },
+});
+
+// clip._id's selected with Selecto
 const selectedClipIdsAtom = atom({
   key: "selectedClipIds",
   default: [],
 });
 
+// selected clip data objects from the API
 const selectedClipsAtom = selector({
   key: "selectedClips",
   default: [],
@@ -76,6 +101,7 @@ const selectedClipsAtom = selector({
   },
 });
 
+// tags shared by currently selected clips
 const sharedTagsAtom = selector({
   key: "sharedtags",
   default: [],
@@ -102,34 +128,6 @@ const sharedTagsAtom = selector({
     }
 
     return shared.filter((tag) => !notShared.includes(tag));
-  },
-});
-
-/**
- * List of tags found in the current clips
- */
-const clipTagsAtom = selector({
-  key: "clipTags",
-  default: placeholdertaglist,
-  get: ({ get }) => {
-    const clips = get(clipsAtom);
-
-    let tags = [];
-    let counts = {};
-
-    for (const clip of clips) {
-      clip.tags.forEach((tag) => {
-        tags.push(tag);
-        counts[tag] = counts[tag] ? counts[tag] + 1 : 1;
-      });
-    }
-
-    // console.log(tags);
-
-    tags = [...new Set(tags)].sort((a, b) => counts[a] < counts[b]);
-    tags = tags.map((tag) => ({ name: tag, count: counts[tag] }));
-
-    return tags;
   },
 });
 
