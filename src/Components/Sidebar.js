@@ -6,7 +6,7 @@ import { Tag, SelectedTag } from "./Tags";
 
 // State
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { clipTagsAtom, selectedTagsAtom } from "../recoil";
+import { clipTagsAtom, selectedTagsAtom } from "../state";
 import Loader from "./Loader";
 
 function TagList(props) {

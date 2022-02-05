@@ -6,7 +6,7 @@ import ContextMenu from "../../components/ContextMenu";
 import Selecto from "react-selecto";
 
 // State
-import { selectedClipIdsAtom } from "../../recoil";
+import { selectedClipIdsAtom } from "../../state";
 import { useSetRecoilState } from "recoil";
 
 function SelectableClips(props) {

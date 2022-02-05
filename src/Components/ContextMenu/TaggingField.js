@@ -12,7 +12,7 @@ import {
   selectedClipIdsAtom,
   selectedClipsAtom,
   sharedTagsAtom,
-} from "../../recoil";
+} from "../../state";
 
 // API
 import axios from "axios";

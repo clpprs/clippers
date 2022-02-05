@@ -6,7 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 // State
 import { useSetRecoilState } from "recoil";
-import { selectedTagsAtom } from "../../recoil";
+import { selectedTagsAtom } from "../../state";
 
 function TagButton(props) {
   const setSelectedTags = useSetRecoilState(selectedTagsAtom);

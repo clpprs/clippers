@@ -5,7 +5,7 @@ import TagButton from "./TagButton";
 
 // State
 import { useSetRecoilState } from "recoil";
-import { selectedTagsAtom } from "../../recoil";
+import { selectedTagsAtom } from "../../state";
 
 function SelectedTag(props) {
   const { tag } = props;

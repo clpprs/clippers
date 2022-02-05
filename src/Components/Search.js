@@ -6,7 +6,7 @@ import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 // State
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { allTagsAtom, selectedTagsAtom } from "../recoil";
+import { allTagsAtom, selectedTagsAtom } from "../state";
 
 // Custom components
 import { Tag } from "./Tags";

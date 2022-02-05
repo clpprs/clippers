@@ -7,7 +7,7 @@ import Clip from "./Clip";
 import NoResult from "../NoResult";
 
 // State
-import { clipsAtom } from "../../recoil";
+import { clipsAtom } from "../../state";
 import { useRecoilValue } from "recoil";
 
 function Clips(props) {
