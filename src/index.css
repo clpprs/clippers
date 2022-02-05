@@ -107,3 +107,8 @@ MANUAL CLASSES
 .selected-tag .tag-button-icon {
   padding: 0.125rem;
 }
+
+/* Force no transitions in search bar because MUI sucks */
+.mui-tag-container .tag-container .tag-button {
+  transition: none;
+}
