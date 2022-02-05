@@ -33,10 +33,20 @@ const selectedTagsAtom = atom({
  * @param {Array} tags Array of tag objects { name: String, selected: Boolean }
  * @returns
  */
-const query = (tags) =>
-  tags.length
-    ? { tags: { $all: tags.filter((tag) => tag.include).map((t) => t.name) } }
-    : {};
+const makeQuery = (tags) => {
+  const included = tags.filter((tag) => tag.include).map((tag) => tag.name);
+  const excluded = tags.filter((tag) => !tag.include).map((tag) => tag.name);
+
+  if (!included.length && !excluded.length) return {};
+  if (included.length && excluded.length)
+    return {
+      $and: [{ tags: { $all: included }, tags: { $nin: excluded } }],
+    };
+  if (included.length) return { tags: { $all: included } };
+  if (excluded.length) return { tags: { $nin: excluded } };
+
+  return {};
+};
 
 /**
  * List of clips from the API
@@ -47,8 +57,8 @@ const clipsAtom = selector({
   get: async ({ get }) => {
     const { results } = (
       await axios.post(url("api", "clip"), {
-        query: query(get(selectedTagsAtom)),
-        opts: { sort: { index: 1 } },
+        query: makeQuery(get(selectedTagsAtom)),
+        opts: { sort: { index: 1 }, limit: 24 },
       })
     ).data;
     return results;
