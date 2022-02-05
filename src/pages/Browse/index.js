@@ -1,45 +1,23 @@
 import React, { Suspense } from "react";
 
 // Components
-import { Clip } from "../../components/Clips";
-import ContextMenu from "./ContextMenu";
-
-// State
-import { clipsAtom, selectedClipIdsAtom } from "../../recoil";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-
-// Selecto
+import { Clips } from "../../components/Clips";
+import ContextMenu from "../../components/ContextMenu";
 import Selecto from "react-selecto";
 
-// Styles
-import "./tagging.css";
-import classNames from "classnames";
+// State
+import { selectedClipIdsAtom } from "../../recoil";
+import { useSetRecoilState } from "recoil";
 
-function ClipList(props) {
-  const clips = useRecoilValue(clipsAtom);
+function SelectableClips(props) {
   const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
 
   return (
     <>
-      <div
-        id="tagging-container"
-        className={classNames([
-          clips.length ? "grid" : "block",
-          "tagging-container",
-          "justify-around",
-          "min-w-full",
-          "min-h-full",
-          "w-full",
-          "h-full",
-        ])}
-      >
-        {clips.map((clip) => (
-          <Clip clip={clip} key={clip._id} />
-        ))}
-      </div>
+      <Clips />
       <Selecto
-        container={"#tagging-container"}
-        dragContainer={"#tagging-container"}
+        container={"#selectable-container"}
+        dragContainer={"#selectable-container"}
         selectableTargets={[".clip-container"]}
         selectByClick={true}
         selectFromInside={true}
@@ -67,10 +45,10 @@ function ClipList(props) {
   );
 }
 
-function Tagging(props) {
+function Browse(props) {
   return (
     <>
-      <ClipList />
+      <SelectableClips />
       <Suspense fallback={null}>
         <ContextMenu />
       </Suspense>
@@ -78,4 +56,4 @@ function Tagging(props) {
   );
 }
 
-export default Tagging;
+export default Browse;

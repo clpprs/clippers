@@ -1,8 +1,6 @@
 import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 
-import "./context.css";
-
 import TaggingField from "./TaggingField";
 
 function ContextMenu(props) {
@@ -50,6 +48,12 @@ function ContextMenu(props) {
         top: `${cordinates.y}px`,
         left: `${cordinates.x}px`,
         visibility: isVisible ? "visible" : "hidden",
+        padding: "0.5rem",
+        backgroundColor: "#fff",
+        borderRadius: "0.25rem",
+        minWidth: "26rem",
+        width: "26rem",
+        maxWidth: "26rem",
       }}
       ref={menuRef}
       className={classNames(["context-menu"])}

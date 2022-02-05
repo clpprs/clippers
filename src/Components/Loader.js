@@ -3,7 +3,7 @@ import { CircularProgress } from "@mui/material";
 function Loader(props) {
   return (
     <div
-      class="loader"
+      className="loader"
       style={{
         height: "100%",
         width: "100%",

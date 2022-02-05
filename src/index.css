@@ -51,6 +51,10 @@ MANUAL CLASSES
   display: block;
 }
 
+.clip-container.selected {
+  opacity: 0.5;
+}
+
 #tag-search {
   background-color: rgba(0, 0, 0, 0);
   outline: none;

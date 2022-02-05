@@ -2,7 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // Router
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Outlet,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
 // Recoil
 import { RecoilRoot } from "recoil";
@@ -17,8 +23,9 @@ import "@fontsource/roboto-mono";
 // Custom components
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import { Clips } from "./components/Clips";
-import Tagging from "./pages/Tagging";
+
+// Pages
+import Browse from "./pages/Browse";
 
 const App = (props) => (
   <div className="app h-full w-full overflow-hidden">
@@ -40,8 +47,8 @@ function Router(props) {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route index element={<Clips />} />
-            <Route path="/tagging" element={<Tagging />} />
+            <Route index element={<Navigate replace to="/browse" />} />
+            <Route path="/browse" element={<Browse />} />
           </Route>
         </Routes>
       </BrowserRouter>
