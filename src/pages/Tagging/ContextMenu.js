@@ -44,19 +44,18 @@ function ContextMenu(props) {
   });
 
   return (
-    isVisible && (
-      <div
-        style={{
-          position: "absolute",
-          top: `${cordinates.y}px`,
-          left: `${cordinates.x}px`,
-        }}
-        ref={menuRef}
-        className={classNames(["context-menu"])}
-      >
-        <TaggingField />
-      </div>
-    )
+    <div
+      style={{
+        position: "absolute",
+        top: `${cordinates.y}px`,
+        left: `${cordinates.x}px`,
+        visibility: isVisible ? "visible" : "hidden",
+      }}
+      ref={menuRef}
+      className={classNames(["context-menu"])}
+    >
+      <TaggingField />
+    </div>
   );
 }
 

@@ -85,9 +85,17 @@ const sharedTagsAtom = selector({
 
     for (const clip of clips) {
       for (const tag of clip.tags) {
-        if (!notShared.includes(tag) && !shared.includes(tag)) shared.push(tag);
-        if (!notShared.includes(tag) && shared.includes(tag))
-          notShared.push(tag);
+        if (notShared.includes(tag) || shared.includes(tag)) continue;
+
+        if (
+          clips.reduce((isShared, c) => {
+            if (!isShared) return isShared;
+            if (c.tags.includes(tag)) return true;
+            return false;
+          }, true)
+        ) {
+          shared.push(tag);
+        } else notShared.push(tag);
       }
     }
 
