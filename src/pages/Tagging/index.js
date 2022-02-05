@@ -2,9 +2,10 @@ import classNames from "classnames";
 
 // Components
 import { Clip } from "../../components/Clips";
+import ContextMenu from "./ContextMenu";
 
 // State
-import { clipsAtom, selectedClipsAtom } from "../../recoil";
+import { clipsAtom, selectedClipIdsAtom } from "../../recoil";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 // Selecto
@@ -15,7 +16,7 @@ import "./tagging.css";
 
 function Tagging(props) {
   const clips = useRecoilValue(clipsAtom);
-  const setSelectedClips = useSetRecoilState(selectedClipsAtom);
+  const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
 
   // const selectedClips = useRecoilValue(selectedClipsAtom);
 
@@ -37,6 +38,7 @@ function Tagging(props) {
           <Clip clip={clip} key={clip._id} />
         ))}
       </div>
+      <ContextMenu />
       <Selecto
         container={"#tagging-container"}
         dragContainer={"#tagging-container"}
@@ -58,7 +60,7 @@ function Tagging(props) {
             r.push(el.id);
             el.classList.remove("selected");
           });
-          setSelectedClips((clips) =>
+          setSelectedClipIds((clips) =>
             [...clips, ...a].filter((c) => !r.includes(c))
           );
         }}

@@ -55,9 +55,44 @@ const clipsAtom = selector({
   },
 });
 
-const selectedClipsAtom = atom({
+const selectedClipIdsAtom = atom({
+  key: "selectedClipIds",
+  default: [],
+});
+
+const selectedClipsAtom = selector({
   key: "selectedClips",
   default: [],
+  get: async ({ get }) => {
+    const { results } = (
+      await axios.post(url("api", "clip"), {
+        query: { _id: { $in: get(selectedClipIdsAtom) } },
+        opts: { sort: { index: 1 } },
+      })
+    ).data;
+    return results;
+  },
+});
+
+const sharedTagsAtom = selector({
+  key: "sharedtags",
+  default: [],
+  get: async ({ get }) => {
+    const clips = get(selectedClipsAtom);
+
+    let shared = [];
+    let notShared = [];
+
+    for (const clip of clips) {
+      for (const tag of clip.tags) {
+        if (!notShared.includes(tag) && !shared.includes(tag)) shared.push(tag);
+        if (!notShared.includes(tag) && shared.includes(tag))
+          notShared.push(tag);
+      }
+    }
+
+    return shared.filter((tag) => !notShared.includes(tag));
+  },
 });
 
 // Prevents WebPack from hotloading the recoil module
@@ -70,5 +105,7 @@ export {
   selectedTagsAtom,
   clipTagsAtom,
   allTagsAtom,
+  selectedClipIdsAtom,
   selectedClipsAtom,
+  sharedTagsAtom,
 };
