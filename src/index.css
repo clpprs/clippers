@@ -91,17 +91,17 @@ MANUAL CLASSES
 
 .tag-container:hover .tag-button {
   opacity: 1;
-  right: 0rem;
+  right: 0.25rem;
 }
 
 .tag-container {
   transition: all 0.25s;
-  padding-left: 0.5rem;
+  padding-left: 0.3rem;
 }
 
 .sidebar-taglist .tag-container:hover {
   background-color: white;
-  padding-left: 1rem;
+  padding-left: 0.6rem;
 }
 
 .selected-tag .tag-button-icon {

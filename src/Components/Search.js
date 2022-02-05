@@ -20,7 +20,7 @@ function Search(props) {
     <Autocomplete
       id="tag-search"
       autoHighlight
-      className="box-border p-1 w-full"
+      className="box-border p-3 w-full"
       options={taglist}
       value={value}
       inputValue={inputValue}
@@ -40,7 +40,7 @@ function Search(props) {
             type="text"
             {...params.inputProps}
           />
-          <IconButton className="absolute p-1">
+          <IconButton className="absolute p-1 right-3">
             <SearchSharpIcon color="#3a3a3a" />
           </IconButton>
         </div>

@@ -7,7 +7,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 // Recoil
 import { RecoilRoot } from "recoil";
 import { Suspense } from "react";
-import { CircularProgress } from "@mui/material";
+import Loader from "./components/Loader";
 
 // Styles and fonts
 import "./index.css";
@@ -24,9 +24,9 @@ const App = (props) => (
   <div className="app h-full w-full overflow-hidden">
     <Navbar />
     <div className="main flex flex-row w-full h-full">
-      <Sidebar className="w-64 flex-shrink-0 flex-grow-0" />
+      <Sidebar className="w-64 flex-shrink-0 flex-grow-0 h-full" />
       <div className="content flex-grow overflow-x-hidden overflow-y-auto">
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
       </div>
