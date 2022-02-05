@@ -68,7 +68,10 @@ function SelectedTags(props) {
 
 function Sidebar(props) {
   return (
-    <div className={`sidebar flex flex-col ${props.className}`}>
+    <div
+      id="sidebar-container"
+      className={`sidebar flex flex-col ${props.className}`}
+    >
       <Search />
       <SelectedTags />
       <Suspense fallback={<Loader />}>

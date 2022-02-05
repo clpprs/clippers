@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 
 import TaggingField from "./TaggingField";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 function ContextMenu(props) {
   const [cordinates, setCordinates] = useState({ x: 0, y: 0 });
@@ -43,22 +44,18 @@ function ContextMenu(props) {
 
   return (
     <div
+      id="context-menu"
       style={{
         position: "absolute",
         top: `${cordinates.y}px`,
         left: `${cordinates.x}px`,
         visibility: isVisible ? "visible" : "hidden",
-        padding: "0.5rem",
-        backgroundColor: "#fff",
-        borderRadius: "0.25rem",
-        minWidth: "26rem",
-        width: "26rem",
-        maxWidth: "26rem",
       }}
       ref={menuRef}
       className={classNames(["context-menu"])}
     >
-      <TaggingField />
+      <TaggingField className="context-menu-item" />
+      <ThemeSwitcher className="context-menu-item" />
     </div>
   );
 }

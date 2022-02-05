@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // MUI
-import { IconButton, Autocomplete, Box } from "@mui/material";
+import { IconButton, Autocomplete } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 // State
@@ -38,7 +38,7 @@ function Search(props) {
     <Autocomplete
       id="tag-search"
       autoHighlight
-      className="box-border p-3 w-full"
+      className="box-border p-3 w-full relative"
       options={taglist}
       value={value}
       inputValue={inputValue}

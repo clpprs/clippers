@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import classNames from "classnames";
 
 // Components
 import { Autocomplete } from "@mui/material";
@@ -20,12 +21,15 @@ import { url } from "../../config";
 
 function TaggingField(props) {
   // Recoil state
+  const selectedClipIds = useRecoilValue(selectedClipIdsAtom);
   const allTags = useRecoilValue(allTagsAtom);
   const sharedTags = useRecoilValue(sharedTagsAtom);
-  const selectedClipIds = useRecoilValue(selectedClipIdsAtom);
 
   // UNSTABLE lol
   const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsAtom);
+
+  // Guards
+  if (!selectedClipIds.length) return <></>;
 
   // Component state
   const availableTags = selectedClipIds.length
@@ -54,6 +58,7 @@ function TaggingField(props) {
       id="tag-field"
       multiple
       disableCloseOnSelect
+      className={classNames([props.className])}
       options={allTags}
       value={sharedTags}
       renderInput={(params) => (

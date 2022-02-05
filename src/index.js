@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 
 // Router
@@ -11,49 +11,72 @@ import {
 } from "react-router-dom";
 
 // Recoil
-import { RecoilRoot } from "recoil";
-import { Suspense } from "react";
-import Loader from "./components/Loader";
+import { RecoilRoot, useRecoilValue } from "recoil";
 
-// Styles and fonts
-import "./index.css";
+// State
+import { themeAtom } from "./state";
+
+// Fonts
 import "@fontsource/roboto";
 import "@fontsource/roboto-mono";
 
-// Custom components
+// Components
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import Loader from "./components/Loader";
 
 // Pages
 import Browse from "./pages/Browse";
 
-const App = (props) => (
-  <div className="app h-full w-full overflow-hidden">
-    <Navbar />
-    <div className="main flex flex-row w-full h-full">
+// Content wrapper
+function Content(props) {
+  return (
+    <>
       <Sidebar className="w-64 flex-shrink-0 flex-grow-0 h-full" />
       <div className="content flex-grow overflow-x-hidden overflow-y-auto">
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
       </div>
-    </div>
-  </div>
-);
-
-function Router(props) {
-  return (
-    <RecoilRoot>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<Navigate replace to="/browse" />} />
-            <Route path="/browse" element={<Browse />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </RecoilRoot>
+    </>
   );
 }
 
-ReactDOM.render(<Router />, document.getElementById("root"));
+// Route pages
+function Router(props) {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Content />}>
+          <Route index element={<Navigate replace to="/browse" />} />
+          <Route path="/browse" element={<Browse />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+// Render App w/ theme
+function App(props) {
+  import(`./index.css`);
+
+  const theme = useRecoilValue(themeAtom);
+  import(`./themes/${theme}.css`);
+
+  return (
+    <div id="app" className="app overflow-hidden">
+      <Navbar />
+      <div id="content-container" className="flex flex-row w-full h-full">
+        <Router />
+      </div>
+    </div>
+  );
+}
+
+// Wrap everything in RecoilRoot
+ReactDOM.render(
+  <RecoilRoot>
+    <App />
+  </RecoilRoot>,
+  document.getElementById("root")
+);
