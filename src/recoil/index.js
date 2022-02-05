@@ -116,7 +116,7 @@ const sharedTagsAtom = selector({
 // Prevents WebPack from hotloading the recoil module
 // so that when new atoms / selectors are made, the entire
 // page refreshes. Otherwise recoil throws an error
-module.hot.decline();
+if (process.env.WEBPACK_DEV_SERVER) module.hot.decline();
 
 export {
   clipsAtom,
