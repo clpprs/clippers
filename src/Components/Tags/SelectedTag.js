@@ -19,7 +19,11 @@ function SelectedTag(props) {
       className={classNames([
         "selected-tag",
         tag.include ? "included-tag" : "excluded-tag",
-        tag.include ? "bg-blue-400" : "bg-red-400",
+        props.nobutton
+          ? "bg-white"
+          : tag.include
+          ? "bg-blue-400"
+          : "bg-red-400",
         "inline-flex",
         "w-fit",
         "h-fit",
@@ -30,7 +34,7 @@ function SelectedTag(props) {
       <p
         title={tag.name}
         className={classNames([
-          "pl-2",
+          props.nobutton ? "px-2" : "pl-2",
           "my-0.5",
           "text-xs",
           "align-middle",
@@ -44,11 +48,15 @@ function SelectedTag(props) {
       >
         {tag.name}
       </p>
-      <TagButton
-        title={(tag.include ? "exclude:" : "include:") + tag.name}
-        name={tag.name}
-        include={!tag.include}
-      />
+      {props.nobutton ? (
+        <></>
+      ) : (
+        <TagButton
+          title={(tag.include ? "exclude:" : "include:") + tag.name}
+          name={tag.name}
+          include={!tag.include}
+        />
+      )}
     </div>
   );
 }

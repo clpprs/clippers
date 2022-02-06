@@ -5,10 +5,20 @@ import { url } from "../../config";
 import { useRecoilValue } from "recoil";
 
 import { themeAtom } from "../../state";
-import { Tag } from "../Tags";
+import { Tag, SelectedTag } from "../Tags";
 
 function DeathMetadata({ clip, ...props }) {
-  return <></>;
+  const { tags = [] } = clip;
+
+  return (
+    <div className="clip-metadata">
+      <div className="clip-metadata-tags flex flex-wrap gap-1 p-2">
+        {tags.map((tag) => (
+          <SelectedTag tag={{ name: tag }} nobutton />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function ResidenceMetadata({ clip, ...props }) {
