@@ -8,10 +8,6 @@
   font-family: "Roboto Mono" !important;
 }
 
-.sidebar {
-  background-color: #c4c4c4;
-}
-
 .clips-container {
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   padding: 1rem;
@@ -19,11 +15,11 @@
   justify-items: start;
 }
 
-.clip-container {
+.clip {
   display: block;
 }
 
-.clip-container.selected {
+.clip.selected {
   opacity: 0.5;
 }
 

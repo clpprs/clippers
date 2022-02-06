@@ -20,7 +20,7 @@ function SelectableClips(props) {
       <Selecto
         container={"#selectable-container"}
         dragContainer={"#selectable-container"}
-        selectableTargets={[".clip-container"]}
+        selectableTargets={[".clip"]}
         selectByClick={true}
         selectFromInside={true}
         continueSelect={false}

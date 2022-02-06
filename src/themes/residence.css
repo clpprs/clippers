@@ -1,34 +1,76 @@
 #root {
-  --app-background: rgb(216, 202, 0);
+  --app-background: linear-gradient(to right, #faec50, #f6da32);
+  --sidebar-background: linear-gradient(to left, #faec50, #f6da32);
+  --card-background: black;
+  --card-width: 1rem;
 }
 
 *,
 *::after,
 *::before {
-  font-family: "Roboto";
+  font-family: "Roboto Mono";
+  font-weight: 400;
 }
 
 .roboto-mono {
   font-family: "Roboto Mono" !important;
 }
 
-.sidebar {
-  background-color: #c4c4c4;
-}
-
 .clips-container {
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  padding: 1rem;
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  padding: var(--card-width);
+  gap: 0;
   justify-items: start;
 }
 
-.clip-container {
+.clip {
+  transition: all 0.2s;
   display: block;
+  position: relative;
+  box-sizing: border-box;
+  margin: var(--card-width);
+  padding: 0rem;
+  background-color: transparent;
 }
 
-.clip-container.selected {
+.clip:hover {
+  background-color: var(--card-background);
+  padding: var(--card-width);
+  margin: 0rem;
+}
+
+.clip.selected {
   opacity: 0.5;
+}
+
+.clip .clip-metadata {
+  transition: all 0.2s;
+  overflow: hidden;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  color: white;
+  height: 0;
+  background-color: transparent;
+}
+.clip:hover .clip-metadata {
+  height: auto;
+  padding: 0 var(--card-width);
+  background-color: var(--card-background);
+}
+
+.clip-metadata .tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-bottom: var(--card-width);
+}
+
+.clip-metadata .tag {
+  flex-grow: 0;
+  width: auto;
 }
 
 #tag-search {
@@ -53,10 +95,6 @@
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-}
-
-.tag-container .tag-name {
-  max-width: 80%;
 }
 
 .tag-container .tag-button {

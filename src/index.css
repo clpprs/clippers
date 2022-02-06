@@ -11,11 +11,11 @@
 #root {
   --header-height: 2.75rem;
   --app-background: #ffffff;
-  --sidebar-background: #ddd;
+  --sidebar-background: #c4c4c4;
 }
 
 #app {
-  background-color: var(--app-background);
+  background: var(--app-background);
 }
 
 #header-container {
@@ -29,7 +29,7 @@
 }
 
 #sidebar-container {
-  background-color: var(--sidebar-background);
+  background: var(--sidebar-background);
 }
 
 /* 
@@ -41,6 +41,22 @@
 /* 
    Global fixes / overrides
 */
+
+/* Force video container to be 16:9 aspect ratio */
+.clip-video-container {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 16/9;
+}
+
+/* Center video inside video container */
+.clip-video-container video {
+  position: relative;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 /* Force no transitions in search bar because MUI sucks */
 .mui-tag-container .tag-container .tag-button {
