@@ -5,34 +5,24 @@ import { IconButton, Autocomplete } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 // State
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { allTagsAtom, selectedTagsAtom } from "../state";
 
 // Custom components
-import { Tag } from "./Tags";
+import { Tag } from "./Tags/Tag";
 import classNames from "classnames";
 
 function Search(props) {
   // Recoil state
   const taglist = useRecoilValue(allTagsAtom);
   const selectedTags = useRecoilValue(selectedTagsAtom);
-  const selectedTagnames = selectedTags.map((t) => t.name);
-  const setSelectedTags = useSetRecoilState(selectedTagsAtom);
+  const selectedTagnames = Array.isArray(selectedTags)
+    ? selectedTags.map((t) => t.name)
+    : [];
 
   // Component state
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
-
-  // Tag click handler
-  const toggleTag = (name, include) => {
-    setSelectedTags((tags) => {
-      const found = tags.findIndex((t) => t.name === name);
-      if (found === -1) return [...tags, { name, include }];
-      const newtags = tags.slice();
-      newtags[found] = { name, include };
-      return newtags;
-    });
-  };
 
   return (
     <Autocomplete
@@ -46,15 +36,13 @@ function Search(props) {
         !selectedTagnames.includes(option) && (
           <li
             {...props}
-            className={classNames([props.className], "mui-tag-container")}
+            className={classNames(
+              [props.className],
+              "mui-tag-container w-full"
+            )}
             style={{ padding: "0rem 0.25rem" }}
           >
-            <Tag
-              name={option}
-              key={option}
-              button="decline"
-              onClick={() => toggleTag(option, true)}
-            />
+            <Tag name={option} key={option} add exclude className="w-full" />
           </li>
         )
       }

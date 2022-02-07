@@ -1,4 +1,4 @@
 import Tag from "./Tag";
-import SelectedTag from "./SelectedTag";
+import TagButton from "./TagButton";
 
-export { Tag, SelectedTag };
+export { Tag, TagButton };

@@ -81,6 +81,15 @@
 
 .selected-tag {
   max-width: 50%;
+  background-color: #fff;
+}
+
+.selected-tag.included {
+  background-color: var(--included-color);
+}
+
+.selected-tag.excluded {
+  background-color: var(--excluded-color);
 }
 
 .selected-tag p:hover {

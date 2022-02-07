@@ -1,3 +1,4 @@
+import React from "react";
 import classNames from "classnames";
 
 // MUI
@@ -5,47 +6,30 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
 // State
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { selectedTagsAtom } from "../../state";
 
 function TagButton(props) {
   const setSelectedTags = useSetRecoilState(selectedTagsAtom);
+  const selectedTags = useRecoilValue(selectedTagsAtom);
 
-  const toggleTag = (name, include) => {
+  const toggleTag = (name, include = null) => {
     setSelectedTags((tags) => {
       const found = tags.findIndex((t) => t.name === name);
       if (found === -1) return [...tags, { name, include }];
-      // console.log(`toggling ${name}: ${include}`);
-      let newtags = [...tags];
+      const newtags = [...tags];
       newtags[found] = { name, include };
       return newtags;
     });
   };
 
-  // Overrideable variants
-  function getVariant(variant) {
-    switch (variant) {
-      case "exclude": {
-        return {
-          color: "error",
-          include: false,
-        };
-      }
-      case "include": {
-        return {
-          color: "green",
-          include: true,
-        };
-      }
-      default:
-        return {};
-    }
-  }
-
-  const { include, color, name, title, className } = {
-    ...getVariant(props.variant),
+  let { include, name, title } = {
     ...props,
   };
+
+  const isIncluded = !!selectedTags?.find((tag) => tag?.name === name)?.include;
+
+  include = include == null ? !isIncluded : include;
 
   if (!name && !props.onClick) {
     console.warn("<TagButton /> requires a name or an onClick handler");
@@ -53,50 +37,38 @@ function TagButton(props) {
   }
 
   const {
-    icon: Icon = include ?? include ? AddIcon : RemoveIcon,
+    icon: Icon = include ? AddIcon : RemoveIcon,
     onClick = (e) => {
       e.stopPropagation();
       toggleTag(name, include);
     },
   } = { ...props };
 
-  // Only fires if <Tag button={{}}/> is missing an icon
-  if (name && !Icon) {
-    console.warn(
-      "button needs a { variant: String } or { icon: Function } option to render"
-    );
-    return null;
-  }
-
-  // Only render if an icon is supplied
   return (
     Icon && (
-      <div title={title} className={divClasses(className)} onClick={onClick}>
+      <div
+        title={title}
+        className={classNames(
+          props.className,
+          "tag-button",
+          "inline-flex",
+          "rounded-full",
+          "items-center",
+          "cursor-pointer",
+          "justify-center"
+        )}
+        onClick={onClick}
+      >
         <Icon
-          className="tag-button-icon cursor-pointer"
+          className={classNames([
+            "tag-button-icon",
+            include ? "include" : "exclude",
+            "cursor-pointer",
+          ])}
           fontSize="8px"
-          color={color}
         />
       </div>
     )
-  );
-}
-
-function divClasses(className) {
-  return classNames(
-    className,
-    "tag-button",
-    "bg-white",
-    "inline-flex",
-    "w-3",
-    "h-3",
-    "mx-1",
-    "rounded-full",
-    "bg-opacity-0",
-    "hover:bg-opacity-50",
-    "justify-center",
-    "items-center",
-    "cursor-pointer"
   );
 }
 

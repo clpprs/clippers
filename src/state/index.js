@@ -36,6 +36,8 @@ const selectedTagsAtom = atom({
  * @returns
  */
 const makeQuery = (tags) => {
+  if (!Array.isArray(tags) || !tags.length) return {};
+
   const included = tags.filter((tag) => tag.include).map((tag) => tag.name);
   const excluded = tags.filter((tag) => !tag.include).map((tag) => tag.name);
 
@@ -73,7 +75,7 @@ const clipsAtom = selector({
   default: [],
   get: async ({ get }) => {
     const query = get(clipsQuery);
-    console.log(query);
+    // console.log(query);
     return query.results;
   },
 });

@@ -3,7 +3,7 @@ import classNames from "classnames";
 function Navbar(props) {
   return (
     <div
-      id="header-container"
+      id="header"
       className={classNames([
         "sticky",
         "top-0",

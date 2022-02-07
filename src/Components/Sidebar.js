@@ -2,7 +2,8 @@ import React, { Suspense } from "react";
 
 // Components
 import Search from "./Search";
-import { Tag, SelectedTag } from "./Tags";
+import { SelectedTag } from "./Tags";
+import { Tag } from "./Tags/Tag";
 
 // State
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -36,12 +37,7 @@ function TagList(props) {
       {availableTags.length ? (
         availableTags.map(({ name, count }) => (
           <li key={name}>
-            <Tag
-              name={name}
-              count={count}
-              onClick={() => toggleTag(name, true)}
-              button="exclude"
-            />
+            <Tag name={name} count={count} button add />
           </li>
         ))
       ) : (
@@ -58,9 +54,9 @@ function SelectedTags(props) {
   const selectedTags = useRecoilValue(selectedTagsAtom);
   if (!selectedTags.length) return null;
   return (
-    <div className="flex m-2 h-min flex-wrap justify-items-start gap-1">
+    <div className="selected-tags flex m-2 h-min flex-wrap justify-items-start gap-1">
       {selectedTags.map((tag) => (
-        <SelectedTag tag={tag} key={tag.name} />
+        <Tag tag={tag} key={tag.name} button remove />
       ))}
     </div>
   );
@@ -68,10 +64,7 @@ function SelectedTags(props) {
 
 function Sidebar(props) {
   return (
-    <div
-      id="sidebar-container"
-      className={`sidebar flex flex-col ${props.className}`}
-    >
+    <div id="sidebar" className={`sidebar flex flex-col ${props.className}`}>
       <Search />
       <SelectedTags />
       <Suspense fallback={<Loader />}>

@@ -18,17 +18,17 @@
   background: var(--app-background);
 }
 
-#header-container {
+#header {
   height: var(--header-height);
 }
 
-#content-container {
+#content {
   position: absolute;
   padding-top: var(--header-height);
   top: 0;
 }
 
-#sidebar-container {
+#sidebar {
   background: var(--sidebar-background);
 }
 

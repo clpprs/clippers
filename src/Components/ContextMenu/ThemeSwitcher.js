@@ -14,11 +14,11 @@ function DeathThemeButtons(props) {
 
   const Button = (props) => (
     <button onClick={() => setTheme(props.name)} className="theme-button">
-      <img src={props.img} className="theme-button-image" key={props.name} />
+      <img src={props.img} className="theme-button-image" />
     </button>
   );
 
-  return themes.map((t) => <Button {...t} />);
+  return themes.map((t) => <Button {...t} key={t.name} />);
 }
 
 function ResidenceThemeButtons(props) {
@@ -26,11 +26,11 @@ function ResidenceThemeButtons(props) {
 
   const Button = (props) => (
     <button onClick={() => setTheme(props.name)} className="theme-button">
-      <img src={props.img} className="theme-button-image" key={props.name} />
+      <img src={props.img} className="theme-button-image" />
     </button>
   );
 
-  return themes.map((t) => <Button {...t} />);
+  return themes.map((t) => <Button {...t} key={t.name} />);
 }
 
 function ThemeSwitcher(props) {

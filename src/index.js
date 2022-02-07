@@ -66,7 +66,7 @@ function App(props) {
   return (
     <div id="app" className="app overflow-hidden">
       <Navbar />
-      <div id="content-container" className="flex flex-row w-full h-full">
+      <div id="content" className="flex flex-row w-full h-full">
         <Router />
       </div>
     </div>
