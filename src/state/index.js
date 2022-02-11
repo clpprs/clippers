@@ -44,7 +44,7 @@ const makeQuery = (tags) => {
   if (!included.length && !excluded.length) return {};
   if (included.length && excluded.length)
     return {
-      $and: [{ tags: { $all: included }, tags: { $nin: excluded } }],
+      $and: [{ tags: { $all: included } }, { tags: { $nin: excluded } }],
     };
   if (included.length) return { tags: { $all: included } };
   if (excluded.length) return { tags: { $nin: excluded } };
