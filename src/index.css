@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
 #root,
 #app {
   height: 100vh;
