@@ -12,16 +12,16 @@ function DeathMetadata({ clip, ...props }) {
   const { tags = [] } = clip;
 
   return (
-    <div className="clip-metadata">
-      <div className="clip-metadata-tags flex flex-wrap gap-1 p-2">
-        {tags.map((tag) => (
-          <Tag
-            tag={{ name: tag }}
-            className="bg-white rounded-full px-3 py-0 h-fit grow-0"
-          />
-        ))}
+    <>
+      <div className="clip-metadata">
+        <div className="tag-list">
+          {tags.map((tag) => (
+            <Tag name={tag} key={tag} />
+          ))}
+        </div>
       </div>
-    </div>
+      <div className="selected-video-highlight"></div>
+    </>
   );
 }
 
@@ -52,7 +52,7 @@ function Clip({ clip, ...props }) {
           loop
           {...props}
           className="clip-video"
-          onMouseOver={(event) => event.target.play()}
+          onMouseEnter={(event) => event.target.play()}
           onMouseOut={(event) => {
             event.target.pause();
             event.target.currentTime = 0;
