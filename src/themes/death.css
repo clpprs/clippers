@@ -143,8 +143,9 @@
   width: 100%;
   border-radius: 0.3125rem;
   opacity: 0;
-  transition: all ease-in 150ms;
-  background: linear-gradient(#000, transparent);
+  transition: opacity ease-in 150ms;
+  background-color: #000;
+  mask-image: linear-gradient(#000 0%, #00000000 100%);
 }
 
 .clip:hover .clip-metadata {
