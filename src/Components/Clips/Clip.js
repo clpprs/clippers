@@ -31,7 +31,7 @@ function Clip({ clip, ...props }) {
           loop
           {...props}
           className="clip-video"
-          onMouseOver={(event) => event.target.play()}
+          onMouseEnter={(event) => event.target.play()}
           onMouseOut={(event) => {
             event.target.pause();
             event.target.currentTime = 0;
