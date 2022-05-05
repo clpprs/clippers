@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::after,
+*::before {
+  font-family: "Roboto Mono";
+  font-weight: 400;
+}
+
 #root,
 #app {
   height: 100vh;
@@ -10,8 +17,12 @@
 
 #root {
   --header-height: 2.75rem;
-  --app-background: #ffffff;
-  --sidebar-background: #c4c4c4;
+  --app-background: #fff;
+  --sidebar-background: #fff;
+  --card-background: black;
+  --card-width: 1rem;
+  --included-color: #00deff;
+  --excluded-color: #ff66f7;
 }
 
 #app {
@@ -33,14 +44,26 @@
 }
 
 /* 
-   If you find a way to fix drag selections selecting text,
-   put it here. You can also put any other fixes here or
-   move styles from components to this file.
-*/
-
-/* 
    Global fixes / overrides
 */
+
+/* Clip counter */
+/* #clips-container {
+  counter-reset: reversed(clip) 99;
+}
+
+.clip {
+  counter-increment: clip;
+  z-index: counter(clip);
+} */
+
+/* Disables text selection, applied when clips are selected */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 /* Force video container to be 16:9 aspect ratio */
 .clip-video-container {

@@ -28,8 +28,11 @@ function TaggingField(props) {
   // UNSTABLE lol
   const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsAtom);
 
+  const { fallback } = props;
+
   // Guards
-  if (!selectedClipIds.length) return <></>;
+  if (!selectedClipIds.length)
+    return <>{fallback || <h2>Hint: select clips by shift clicking</h2>}</>;
 
   // Component state
   const availableTags = selectedClipIds.length

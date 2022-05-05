@@ -4,16 +4,6 @@ import { url } from "../config";
 
 import placeholdertaglist from "../tags";
 
-const themeAtom = selector({
-  key: "theme",
-  default: "death",
-  get: ({ get }) => {
-    const theme = localStorage.getItem("theme");
-    if (!theme) localStorage.setItem("theme", "death");
-    return theme || "death";
-  },
-});
-
 /**
  * All available tags
  */
@@ -156,5 +146,4 @@ export {
   selectedClipIdsAtom,
   selectedClipsAtom,
   sharedTagsAtom,
-  themeAtom,
 };

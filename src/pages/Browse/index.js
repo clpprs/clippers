@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 // Components
 import { Clips } from "../../components/Clips";
@@ -7,21 +7,39 @@ import Selecto from "react-selecto";
 
 // State
 import { selectedClipIdsAtom } from "../../state";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+
+import KeyController from "keycon";
+import classNames from "classnames";
+
+const keycon = new KeyController();
 
 function SelectableClips(props) {
   const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
+  const selectedClipIds = useRecoilValue(selectedClipIdsAtom);
+
+  const [shiftDown, setShiftDown] = useState(false);
+
+  // Set the event listeners once
+  useEffect(() => {
+    keycon.keydown("shift", (e) => {
+      setShiftDown(true);
+    });
+    keycon.keyup("shift", (e) => {
+      setShiftDown(false);
+    });
+  }, [true]);
 
   return (
     <>
-      <div id="selectable-container">
+      <div id="selectable-container" className={classNames("no-select")}>
         <Clips />
       </div>
       <Selecto
         container={"#selectable-container"}
         dragContainer={"#selectable-container"}
         selectableTargets={[".clip"]}
-        selectByClick={true}
+        selectByClick={shiftDown}
         selectFromInside={true}
         continueSelect={false}
         toggleContinueSelect={"shift"}

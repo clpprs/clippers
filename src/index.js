@@ -13,9 +13,6 @@ import {
 // Recoil
 import { RecoilRoot, useRecoilValue } from "recoil";
 
-// State
-import { themeAtom } from "./state";
-
 // Fonts
 import "@fontsource/roboto";
 import "@fontsource/roboto-mono";
@@ -59,9 +56,6 @@ function Router(props) {
 // Render App w/ theme
 function App(props) {
   import(`./index.css`);
-
-  const theme = useRecoilValue(themeAtom);
-  import(`./themes/${theme}.css`);
 
   return (
     <div id="app" className="app overflow-hidden">

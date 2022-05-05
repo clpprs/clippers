@@ -12,6 +12,14 @@ import { allTagsAtom, selectedTagsAtom } from "../state";
 import { Tag } from "./Tags/Tag";
 import classNames from "classnames";
 
+import styled from "styled-components";
+
+const StyledAutocomplete = styled(Autocomplete)`
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  border: none;
+`;
+
 function Search(props) {
   // Recoil state
   const taglist = useRecoilValue(allTagsAtom);
@@ -25,7 +33,7 @@ function Search(props) {
   const [inputValue, setInputValue] = useState("");
 
   return (
-    <Autocomplete
+    <StyledAutocomplete
       id="tag-search"
       autoHighlight
       className="box-border p-3 w-full relative"

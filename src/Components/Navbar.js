@@ -10,6 +10,7 @@ function Navbar(props) {
         "flex",
         "w-full",
         "bg-black",
+        "text-white",
         "justify-center",
         "items-center",
       ])}
@@ -22,7 +23,6 @@ function Navbar(props) {
             "font-semibold",
             "roboto-mono",
             "tracking-wide",
-            "text-white",
           ])}
         >
           CLIPPERS

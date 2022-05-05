@@ -2,30 +2,11 @@ import React from "react";
 import classNames from "classnames";
 
 import { url } from "../../config";
-import { useRecoilValue } from "recoil";
-
-import { themeAtom } from "../../state";
-
 import { Tag } from "../Tags/Tag";
 
-function DeathMetadata({ clip, ...props }) {
-  const { tags = [] } = clip;
+import "./clip.css";
 
-  return (
-    <div className="clip-metadata">
-      <div className="clip-metadata-tags flex flex-wrap gap-1 p-2">
-        {tags.map((tag) => (
-          <Tag
-            tag={{ name: tag }}
-            className="bg-white rounded-full px-3 py-0 h-fit grow-0"
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ResidenceMetadata({ clip, ...props }) {
+function Metadata({ clip, ...props }) {
   const { tags = [] } = clip;
 
   return (
@@ -39,11 +20,9 @@ function ResidenceMetadata({ clip, ...props }) {
   );
 }
 
+// TODO: move clip.css to styled.div
+
 function Clip({ clip, ...props }) {
-  const theme = useRecoilValue(themeAtom);
-
-  const Metadata = theme === "death" ? DeathMetadata : ResidenceMetadata;
-
   return (
     <div className="clip" id={clip._id}>
       <div className="clip-video-container">
