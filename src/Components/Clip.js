@@ -92,12 +92,7 @@ function Clip({ clip, ...props }) {
             event.target.currentTime = 0;
           }}
         >
-          <source
-            src={`${url("files")}/${clip.anime}/${clip.episode}/${
-              clip.index
-            }.mp4`}
-            type="video/mp4"
-          ></source>
+          <source src={url(clip)} type="video/mp4"></source>
           Clip file not found
         </video>
       </div>

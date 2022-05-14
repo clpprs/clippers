@@ -1,6 +1,6 @@
 import { CircularProgress } from "@mui/material";
 
-function Loader(props) {
+export function Loader(props) {
   return (
     <div
       className="loader"

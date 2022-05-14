@@ -43,20 +43,6 @@
   background: var(--sidebar-background);
 }
 
-/* 
-   Global fixes / overrides
-*/
-
-/* Clip counter */
-/* #clips-container {
-  counter-reset: reversed(clip) 99;
-}
-
-.clip {
-  counter-increment: clip;
-  z-index: counter(clip);
-} */
-
 /* Disables text selection, applied when clips are selected */
 .no-select {
   -webkit-user-select: none;

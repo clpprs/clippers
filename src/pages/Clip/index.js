@@ -1,46 +1,80 @@
 import React, { Suspense, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import styled from "styled-components";
 
-import { useParams } from "react-router-dom";
+// Fontawesome
+import { MdFileDownload } from "react-icons/md";
 
 // Components
 import classNames from "classnames";
+import { Loader, TaggingField } from "../../components";
 
 import axios from "axios";
 import { url } from "../../config";
 
-function Clip(props) {
+import { selectedClipIdsAtom } from "../../state";
+import { useSetRecoilState } from "recoil";
+import { IconContext } from "react-icons";
+
+const ClipPageContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  & > * {
+    width: 100%;
+    max-width: 62rem;
+    margin-bottom: 1rem;
+  }
+`;
+
+function Video(props) {
   const { _id, anime, episode, index } = props;
   return (
     <div id={_id} className={props.className}>
       <video muted autoPlay loop controls>
-        <source
-          src={`${url("files")}/${anime}/${episode}/${index}.mp4`}
-          type="video/mp4"
-        ></source>
+        <source src={url(props)} type="video/mp4"></source>
         Clip file not found
       </video>
     </div>
   );
 }
 
-function ClipContent(props) {
-  const { clip } = props;
-  const tags = clip.tags || [];
-  return (
-    <div>
-      <h1>Tags:</h1>
-      <ul>
-        {tags.map((t) => (
-          <li key={t}>{t}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+// Tag autocomplete field under clip
+const TaggingContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+`;
+
+const ClipActionButtonContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+
+  & > * {
+    margin-right: 1rem;
+  }
+
+  & svg {
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+
+  & svg:hover {
+    opacity: 1;
+  }
+`;
 
 function ClipPage(props) {
   const { _id } = useParams();
   const [clip, setClip] = useState({});
+  const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
 
   useEffect(() => {
     console.log("Getting clip");
@@ -56,21 +90,28 @@ function ClipPage(props) {
       });
   }, [true]);
 
+  useEffect(() => {
+    console.log("Setting clip as selected");
+    setSelectedClipIds((clips) => [_id]); // replace selected clips
+  }, [true]);
+
   return (
-    <div
-      id="clip-content"
-      className={classNames(
-        "flex",
-        "w-full",
-        "h-full",
-        "justify-evenly",
-        "justify-items-center",
-        "items-center"
-      )}
-    >
-      <>{clip._id && <Clip {...clip} className={classNames("max-w-5xl")} />}</>
-      <ClipContent clip={clip} />
-    </div>
+    <ClipPageContent className={classNames("clip-page-content")}>
+      <IconContext.Provider value={{ size: "2rem" }}>
+        <h2>{`${clip.anime} - ${clip.episode} - ${clip.index}`}</h2>
+        <div>{clip._id && <Video {...clip} className={classNames()} />}</div>
+        <TaggingContainer className={classNames("clip-tagging-container")}>
+          <Suspense fallback={<Loader />}>
+            <TaggingField />
+          </Suspense>
+        </TaggingContainer>
+        <ClipActionButtonContainer>
+          <a href={url(clip, true)} target="_blank" download>
+            <MdFileDownload />
+          </a>
+        </ClipActionButtonContainer>
+      </IconContext.Provider>
+    </ClipPageContent>
   );
 }
 
