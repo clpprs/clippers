@@ -24,6 +24,7 @@ import Loader from "./components/Loader";
 
 // Pages
 import Browse from "./pages/Browse";
+import ClipPage from "./pages/Clip";
 
 // Content wrapper
 function Content(props) {
@@ -48,6 +49,7 @@ function Router(props) {
           <Route index element={<Navigate replace to="/browse" />} />
           <Route path="/browse" element={<Browse />} />
         </Route>
+        <Route path="/clip/:_id" element={<ClipPage />} />
       </Routes>
     </BrowserRouter>
   );

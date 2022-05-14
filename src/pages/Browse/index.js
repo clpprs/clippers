@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 
 // Components
-import { Clips } from "../../components/Clips";
+import Clips from "./Clips";
 import ContextMenu from "../../components/ContextMenu";
 import Selecto from "react-selecto";
 

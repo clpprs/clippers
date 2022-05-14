@@ -1,10 +1,10 @@
 import classNames from "classnames";
 
 // Components
-import Clip from "./Clip";
+import Clip from "../../components/Clip";
 
 // Components
-import NoResult from "../NoResult";
+import NoResult from "../../components/NoResult";
 
 // State
 import { clipsAtom } from "../../state";
@@ -13,7 +13,7 @@ import styled from "styled-components";
 
 const ClipsContainer = styled.div``;
 
-function Clips(props) {
+export function Clips(props) {
   const clips = useRecoilValue(clipsAtom);
 
   return (
