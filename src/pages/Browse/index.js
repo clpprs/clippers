@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
+import styled from "styled-components";
 
 // Components
 import Clips from "./Clips";
@@ -11,6 +12,8 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 
 import KeyController from "keycon";
 import classNames from "classnames";
+import Sidebar from "../../components/Sidebar";
+import { Loader } from "../../components";
 
 const keycon = new KeyController();
 
@@ -65,12 +68,35 @@ function SelectableClips(props) {
   );
 }
 
+const Content = styled.div`
+  overflow-y: scroll;
+
+  &::after {
+    display: block;
+    height: 16rem;
+    width: 100%;
+    // Scryfall reference
+    content: "This search is finished. Now the real work can begin.";
+    line-height: 16rem;
+    text-align: center;
+    vertical-align: middle;
+    font-style: italic;
+    font-size: 0.8rem;
+    opacity: 0.25;
+  }
+`;
+
 function Browse(props) {
   return (
     <>
-      <SelectableClips />
-      <Suspense fallback={null}>
-        <ContextMenu />
+      <Sidebar />
+      <Suspense fallback={<Loader />}>
+        <Content>
+          <SelectableClips />
+          <Suspense fallback={null}>
+            <ContextMenu />
+          </Suspense>
+        </Content>
       </Suspense>
     </>
   );

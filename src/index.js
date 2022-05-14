@@ -26,26 +26,12 @@ import Loader from "./components/Loader";
 import Browse from "./pages/Browse";
 import ClipPage from "./pages/Clip";
 
-// Content wrapper
-function Content(props) {
-  return (
-    <>
-      <Sidebar className="w-64 flex-shrink-0 flex-grow-0 h-full" />
-      <div className="content flex-grow overflow-x-hidden overflow-y-auto">
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-      </div>
-    </>
-  );
-}
-
 // Route pages
 function Router(props) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Content />}>
+        <Route path="/">
           <Route index element={<Navigate replace to="/browse" />} />
           <Route path="/browse" element={<Browse />} />
         </Route>
