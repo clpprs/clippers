@@ -1,4 +1,5 @@
 const config = {
+  limit: 50,
   protocol: "https://",
   domain: "amv.tools",
   api: "gaen",

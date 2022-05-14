@@ -33,7 +33,7 @@ export function Clips(props) {
       {!clips.length ? (
         <NoResult />
       ) : (
-        clips.map((clip) => <Clip clip={clip} key={clip._id} />)
+        clips.map((clip) => <Clip clip={clip} key={clip._id} clickable />)
       )}
     </ClipsContainer>
   );

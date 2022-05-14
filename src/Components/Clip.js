@@ -46,8 +46,7 @@ function Metadata({ clip, ...props }) {
   );
 }
 
-const ClickableClip = styled.div`
-  cursor: pointer;
+const ClipContainer = styled.div`
   transition: all 0.2s;
   display: block;
   position: relative;
@@ -74,30 +73,32 @@ const ClickableClip = styled.div`
 `;
 
 function Clip({ clip, ...props }) {
+  const ConditionalLink = ({ clickable, children }) =>
+    clickable ? <a href={`/clip/${clip._id}`}>{children}</a> : children;
+
   return (
-    <ClickableClip
-      className="clip"
-      id={clip._id}
-      onClick={() => (window.location = `/clip/${clip._id}`)}
-    >
-      <div className="clip-video-container">
-        <video
-          muted
-          loop
-          {...props}
-          className="clip-video"
-          onMouseEnter={(event) => event.target.play()}
-          onMouseOut={(event) => {
-            event.target.pause();
-            event.target.currentTime = 0;
-          }}
-        >
-          <source src={url(clip)} type="video/mp4"></source>
-          Clip file not found
-        </video>
-      </div>
+    <ClipContainer className="clip" id={clip._id}>
+      <ConditionalLink clickable={props.clickable}>
+        <div className="clip-video-container">
+          <video
+            muted
+            loop
+            {...props}
+            className="clip-video"
+            onMouseEnter={(event) => event.target.play()}
+            onMouseOut={(event) => {
+              event.target.pause();
+              event.target.currentTime = 0;
+            }}
+          >
+            <source src={url(clip)} type="video/mp4"></source>
+            Clip file not found
+          </video>
+        </div>
+      </ConditionalLink>
+
       <Metadata clip={clip} />
-    </ClickableClip>
+    </ClipContainer>
   );
 }
 

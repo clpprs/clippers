@@ -1,6 +1,6 @@
 import axios from "axios";
 import { atom, selector } from "recoil";
-import { url } from "../config";
+import { url, limit } from "../config";
 
 import placeholdertaglist from "../tags";
 
@@ -51,7 +51,7 @@ const clipsQuery = selector({
   get: async ({ get }) => {
     const { data } = await axios.post(url("api", "clip"), {
       query: makeQuery(get(selectedTagsAtom)),
-      opts: { sort: { index: 1 }, limit: 24 },
+      opts: { sort: { index: 1 }, limit },
     });
     return data;
   },
