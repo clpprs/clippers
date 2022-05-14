@@ -8,7 +8,7 @@ import Selecto from "react-selecto";
 
 // State
 import { selectedClipIdsAtom } from "../../state";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 import KeyController from "keycon";
 import classNames from "classnames";
@@ -19,7 +19,6 @@ const keycon = new KeyController();
 
 function SelectableClips(props) {
   const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
-  const selectedClipIds = useRecoilValue(selectedClipIdsAtom);
 
   const [shiftDown, setShiftDown] = useState(false);
 
@@ -31,11 +30,14 @@ function SelectableClips(props) {
     keycon.keyup("shift", (e) => {
       setShiftDown(false);
     });
-  }, [true]);
+  });
 
   return (
     <>
-      <div id="selectable-container" className={classNames("no-select")}>
+      <div
+        id="selectable-container"
+        className={classNames("no-select", "min-w-full", "w-full")}
+      >
         <Clips />
       </div>
       <Selecto
@@ -70,6 +72,7 @@ function SelectableClips(props) {
 
 const Content = styled.div`
   overflow-y: scroll;
+  width: 100%;
 
   &::after {
     display: block;
@@ -90,14 +93,12 @@ function Browse(props) {
   return (
     <>
       <Sidebar />
-      <Suspense fallback={<Loader />}>
-        <Content>
+      <Content>
+        <Suspense fallback={<Loader />}>
           <SelectableClips />
-          <Suspense fallback={null}>
-            <ContextMenu />
-          </Suspense>
-        </Content>
-      </Suspense>
+          <ContextMenu />
+        </Suspense>
+      </Content>
     </>
   );
 }

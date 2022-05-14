@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 // Fontawesome
@@ -32,10 +32,10 @@ const ClipPageContent = styled.div`
 `;
 
 function Video(props) {
-  const { _id, anime, episode, index } = props;
+  const { _id } = props;
   return (
     <div id={_id} className={props.className}>
-      <video muted autoPlay loop controls>
+      <video loop controls>
         <source src={url(props)} type="video/mp4"></source>
         Clip file not found
       </video>
@@ -88,12 +88,12 @@ function ClipPage(props) {
         console.log(c);
         setClip(c);
       });
-  }, [true]);
+  }, [_id]);
 
   useEffect(() => {
     console.log("Setting clip as selected");
     setSelectedClipIds((clips) => [_id]); // replace selected clips
-  }, [true]);
+  }, [_id, setSelectedClipIds]);
 
   return (
     <ClipPageContent className={classNames("clip-page-content")}>
@@ -106,7 +106,7 @@ function ClipPage(props) {
           </Suspense>
         </TaggingContainer>
         <ClipActionButtonContainer>
-          <a href={url(clip, true)} target="_blank" download>
+          <a href={url(clip, true)} target="_blank" rel="noreferrer" download>
             <MdFileDownload />
           </a>
         </ClipActionButtonContainer>

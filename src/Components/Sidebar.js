@@ -2,11 +2,10 @@ import React, { Suspense } from "react";
 
 // Components
 import Search from "./Search";
-import { SelectedTag } from "./Tags";
 import { Tag } from "./Tags/Tag";
 
 // State
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { clipTagsAtom, selectedTagsAtom } from "../state";
 import Loader from "./Loader";
 import classNames from "classnames";
@@ -27,7 +26,6 @@ const StyledTag = styled.li`
 function TagList(props) {
   const clipTags = useRecoilValue(clipTagsAtom);
   const selectedTags = useRecoilValue(selectedTagsAtom);
-  const setSelectedTags = useSetRecoilState(selectedTagsAtom);
 
   // Remove selected tags from the taglist
   const selectedTagNames = selectedTags.map((tag) => tag.name);

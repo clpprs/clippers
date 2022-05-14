@@ -3,9 +3,6 @@ import classNames from "classnames";
 // Components
 import Clip from "../../components/Clip";
 
-// Components
-import NoResult from "../../components/NoResult";
-
 // State
 import { clipsAtom } from "../../state";
 import { useRecoilValue } from "recoil";
@@ -30,11 +27,9 @@ export function Clips(props) {
         "h-full",
       ])}
     >
-      {!clips.length ? (
-        <NoResult />
-      ) : (
-        clips.map((clip) => <Clip clip={clip} key={clip._id} clickable />)
-      )}
+      {clips.map((clip) => (
+        <Clip clip={clip} key={clip._id} clickable />
+      ))}
     </ClipsContainer>
   );
 }

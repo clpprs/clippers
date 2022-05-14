@@ -1,17 +1,11 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 // Router
-import {
-  BrowserRouter,
-  Outlet,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 // Recoil
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot } from "recoil";
 
 // Fonts
 import "@fontsource/roboto";
@@ -19,8 +13,6 @@ import "@fontsource/roboto-mono";
 
 // Components
 import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import Loader from "./components/Loader";
 
 // Pages
 import Browse from "./pages/Browse";

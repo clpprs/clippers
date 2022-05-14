@@ -36,7 +36,7 @@ function Metadata({ clip, ...props }) {
   const { tags = [] } = clip;
 
   return (
-    <ClipMetadata className="clip-metadata">
+    <ClipMetadata className={classNames("clip-metadata")}>
       <div className="tag-list">
         {tags.map((tag) => (
           <Tag name={tag} key={tag} />
@@ -72,13 +72,13 @@ const ClipContainer = styled.div`
   }
 `;
 
-function Clip({ clip, ...props }) {
+function Clip({ clip, clickable, ...props }) {
   const ConditionalLink = ({ clickable, children }) =>
     clickable ? <a href={`/clip/${clip._id}`}>{children}</a> : children;
 
   return (
     <ClipContainer className="clip" id={clip._id}>
-      <ConditionalLink clickable={props.clickable}>
+      <ConditionalLink clickable={clickable}>
         <div className="clip-video-container">
           <video
             muted
@@ -96,7 +96,6 @@ function Clip({ clip, ...props }) {
           </video>
         </div>
       </ConditionalLink>
-
       <Metadata clip={clip} />
     </ClipContainer>
   );

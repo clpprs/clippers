@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 // Components
 import TagButton from "./TagButton";
-import { allTagsAtom, clipsAtom, selectedTagsAtom } from "../../state";
+import { selectedTagsAtom } from "../../state";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 /**
