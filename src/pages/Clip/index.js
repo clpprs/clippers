@@ -2,19 +2,22 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-// Fontawesome
+// Icons
+import { IconContext } from "react-icons";
 import { MdFileDownload } from "react-icons/md";
+import { BiArrowBack } from "react-icons/bi";
 
 // Components
 import classNames from "classnames";
 import { Loader, TaggingField } from "../../components";
 
+// Networking
 import axios from "axios";
 import { url } from "../../config";
 
-import { selectedClipIdsAtom } from "../../state";
+// State
 import { useSetRecoilState } from "recoil";
-import { IconContext } from "react-icons";
+import { selectedClipIdsAtom } from "../../state";
 
 const ClipPageContent = styled.div`
   width: 100%;
@@ -23,6 +26,7 @@ const ClipPageContent = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
+  position: relative;
 
   & > * {
     width: 100%;
@@ -71,6 +75,15 @@ const ClipActionButtonContainer = styled.div`
   }
 `;
 
+const BackButton = styled.a`
+  display: block;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  z-index: 999;
+  cursor: pointer;
+`;
+
 function ClipPage(props) {
   const { _id } = useParams();
   const [clip, setClip] = useState({});
@@ -110,6 +123,9 @@ function ClipPage(props) {
             <MdFileDownload />
           </a>
         </ClipActionButtonContainer>
+        <BackButton href="/">
+          <BiArrowBack />
+        </BackButton>
       </IconContext.Provider>
     </ClipPageContent>
   );
