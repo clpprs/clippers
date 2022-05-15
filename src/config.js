@@ -5,6 +5,9 @@ const config = {
   api: "gaen",
   files: "hachikuji",
   url: (service, page = "") => {
+    // Dev
+    if (service === "api") return `http://localhost:80/${!!page && page}`;
+
     // If provided a clip object
     if (typeof service === "object")
       return `${config.protocol}${config.files}.${config.domain}/${

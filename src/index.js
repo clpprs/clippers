@@ -18,6 +18,7 @@ import Navbar from "./components/Navbar";
 import Browse from "./pages/Browse";
 import ClipPage from "./pages/Clip";
 import About from "./pages/About";
+import Anime from "./pages/Anime";
 
 // Route pages
 function Router(props) {
@@ -30,6 +31,7 @@ function Router(props) {
         </Route>
         <Route path="/clip/:_id" element={<ClipPage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/anime" element={<Anime />} />
       </Routes>
     </BrowserRouter>
   );
