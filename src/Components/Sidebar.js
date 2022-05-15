@@ -124,7 +124,7 @@ const SidebarContainer = styled.div`
   gap: 0.5rem;
 `;
 
-function Sidebar(props) {
+export function Sidebar(props) {
   return (
     <SidebarContainer id="sidebar" className={classNames("sidebar")}>
       <Search />

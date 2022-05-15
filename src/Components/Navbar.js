@@ -13,7 +13,7 @@ const NavbarContainer = styled.div`
   width: 100vw;
 `;
 
-function Navbar(props) {
+export function Navbar(props) {
   return (
     <NavbarContainer id="navigation">
       <div className="text-center">

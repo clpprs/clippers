@@ -1,4 +1,5 @@
-import classNames from "classnames";
+import React from "react";
+import styled from "styled-components";
 
 // Components
 import Clip from "../../components/Clip";
@@ -6,7 +7,6 @@ import Clip from "../../components/Clip";
 // State
 import { clipsAtom } from "../../state";
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
 
 const ClipsContainer = styled.div`
   display: grid;
