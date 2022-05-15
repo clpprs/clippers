@@ -17,6 +17,7 @@ import Navbar from "./components/Navbar";
 // Pages
 import Browse from "./pages/Browse";
 import ClipPage from "./pages/Clip";
+import About from "./pages/About";
 
 // Route pages
 function Router(props) {
@@ -28,6 +29,7 @@ function Router(props) {
           <Route path="/browse" element={<Browse />} />
         </Route>
         <Route path="/clip/:_id" element={<ClipPage />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );
@@ -38,9 +40,9 @@ function App(props) {
   import(`./index.css`);
 
   return (
-    <div id="app" className="app overflow-hidden">
+    <div id="app" className="app">
       <Navbar />
-      <div id="content" className="flex flex-row w-full h-full">
+      <div id="content">
         <Router />
       </div>
     </div>

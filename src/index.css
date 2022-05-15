@@ -10,9 +10,11 @@
 }
 
 #root,
-#app {
+#app,
+#content {
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 #root {
@@ -29,13 +31,12 @@
 }
 
 #navigation {
-  min-height: var(--header-height);
   height: var(--header-height);
 }
 
 #content {
+  position: relative;
   padding-top: var(--header-height);
-  overflow: hidden;
 }
 
 /*
