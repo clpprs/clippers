@@ -38,6 +38,7 @@ export function Navbar(props) {
           <img src={hachi} />
         </a>
       </Logo>
+      <a href="/anime">ANIME</a>
       <a href="/about">ABOUT</a>
     </NavbarContainer>
   );
