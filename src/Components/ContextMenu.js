@@ -11,7 +11,7 @@ const ContextMenuContainer = styled.div`
   z-index: 9999;
 `;
 
-function ContextMenu(props) {
+export function ContextMenu(props) {
   const [cordinates, setCordinates] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
 

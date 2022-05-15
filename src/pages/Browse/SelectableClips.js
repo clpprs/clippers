@@ -1,79 +1,28 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import classNames from "classnames";
+import styled from "styled-components";
 
 // Components
 import Clips from "./Clips";
-import ContextMenu from "../../components/ContextMenu";
-import Selecto from "react-selecto";
-import { Loader } from "../../components";
+import { Loader, ContextMenu } from "../../components";
+import Selecto from "./Selecto";
 
-// State
-import { selectedClipIdsAtom } from "../../state";
-import { useSetRecoilState } from "recoil";
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
-import KeyController from "keycon";
-
-const keycon = new KeyController();
-
-function SelectableContainer(props) {
-  const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
-
-  const [shiftDown, setShiftDown] = useState(false);
-
-  // Set the event listeners once
-  useEffect(() => {
-    keycon.keydown("shift", (e) => {
-      setShiftDown(true);
-    });
-    keycon.keyup("shift", (e) => {
-      setShiftDown(false);
-    });
-  }, [setShiftDown]);
+export function SelectableClips(props) {
+  const containerID = "selectable-container";
 
   return (
     <>
-      <div
-        id="selectable-container"
-        className={classNames("no-select", "min-w-full", "w-full")}
-      >
+      <Container id={containerID} className={classNames("no-select")}>
         <Suspense fallback={<Loader />}>
           <Clips />
         </Suspense>
-      </div>
-      <Selecto
-        container={"#selectable-container"}
-        dragContainer={"#selectable-container"}
-        selectableTargets={[".clip"]}
-        selectByClick={shiftDown}
-        selectFromInside={true}
-        continueSelect={false}
-        toggleContinueSelect={"shift"}
-        keyContainer={window}
-        hitRate={5}
-        onSelect={(e) => {
-          let a = [];
-          let r = [];
-          e.added.forEach((el) => {
-            el.classList.add("selected");
-            a.push(el.id);
-          });
-          e.removed.forEach((el) => {
-            el.classList.remove("selected");
-            r.push(el.id);
-          });
-          setSelectedClipIds((clips) =>
-            [...clips, ...a].filter((c) => !r.includes(c))
-          );
-        }}
-      />
-    </>
-  );
-}
-
-export function SelectableClips(props) {
-  return (
-    <>
-      <SelectableContainer />
+      </Container>
+      <Selecto containerID={containerID} />
       <Suspense fallback={null}>
         <ContextMenu />
       </Suspense>

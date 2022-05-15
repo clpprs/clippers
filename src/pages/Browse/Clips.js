@@ -19,7 +19,6 @@ const ClipsContainer = styled.div`
 
 export function Clips(props) {
   const clips = useRecoilValue(clipsAtom);
-
   return (
     <ClipsContainer id="clips-container">
       {clips.map((clip) => (

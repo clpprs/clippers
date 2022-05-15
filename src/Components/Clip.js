@@ -74,7 +74,13 @@ const ClipContainer = styled.div`
 
 function Clip({ clip, clickable, ...props }) {
   const ConditionalLink = ({ clickable, children }) =>
-    clickable ? <a href={`/clip/${clip._id}`}>{children}</a> : children;
+    clickable ? (
+      <a href={`/clip/${clip._id}`} className="preventable">
+        {children}
+      </a>
+    ) : (
+      children
+    );
 
   return (
     <ClipContainer className="clip" id={clip._id}>
