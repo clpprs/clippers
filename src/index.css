@@ -18,7 +18,6 @@
 #root {
   --header-height: 2.75rem;
   --app-background: #fff;
-  --sidebar-background: #fff;
   --card-background: black;
   --card-width: 1rem;
   --included-color: #00deff;
@@ -29,19 +28,33 @@
   background: var(--app-background);
 }
 
-#header {
+#navigation {
+  min-height: var(--header-height);
   height: var(--header-height);
 }
 
 #content {
-  position: absolute;
   padding-top: var(--header-height);
-  top: 0;
+  overflow: hidden;
 }
 
-#sidebar {
-  background: var(--sidebar-background);
+/*
+ * Global tag highlighting 
+ */
+
+.highlight-tags .included {
+  background-color: var(--included-color);
 }
+.highlight-tags .excluded {
+  background-color: var(--excluded-color);
+}
+.highlight-tags .selected span:hover {
+  text-decoration: line-through;
+}
+
+/* 
+ * Global fixes
+ */
 
 /* Disables text selection, applied when clips are selected */
 .no-select {

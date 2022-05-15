@@ -8,25 +8,20 @@ import { clipsAtom } from "../../state";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-const ClipsContainer = styled.div``;
+const ClipsContainer = styled.div`
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  height: 100%;
+  padding: 0 2rem;
+`;
 
 export function Clips(props) {
   const clips = useRecoilValue(clipsAtom);
 
   return (
-    <ClipsContainer
-      id="clips-container"
-      className={classNames([
-        clips.length ? "grid" : "block",
-        "grid-flow-row",
-        "grid-cols-4",
-        "px-8",
-        "min-w-full",
-        "min-h-full",
-        "w-full",
-        "h-full",
-      ])}
-    >
+    <ClipsContainer id="clips-container">
       {clips.map((clip) => (
         <Clip clip={clip} key={clip._id} clickable />
       ))}

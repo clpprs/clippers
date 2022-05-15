@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import styled from "styled-components";
 
 // Components
 import Search from "./Search";
@@ -7,18 +8,79 @@ import { Tag } from "./Tags/Tag";
 // State
 import { useRecoilValue } from "recoil";
 import { clipTagsAtom, selectedTagsAtom } from "../state";
-import Loader from "./Loader";
 import classNames from "classnames";
 
-import styled from "styled-components";
+const Subtitle = styled.span`
+  width: 100%;
+  font-size: 0.75rem;
+  margin-bottom: -0.25rem;
+`;
 
-const StyledTag = styled.li`
-  & .tag-button {
-    opacity: 0;
-    position: relative;
+const SelectedTagList = styled.div`
+  padding: 0 0.5rem;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.25rem;
+
+  & .tag {
+    padding: 0 0.25rem;
+    white-space: pre-wrap;
   }
 
-  &:hover .tag-button {
+  & .tag .tag-button {
+    padding-left: 0.25rem;
+  }
+`;
+
+function SelectedTags(props) {
+  const selectedTags = useRecoilValue(selectedTagsAtom);
+
+  const [excluded, included] = selectedTags.reduce(
+    (output, tag) => {
+      output[Number(tag.include)].push(tag);
+      return output;
+    },
+    [[], []]
+  );
+
+  return (
+    !!selectedTags.length && (
+      <SelectedTagList id="selected-tags" className="highlight-tags">
+        {!!included.length && (
+          <>
+            <Subtitle>Included tags</Subtitle>
+            {included.map((tag) => (
+              <Tag tag={tag} key={tag.name} button remove />
+            ))}
+          </>
+        )}
+
+        {!!excluded.length && (
+          <>
+            <Subtitle className={classNames("mt-2")}>Excluded tags</Subtitle>
+            {excluded.map((tag) => (
+              <Tag tag={tag} key={tag.name} button remove />
+            ))}
+          </>
+        )}
+      </SelectedTagList>
+    )
+  );
+}
+
+const AvailableTags = styled.div`
+  padding: 0 0.5rem;
+`;
+
+const AvailableTagList = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.25rem;
+
+  & .tag .tag-button {
+    opacity: 0;
+  }
+  & .tag:hover .tag-button {
     opacity: 1;
   }
 `;
@@ -33,93 +95,44 @@ function TagList(props) {
     (tag) => !selectedTagNames.includes(tag.name)
   );
 
-  // TODO: figure out what this does
-  // const toggleTag = (name, include) => {
-  //   setSelectedTags((tags) => {
-  //     const found = tags.findIndex((t) => t.name === name);
-  //     if (found === -1) return [...tags, { name, include }];
-  //     const newtags = tags.slice();
-  //     newtags[found] = { name, include };
-  //     return newtags;
-  //   });
-  // };
-
   return (
-    <ul className="sidebar-taglist h-min overflow-y-auto px-2">
+    <AvailableTags>
+      <Subtitle>Most common tags</Subtitle>
       {availableTags.length ? (
-        availableTags.map(({ name, count }) => (
-          <StyledTag key={name}>
-            <Tag
-              className={classNames("pl-2", "pb-1")}
-              name={name}
-              count={count}
-              button
-              add
-            />
-          </StyledTag>
-        ))
+        <AvailableTagList
+          id="available-tags"
+          className={classNames("sidebar-taglist")}
+        >
+          {availableTags.map(({ name, count }) => (
+            <Tag name={name} key={name} count={count} button add />
+          ))}
+        </AvailableTagList>
       ) : (
-        <>
-          <li>These results contain no tags</li>
-          <li>Please tag them!</li>
-        </>
+        !clipTags.length && (
+          <span>These results contain no tags. Please tag them!</span>
+        )
       )}
-    </ul>
+    </AvailableTags>
   );
 }
 
-const SelectedTagList = styled.div`
-  & .included {
-    background-color: var(--included-color);
-  }
-  & .excluded {
-    background-color: var(--excluded-color);
-  }
-  & .selected span:hover {
-    text-decoration: line-through;
-  }
+const SidebarContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  width: 18rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
 `;
-
-function SelectedTags(props) {
-  const selectedTags = useRecoilValue(selectedTagsAtom);
-  if (!selectedTags.length) return null;
-
-  return (
-    <SelectedTagList
-      id="selectedTags"
-      className={classNames(
-        "flex",
-        "px-3",
-        "gap-1",
-        "my-1",
-        "m-2",
-        "h-min",
-        "flex-wrap",
-        "justify-items-start"
-      )}
-    >
-      {selectedTags.map((tag) => (
-        <Tag
-          tag={tag}
-          key={tag.name}
-          className={classNames("w-full", "whitespace-pre-wrap")}
-          button
-          remove
-        />
-      ))}
-    </SelectedTagList>
-  );
-}
 
 function Sidebar(props) {
   return (
-    <div id="sidebar" className={`sidebar flex flex-col ${props.className}`}>
+    <SidebarContainer id="sidebar" className={classNames("sidebar")}>
       <Search />
       <SelectedTags />
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={null}>
         <TagList />
       </Suspense>
-    </div>
+    </SidebarContainer>
   );
 }
 
