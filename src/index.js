@@ -40,8 +40,8 @@ function App(props) {
   import(`./index.css`);
 
   return (
-    <div id="app" className="app">
-      <Navbar />
+    <div id="app">
+      <Navbar id="navigation" />
       <div id="content">
         <Router />
       </div>

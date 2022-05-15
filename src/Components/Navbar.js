@@ -1,31 +1,43 @@
 import React from "react";
 import styled from "styled-components";
 
-const NavbarContainer = styled.div`
+import hachi from "../images/hachi.webp";
+
+const NavbarContainer = styled.nav`
   position: fixed;
   top: 0;
   z-index: 9999;
-  width: 100vw;
 
   background-color: black;
   color: white;
 
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  align-content: space-around;
+
+  gap: 1rem;
+  padding: 0 1rem;
 
   vertical-align: middle;
   font-weight: 600;
   letter-spacing: 0.025em;
 `;
 
+const Logo = styled.div`
+  height: 100%;
+  & * {
+    height: inherit;
+  }
+`;
+
 export function Navbar(props) {
   return (
-    <NavbarContainer id="navigation">
-      <a href="/">CLIPPERS</a>
+    <NavbarContainer {...props}>
+      <a href="/">BROWSE</a>
+      <Logo>
+        <a href="/">
+          <img src={hachi} />
+        </a>
+      </Logo>
       <a href="/about">ABOUT</a>
     </NavbarContainer>
   );

@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 
 import drip from "./drip.jpg";
-import hachi from "./hachi.webp";
+import hachi from "../../images/hachi.webp";
 
 const Flexer = styled.div`
   padding: 4rem 0;
