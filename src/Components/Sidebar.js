@@ -119,9 +119,12 @@ function TagList(props) {
 const SidebarContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  width: 18rem;
-  padding: 0.5rem;
   gap: 0.5rem;
+
+  width: 18rem;
+  min-width: 18rem;
+  max-width: 18rem;
+  padding: 0.5rem;
 `;
 
 export function Sidebar(props) {

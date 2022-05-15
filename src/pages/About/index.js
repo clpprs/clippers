@@ -30,7 +30,10 @@ const Flexer = styled.div`
 
 export function About(props) {
   return (
-    <div id="scroller" className={classNames("overflow-y-scroll", "h-full")}>
+    <div
+      id="scroller"
+      className={classNames("overflow-y-scroll", "h-full", "w-full")}
+    >
       <Flexer className="flexer">
         <img src={hachi} className="max-w-min" />
         <p>
@@ -51,7 +54,7 @@ export function About(props) {
           The current goal for Clippers is to get bakemonogatari in it's
           entirety uploaded and tagged.
         </p>
-        <div className={classNames("py-96")}></div>
+        <div className={classNames("spacer", "py-96")}></div>
         <img src={drip} className="max-w-2xl" />
       </Flexer>
     </div>

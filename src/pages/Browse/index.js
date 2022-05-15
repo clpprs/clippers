@@ -7,6 +7,7 @@ import SelectableClips from "./SelectableClips";
 const BrowseContent = styled.div`
   overflow-y: scroll;
   width: 100%;
+  height: 100%;
 
   &::after {
     display: block;

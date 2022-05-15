@@ -18,6 +18,7 @@
 }
 
 #root {
+  --sidebar-width: 18rem;
   --header-height: 2.75rem;
   --app-background: #fff;
   --card-background: black;
@@ -31,11 +32,14 @@
 }
 
 #navigation {
+  line-height: var(--header-height);
   height: var(--header-height);
 }
 
 #content {
   position: relative;
+  display: flex;
+  flex-flow: row nowrap;
   padding-top: var(--header-height);
 }
 

@@ -7,10 +7,7 @@ import Clips from "./Clips";
 import { Loader, ContextMenu } from "../../components";
 import Selecto from "./Selecto";
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+const Container = styled.div``;
 
 export function SelectableClips(props) {
   const containerID = "selectable-container";
