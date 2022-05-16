@@ -9,9 +9,6 @@
     "@fontsource/roboto-mono": "^4.5.1",
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.4.0",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
     "classnames": "^2.3.1",
     "keycon": "^1.1.2",
@@ -19,39 +16,25 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
     "react-selecto": "^1.13.2",
     "recoil": "^0.6.1",
-    "styled-components": "^5.3.5",
-    "web-vitals": "^2.1.4"
+    "styled-components": "^5.3.5"
   },
+  "source": "public/index.html",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "parcel",
+    "build": "parcel build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    "defaults",
+    "not ios_saf < 13"
+  ],
   "devDependencies": {
-    "autoprefixer": "^10.4.2",
+    "@parcel/packager-raw-url": "^2.5.0",
+    "@parcel/transformer-webmanifest": "^2.5.0",
+    "parcel": "^2.5.0",
     "postcss": "^8.4.5",
+    "process": "^0.11.10",
     "tailwindcss": "^3.0.18"
   }
 }

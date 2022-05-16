@@ -1,8 +1,9 @@
 {
   "files.exclude": {
     "node_modules": true,
-    "build": true,
-    "package-lock.json": true
+    "package-lock.json": true,
+    "dist": true,
+    ".parcel-cache": true
   },
   "editor.formatOnSave": true,
   "prettier.semi": true,
