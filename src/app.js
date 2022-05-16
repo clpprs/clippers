@@ -1,3 +1,7 @@
+// Fonts
+import "@fontsource/roboto";
+import "@fontsource/roboto-mono";
+
 // Router
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 

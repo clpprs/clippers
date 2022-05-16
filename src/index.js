@@ -1,12 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 // Entry component
 import App from "./app";
 
-// Fonts
-import "@fontsource/roboto";
-import "@fontsource/roboto-mono";
-
-// Wrap everything in RecoilRoot
-ReactDOM.render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App />);

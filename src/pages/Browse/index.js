@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Sidebar from "../../components/Sidebar";
 import SelectableClips from "./SelectableClips";
+import SidebarContent from "./SidebarContent";
 
 const BrowseContent = styled.div`
   overflow-y: scroll;
@@ -24,10 +25,12 @@ const BrowseContent = styled.div`
   }
 `;
 
-function Browse(props) {
+export function Browse(props) {
   return (
     <>
-      <Sidebar />
+      <Sidebar>
+        <SidebarContent />
+      </Sidebar>
       <BrowseContent>
         <SelectableClips />
       </BrowseContent>

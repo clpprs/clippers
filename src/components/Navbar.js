@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import death from "../images/death.jpg";
+import reisir from "../images/reisir.jpg";
 import hachi from "../images/hachi.webp";
 
 const Nav = styled.nav`
@@ -19,10 +21,6 @@ const Nav = styled.nav`
   vertical-align: middle;
   letter-spacing: 0.05em;
 
-  & img:hover {
-    filter: hue-rotate(180deg) contrast(125%) brightness(0.75);
-  }
-
   & * {
     font-weight: bold;
     transition: all 0.15s ease-out;
@@ -38,8 +36,36 @@ const Nav = styled.nav`
 
 const Logo = styled.div`
   height: 100%;
+
   & * {
     height: inherit;
+  }
+
+  & img:hover {
+    filter: hue-rotate(180deg) contrast(125%) brightness(0.75);
+  }
+`;
+
+const RightAligned = styled.div`
+  flex: 1 1;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+
+  gap: 1rem;
+
+  & img {
+    border-radius: 100%;
+    height: 70%;
+  }
+
+  & img:first-of-type {
+    position: relative;
+    margin-right: -1.75rem;
+    z-index: 9900;
   }
 `;
 
@@ -54,6 +80,11 @@ export function Navbar(props) {
       </Logo>
       <a href="/anime">ANIME</a>
       <a href="/about">ABOUT</a>
+      <RightAligned>
+        <p style={{ fontSize: "0.75rem" }}>Developed by: </p>
+        <img src={death} />
+        <img src={reisir} />
+      </RightAligned>
     </Nav>
   );
 }

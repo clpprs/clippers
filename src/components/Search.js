@@ -9,7 +9,7 @@ import { useRecoilValue } from "recoil";
 import { allTagsAtom, selectedTagsAtom } from "../state";
 
 // Custom components
-import { Tag } from "./Tags/Tag";
+import { Tag } from "./Tags";
 import classNames from "classnames";
 
 import styled from "styled-components";
@@ -20,7 +20,7 @@ const StyledAutocomplete = styled(Autocomplete)`
   border: none;
 `;
 
-function Search(props) {
+export function Search(props) {
   // Recoil state
   const taglist = useRecoilValue(allTagsAtom);
   const selectedTags = useRecoilValue(selectedTagsAtom);
@@ -45,11 +45,8 @@ function Search(props) {
           !selectedTagnames.includes(option) && (
             <div
               {...props}
-              className={classNames(
-                [props.className],
-                "mui-tag-container w-full"
-              )}
-              style={{ padding: "0rem 0.25rem" }}
+              className={classNames("mui-tag-container", "w-full")}
+              style={{ padding: "0 0.25rem" }}
             >
               <Tag name={option} key={option} add exclude className="w-full" />
             </div>
@@ -75,7 +72,7 @@ function Search(props) {
           setValue(null);
           setInputValue(inputValue);
         }}
-        onInputChange={(event, newInputValue) => {
+        onInputChange={(e, newInputValue) => {
           setInputValue(newInputValue.toLowerCase());
         }}
       />

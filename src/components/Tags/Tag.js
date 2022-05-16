@@ -49,7 +49,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
  * ```
  *
  */
-function Tag(props) {
+export function Tag(props) {
   const setSelectedTags = useSetRecoilState(selectedTagsAtom);
   const selectedTags = useRecoilValue(selectedTagsAtom);
 
@@ -139,7 +139,7 @@ function Tag(props) {
   );
 }
 
-function Testing(props) {
+export function Testing(props) {
   return (
     <>
       <div style={{ width: "30%", float: "left" }}>
@@ -158,5 +158,3 @@ function Testing(props) {
 }
 
 export default Tag;
-
-export { Tag, Testing };
