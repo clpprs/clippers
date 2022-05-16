@@ -11,7 +11,7 @@ import { useRecoilValue } from "recoil";
 const ClipsContainer = styled.div`
   display: grid;
   grid-auto-flow: row;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   width: 100%;
   height: 100%;
   padding: 0 2rem;
