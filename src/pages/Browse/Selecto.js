@@ -1,43 +1,64 @@
 import React, { useEffect, useState } from "react";
 
+// Selection handler
 import Selecto from "react-selecto";
+
+// Keyboard listener
+import KeyController from "keycon";
 
 // State
 import { selectedClipIdsAtom } from "../../state";
-import { useSetRecoilState } from "recoil";
-import KeyController from "keycon";
+import { useRecoilState } from "recoil";
 
-const keycon = new KeyController();
-let globalShiftDown = false;
+// Link disabler event handler
+const prevent = (e) => e.preventDefault();
 
 export function SelectoWrapper(props) {
-  const containerQuerySelector = `#${props.containerID}`;
-  const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
+  const [selectedClipIds, setSelectedClipIds] =
+    useRecoilState(selectedClipIdsAtom);
   const [shiftDown, setShiftDown] = useState(false);
+  const [linksAreClickable, setLinksAreClickable] = useState(true);
 
-  const prevent = (e) => e.preventDefault();
+  // Get the selection container ID from props, could use a ref
+  const containerQuerySelector = `#${props.containerID}`;
 
-  // Set the event listeners once
+  // Helper function to check if any clips are selected
+  const areSelected = () => !!selectedClipIds.length;
+
+  // Helper function to toggleLinks
+  const toggleLinks = (enable) => {
+    if (enable && linksAreClickable) return;
+    if (!enable && !linksAreClickable) return;
+
+    // Find all links inside the selection container
+    const links = document.querySelectorAll(`${containerQuerySelector} a`);
+    // Add or remove the event handler from all links
+    links.forEach(function (link) {
+      enable
+        ? link.removeEventListener("click", prevent)
+        : link.addEventListener("click", prevent);
+    });
+    setLinksAreClickable(enable);
+  };
+
+  // Create KeyController, bind event handlers and clean it up
   useEffect(() => {
+    const keycon = new KeyController();
+
     function handleKeyEvent(up) {
-      // Have to use  setShiftDown and globalShiftDown because the keycon
-      // event functions do not re-evaluate when component state changes
-      if (globalShiftDown == up) return;
-      globalShiftDown = up;
+      if (shiftDown == up) return;
       setShiftDown(up);
-      // We use the containerID passed in props to disable all
-      // link onClick events inside the container when shift is down
-      const links = document.querySelectorAll(`${containerQuerySelector} a`);
-      links.forEach(function (link) {
-        up
-          ? link.addEventListener("click", prevent)
-          : link.removeEventListener("click", prevent);
-      });
+      if (!up && areSelected()) return;
+      toggleLinks(!up);
     }
 
     keycon.keydown("shift", (e) => handleKeyEvent(true));
     keycon.keyup("shift", (e) => handleKeyEvent(false));
-  }, [setShiftDown]);
+
+    return function cleanup() {
+      keycon.destroy();
+    };
+  });
 
   return (
     <Selecto
@@ -55,19 +76,23 @@ export function SelectoWrapper(props) {
         if (!shiftDown) e.stop();
       }}
       onSelect={(e) => {
-        let a = [];
-        let r = [];
+        let added = [];
+        let removed = [];
         e.added.forEach((el) => {
           el.classList.add("selected");
-          a.push(el.id);
+          added.push(el.id);
         });
         e.removed.forEach((el) => {
           el.classList.remove("selected");
-          r.push(el.id);
+          removed.push(el.id);
         });
         setSelectedClipIds((clips) =>
-          [...clips, ...a].filter((c) => !r.includes(c))
+          [...clips, ...added].filter((c) => !removed.includes(c))
         );
+      }}
+      onSelectEnd={() => {
+        if (!areSelected() && !linksAreClickable && !shiftDown)
+          setTimeout(() => toggleLinks(true), 10);
       }}
     />
   );
