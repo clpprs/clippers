@@ -91,8 +91,8 @@ export function About(props) {
         <div className={classNames("spacer", "py-6")}></div>
         <h3>Clippers roadmap</h3>
         <ol>
-          <li>Public beta testing</li>
-          <li>Update the page browse when tags are changed</li>
+          <li>Closed beta testing</li>
+          <li>Update the browse page when tags are changed</li>
           <li>Load thumbnails before full videos</li>
           <li>Bulk download</li>
           <li>New tag suggestions</li>
