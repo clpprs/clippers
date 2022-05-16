@@ -13,6 +13,11 @@ const Subtitle = styled.span`
   width: 100%;
   font-size: 0.75rem;
   margin-bottom: -0.25rem;
+  margin-top: 0.5rem;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
 `;
 
 const SelectedTagList = styled.div`
@@ -56,7 +61,7 @@ function SelectedTags(props) {
 
         {!!excluded.length && (
           <>
-            <Subtitle className={classNames("mt-2")}>Excluded tags</Subtitle>
+            <Subtitle>Excluded tags</Subtitle>
             {excluded.map((tag) => (
               <Tag tag={tag} key={tag.name} button remove />
             ))}
