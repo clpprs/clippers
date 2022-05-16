@@ -3,7 +3,12 @@ import styled from "styled-components";
 
 import hachi from "../images/hachi.webp";
 
-const NavbarContainer = styled.nav`
+const Nav = styled.nav`
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+  padding: 0 1rem;
+
   position: fixed;
   top: 0;
   z-index: 9999;
@@ -11,15 +16,24 @@ const NavbarContainer = styled.nav`
   background-color: black;
   color: white;
 
-  display: flex;
-  flex-flow: row nowrap;
-
-  gap: 1rem;
-  padding: 0 1rem;
-
   vertical-align: middle;
-  font-weight: 600;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.05em;
+
+  & img:hover {
+    filter: hue-rotate(180deg) contrast(125%) brightness(0.75);
+  }
+
+  & * {
+    font-weight: bold;
+    transition: all 0.15s ease-out;
+  }
+
+  & a:hover {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    color: var(--link-highlight-color);
+    text-decoration-color: var(--link-highlight-color);
+  }
 `;
 
 const Logo = styled.div`
@@ -31,8 +45,8 @@ const Logo = styled.div`
 
 export function Navbar(props) {
   return (
-    <NavbarContainer {...props}>
-      <a href="/">BROWSE</a>
+    <Nav {...props}>
+      {/* <a href="/">BROWSE</a> */}
       <Logo>
         <a href="/">
           <img src={hachi} />
@@ -40,7 +54,7 @@ export function Navbar(props) {
       </Logo>
       <a href="/anime">ANIME</a>
       <a href="/about">ABOUT</a>
-    </NavbarContainer>
+    </Nav>
   );
 }
 

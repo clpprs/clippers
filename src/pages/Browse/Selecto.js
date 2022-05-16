@@ -46,6 +46,7 @@ export function SelectoWrapper(props) {
       selectableTargets={[".clip"]}
       selectByClick={shiftDown}
       selectFromInside={true}
+      preventDragFromInside={false}
       continueSelect={false}
       toggleContinueSelect={"shift"}
       keyContainer={window}

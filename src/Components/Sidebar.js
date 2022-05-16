@@ -97,19 +97,21 @@ function TagList(props) {
 
   return (
     <AvailableTags>
-      <Subtitle>Most common tags</Subtitle>
       {availableTags.length ? (
-        <AvailableTagList
-          id="available-tags"
-          className={classNames("sidebar-taglist")}
-        >
-          {availableTags.map(({ name, count }) => (
-            <Tag name={name} key={name} count={count} button add />
-          ))}
-        </AvailableTagList>
+        <>
+          <Subtitle>Most common tags</Subtitle>
+          <AvailableTagList
+            id="available-tags"
+            className={classNames("sidebar-taglist")}
+          >
+            {availableTags.map(({ name, count }) => (
+              <Tag name={name} key={name} count={count} button add />
+            ))}
+          </AvailableTagList>
+        </>
       ) : (
         !clipTags.length && (
-          <span>These results contain no tags. Please tag them!</span>
+          <div>These results contain no tags. Please tag them!</div>
         )
       )}
     </AvailableTags>
@@ -120,11 +122,11 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   gap: 0.5rem;
-
-  width: 18rem;
-  min-width: 18rem;
-  max-width: 18rem;
   padding: 0.5rem;
+
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  max-width: var(--sidebar-width);
 `;
 
 export function Sidebar(props) {

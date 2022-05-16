@@ -47,6 +47,7 @@ function Metadata({ clip, ...props }) {
 }
 
 const ClipContainer = styled.div`
+  --card-width: 1rem;
   transition: all 0.2s;
   display: block;
   position: relative;
@@ -72,23 +73,18 @@ const ClipContainer = styled.div`
   }
 `;
 
-function Clip({ clip, clickable, ...props }) {
+function Clip({ clip, clickable, className, ...props }) {
   const ConditionalLink = ({ clickable, children }) =>
-    clickable ? (
-      <a href={`/clip/${clip._id}`} className="preventable">
-        {children}
-      </a>
-    ) : (
-      children
-    );
+    clickable ? <a href={`/clip/${clip._id}`}>{children}</a> : children;
 
   return (
-    <ClipContainer className="clip" id={clip._id}>
+    <ClipContainer className={classNames("clip", className)} id={clip._id}>
       <ConditionalLink clickable={clickable}>
         <div className="clip-video-container">
           <video
             muted
             loop
+            draggable="false"
             {...props}
             className="clip-video"
             onMouseEnter={(event) => event.target.play()}

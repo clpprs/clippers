@@ -2,29 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-*,
-*::after,
-*::before {
-  font-family: "Roboto Mono";
-  font-weight: 400;
+#root {
+  --sidebar-width: 18rem;
+  --header-height: 2.75rem;
+  --app-background: #fff;
+  --card-background: black;
+  --link-highlight-color: slateblue;
+  --included-color: #00deff;
+  --excluded-color: #ff66f7;
 }
 
+/* 
+ * App containers etc
+ */
+
+html,
+body,
 #root,
 #app,
 #content {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-}
-
-#root {
-  --sidebar-width: 18rem;
-  --header-height: 2.75rem;
-  --app-background: #fff;
-  --card-background: black;
-  --card-width: 1rem;
-  --included-color: #00deff;
-  --excluded-color: #ff66f7;
 }
 
 #app {
@@ -42,6 +41,32 @@
   display: flex;
   flex-flow: row nowrap;
   padding-top: var(--header-height);
+}
+
+/*
+ * Defaults
+ */
+
+*,
+*::after,
+*::before {
+  font-family: "Roboto Mono";
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.25rem;
+}
+ol {
+  list-style-type: decimal;
 }
 
 /*

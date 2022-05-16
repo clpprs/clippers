@@ -9,6 +9,57 @@ import Scroller from "../../components/Scroller";
 import axios from "axios";
 import { url } from "../../config";
 
+const AnimeContainer = styled.a`
+  --padding: 1rem;
+  --transition: all 0.25s ease-out;
+
+  display: block;
+  height: 20rem;
+  padding: var(--padding);
+  border-radius: 0.25rem;
+  border: 1px solid lightgray;
+  position: relative;
+  transition: var(--transition);
+
+  &:hover {
+    --padding: 0.5rem;
+    border-color: darkgray;
+  }
+
+  & .anime-title {
+    transition: var(--transition);
+    display: block;
+    position: absolute;
+    width: calc(100% - (var(--padding) * 2));
+    background-color: white;
+    text-align: center;
+    z-index: 1;
+    top: -1rem;
+  }
+
+  & .anime-cover {
+    position: relative;
+    z-index: 2;
+    width: auto;
+    height: 100%;
+    border-radius: 0.25rem;
+  }
+`;
+
+function Anime(props) {
+  const { anime } = props;
+
+  return (
+    <AnimeContainer href="/browse">
+      <img
+        className="anime-cover"
+        src={url("files", `${anime._id}/covers/a.jpg`)}
+      />
+      <span className="anime-title">{anime.title}</span>
+    </AnimeContainer>
+  );
+}
+
 const AnimePageContent = styled.div`
   position: relative;
 
@@ -64,51 +115,3 @@ export function ClipPage(props) {
 }
 
 export default ClipPage;
-
-const AnimeContainer = styled.a`
-  --padding: 1rem;
-  --transition: all 0.25s ease-out;
-
-  display: block;
-  height: 20rem;
-  padding: var(--padding);
-  border-radius: 0.25rem;
-  border: 1px solid lightgray;
-  position: relative;
-  transition: var(--transition);
-
-  &:hover {
-    --padding: 0.5rem;
-    border-color: darkgray;
-  }
-
-  & h2 {
-    transition: var(--transition);
-    display: block;
-    position: absolute;
-    width: calc(100% - (var(--padding) * 2));
-    background-color: white;
-    text-align: center;
-    z-index: 1;
-    top: -1rem;
-  }
-
-  & img {
-    position: relative;
-    z-index: 2;
-    width: auto;
-    height: 100%;
-    border-radius: 0.25rem;
-  }
-`;
-
-function Anime(props) {
-  const { anime } = props;
-
-  return (
-    <AnimeContainer href="/browse">
-      <img src={url("files", `${anime._id}/covers/a.jpg`)} />
-      <h2>{anime.title}</h2>
-    </AnimeContainer>
-  );
-}
