@@ -5,12 +5,11 @@ less goo
 ## To Do:
 
 - [ ] Disable links until all clips are unselected
-- [ ] Add death.png and reisir.png to navbar
+- [x] Add death.png and reisir.png to navbar
 - [x] Make \<Sidebar\> reusable, remove the content and make it render children
 - [ ] Update the browse page when tagging
-- [ ] Make browse grid size and wrap better with min-width and probably a max-width too
-- [ ] Sidebar subtitle positioning when changing from exclude to include
-  - Probably use ::first-child
+- [x] Make browse grid size and wrap better with min-width and probably a max-width too
+- [x] Sidebar subtitle positioning when changing from exclude to include
 - [ ] Re-process the clips without auto-cropping black bars out
 - [ ] Style headings better
 - [ ] Consider different fonts

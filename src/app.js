@@ -40,11 +40,9 @@ export function App(props) {
 
   return (
     <RecoilRoot>
-      <div id="app">
-        <Navbar id="navigation" />
-        <div id="content">
-          <Router />
-        </div>
+      <Navbar id="navigation" />
+      <div id="content">
+        <Router />
       </div>
     </RecoilRoot>
   );
