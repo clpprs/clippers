@@ -43,7 +43,7 @@ export function About(props) {
   return (
     <Scroller>
       <Flexer className="flexer">
-        <img src={hachi} className="max-w-min" />
+        <img src={hachi} style={{ maxWidth: "min-content" }} />
         <p>
           Clippers is a
           <a
@@ -114,7 +114,7 @@ export function About(props) {
         </ul>
 
         <div className={classNames("spacer", "py-96")}></div>
-        <img src={drip} className="max-w-2xl" />
+        <img src={drip} style={{ maxWidth: "42rem" }} />
         <div className={classNames("spacer", "py-6")}></div>
 
         <p style={{ textAlign: "center" }}>
