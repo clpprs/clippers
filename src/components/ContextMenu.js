@@ -1,9 +1,9 @@
-import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-
-import TaggingField from "./TaggingField";
-
+import classNames from "classnames";
 import styled from "styled-components";
+
+// Components
+import TaggingField from "./TaggingField";
 
 const ContextMenuContainer = styled.div`
   background-color: #fff;
@@ -28,6 +28,12 @@ export function ContextMenu(props) {
 
     // Left click handler
     function handleClick(event) {
+      // Hide the menu if the ref points to null
+      // this sometimes happens when clips are
+      // selected and you click out of the menu
+      if (menuRef.current == null) {
+        return setIsVisible(false);
+      }
       // Only hide if user clicks outside of the context menu
       if (
         isVisible &&
