@@ -40,7 +40,7 @@ export function TaggingField(props) {
 
   // Guards
   if (!selectedClipIds.length)
-    return <>{fallback || <h2>Hint: select clips by shift clicking</h2>}</>;
+    return <>{fallback || <p>Hint: select clips by shift clicking</p>}</>;
 
   // Component state
   const availableTags = selectedClipIds.length

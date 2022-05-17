@@ -59,10 +59,8 @@ export function ContextMenu(props) {
         visibility: isVisible ? "visible" : "hidden",
       }}
       ref={menuRef}
-      className={classNames("p-2 pb-0 w-96 mb-2")}
+      className={classNames("p-2", "w-96")}
     >
-      <h1>Menu</h1>
-      <hr></hr>
       <TaggingField className="context-menu-item" />
     </ContextMenuContainer>
   );
