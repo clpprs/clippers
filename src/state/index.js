@@ -140,6 +140,7 @@ const sharedTagsAtom = selector({
 
 export {
   clipsAtom,
+  clipsQuery,
   selectedTagsAtom,
   clipTagsAtom,
   allTagsAtom,

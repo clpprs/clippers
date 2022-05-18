@@ -73,7 +73,7 @@ const ClipContainer = styled.div`
   }
 `;
 
-function Clip({ clip, clickable, className, ...props }) {
+export function Clip({ clip, clickable, className, ...props }) {
   const ConditionalLink = ({ clickable, children }) =>
     clickable ? <a href={`/clip/${clip._id}`}>{children}</a> : children;
 

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 // Components
-import Clip from "../../components/Clip";
+import { Clip } from "../../components";
 
 // State
 import { clipsAtom } from "../../state";

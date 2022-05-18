@@ -14,6 +14,7 @@ import {
   selectedClipIdsAtom,
   selectedClipsAtom,
   sharedTagsAtom,
+  clipsQuery,
 } from "../state";
 
 // API
@@ -35,6 +36,7 @@ export function TaggingField(props) {
 
   // UNSTABLE lol
   const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsAtom);
+  const refreshClipsQuery = useRecoilRefresher_UNSTABLE(clipsQuery);
 
   const { fallback } = props;
 
@@ -53,7 +55,10 @@ export function TaggingField(props) {
       .patch(url("api", "clip"), {
         patch: { _id: selectedClipIds, tags: { add: [tag] } },
       })
-      .then((data) => refreshSelectedClips());
+      .then((data) => {
+        refreshSelectedClips();
+        refreshClipsQuery();
+      });
   };
   const handleRemoveTag = (tag) => {
     // console.log("Removing tag", tag);
@@ -61,7 +66,10 @@ export function TaggingField(props) {
       .patch(url("api", "clip"), {
         patch: { _id: selectedClipIds, tags: { remove: [tag] } },
       })
-      .then((data) => refreshSelectedClips());
+      .then((data) => {
+        refreshSelectedClips();
+        refreshClipsQuery();
+      });
   };
 
   return (
