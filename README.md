@@ -2,12 +2,19 @@
 
 less goo
 
+# STATE
+
+What the fuck
+
 ## To Do:
 
 - [x] Disable links until all clips are unselected
 - [x] Add death.png and reisir.png to navbar
 - [x] Make \<Sidebar\> reusable, remove the content and make it render children
 - [ ] Update the page when tagging
+- [ ] Sort tags on clip page alphabetically
+- [ ] Make right click on an unselected clip select it when no clips are selected
+- [ ] Do not trigger contextmenu outside of grid
 - [x] Make browse grid size and wrap better with min-width and probably a max-width too
 - [x] Sidebar subtitle positioning when changing from exclude to include
 - [ ] Include tags, episode and index in download="" filename
