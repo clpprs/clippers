@@ -1,3 +1,5 @@
+import React from "react";
+
 // Fonts
 import "@fontsource/roboto";
 import "@fontsource/roboto-mono";
@@ -42,7 +44,9 @@ export function App(props) {
     <RecoilRoot>
       <Navbar id="navigation" />
       <div id="content">
-        <Router />
+        <React.StrictMode>
+          <Router />
+        </React.StrictMode>
       </div>
     </RecoilRoot>
   );

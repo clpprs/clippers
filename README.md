@@ -20,6 +20,8 @@ What the fuck
 - [ ] Include tags, episode and index in download="" filename
 - [ ] Re-process the clips without auto-cropping black bars out
 - [ ] Style headings better
+- [ ] Thumbnails
+  - https://usefulangle.com/post/287/html-video-lazy-load
 - [ ] Consider different fonts
 - [x] Fix margins in context menu
 - [ ] ZIP downloads with https://github.com/Touffy/client-zip

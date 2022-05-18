@@ -4,7 +4,7 @@ import classNames from "classnames";
 // Components
 import TagButton from "./TagButton";
 import { selectedTagsAtom } from "../../state";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 /**
  * Tag element. You can supply the tag params through props.tag or as separate props
@@ -50,8 +50,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
  *
  */
 export function Tag(props) {
-  const setSelectedTags = useSetRecoilState(selectedTagsAtom);
-  const selectedTags = useRecoilValue(selectedTagsAtom);
+  const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsAtom);
 
   const { include, exclude } = props;
   let { tag, name, count, add, remove, toggle, button } = {
