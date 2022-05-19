@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import classNames from "classnames";
-import styled from "styled-components";
 
 // Components
 import Clips from "./Clips";
@@ -9,7 +8,6 @@ import Selecto from "./Selecto";
 
 export function SelectableClips(props) {
   const containerID = "selectable-container";
-
   return (
     <>
       <div id={containerID} className={classNames("no-select")}>

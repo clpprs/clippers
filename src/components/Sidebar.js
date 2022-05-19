@@ -5,6 +5,7 @@ import classNames from "classnames";
 const SidebarContainer = styled.div`
   position: fixed;
   padding: 0.5rem;
+  height: 100%;
 
   display: flex;
   flex-flow: column nowrap;
