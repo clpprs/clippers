@@ -4,7 +4,7 @@ import classNames from "classnames";
 // Components
 import TagButton from "./TagButton";
 import { selectedTagsAtom } from "../../state";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 /**
  * Tag element. You can supply the tag params through props.tag or as separate props

@@ -28,15 +28,16 @@ export function ContextMenu(props) {
 
     // Left click handler
     function handleClick(event) {
+      if (!isVisible) return;
       // Hide the menu if the ref points to null
       // this sometimes happens when clips are
       // selected and you click out of the menu
       if (menuRef.current == null) {
+        console.log(`menuRef is null, closing menu`);
         return setIsVisible(false);
       }
       // Only hide if user clicks outside of the context menu
       if (
-        isVisible &&
         !menuRef.current.contains(event.target) &&
         !event.target.classList.contains("Mui-focused")
       ) {
@@ -53,7 +54,7 @@ export function ContextMenu(props) {
       document.removeEventListener("contextmenu", handleContextEvent);
       document.removeEventListener("click", handleClick);
     };
-  });
+  }, [isVisible, setCordinates]);
 
   return (
     <ContextMenuContainer

@@ -1,8 +1,14 @@
-import axios from "axios";
 import { atom, selector } from "recoil";
-import { url, limit } from "../config";
 
+// Config
+import { url, limit } from "../config";
 import placeholdertaglist from "../tags";
+
+// Helpers
+import { getSharedTags, makeQuery } from "./stateHelpers";
+
+// Networking
+import axios from "axios";
 
 /**
  * All available tags
@@ -19,28 +25,6 @@ const selectedTagsAtom = atom({
   key: "selectedTags",
   default: [],
 });
-
-/**
- *
- * @param {Array} tags Array of tag objects { name: String, include: Boolean }
- * @returns
- */
-const makeQuery = (tags) => {
-  if (!Array.isArray(tags) || !tags.length) return {};
-
-  const included = tags.filter((tag) => tag.include).map((tag) => tag.name);
-  const excluded = tags.filter((tag) => !tag.include).map((tag) => tag.name);
-
-  if (!included.length && !excluded.length) return {};
-  if (included.length && excluded.length)
-    return {
-      $and: [{ tags: { $all: included } }, { tags: { $nin: excluded } }],
-    };
-  if (included.length) return { tags: { $all: included } };
-  if (excluded.length) return { tags: { $nin: excluded } };
-
-  return {};
-};
 
 /**
  * Raw query result from API
@@ -109,34 +93,9 @@ const sharedTagsAtom = selector({
   default: [],
   get: async ({ get }) => {
     const clips = get(selectedClipsAtom);
-
-    let shared = [];
-    let notShared = [];
-
-    for (const clip of clips) {
-      for (const tag of clip.tags) {
-        if (notShared.includes(tag) || shared.includes(tag)) continue;
-
-        if (
-          clips.reduce((isShared, c) => {
-            if (!isShared) return isShared;
-            if (c.tags.includes(tag)) return true;
-            return false;
-          }, true)
-        ) {
-          shared.push(tag);
-        } else notShared.push(tag);
-      }
-    }
-
-    return shared.filter((tag) => !notShared.includes(tag));
+    return getSharedTags(clips);
   },
 });
-
-// Prevents WebPack from hotloading the recoil module
-// so that when new atoms / selectors are made, the entire
-// page refreshes. Otherwise recoil throws an error
-// module.hot.decline();
 
 export {
   clipsAtom,

@@ -72,11 +72,11 @@ function SelectedTags(props) {
   );
 }
 
-const AvailableTags = styled.div`
+const TagListContainer = styled.div`
   padding: 0 0.5rem;
 `;
 
-const AvailableTagList = styled.div`
+const AvailableTagListContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   gap: 0.25rem;
@@ -89,7 +89,7 @@ const AvailableTagList = styled.div`
   }
 `;
 
-function TagList(props) {
+function AvailableTags(props) {
   const clipTags = useRecoilValue(clipTagsAtom);
   const selectedTags = useRecoilValue(selectedTagsAtom);
 
@@ -100,25 +100,25 @@ function TagList(props) {
   );
 
   return (
-    <AvailableTags>
+    <TagListContainer>
       {availableTags.length ? (
         <>
           <Subtitle>Most common tags</Subtitle>
-          <AvailableTagList
+          <AvailableTagListContainer
             id="available-tags"
             className={classNames("sidebar-taglist")}
           >
             {availableTags.map(({ name, count }) => (
               <Tag name={name} key={name} count={count} button add />
             ))}
-          </AvailableTagList>
+          </AvailableTagListContainer>
         </>
       ) : (
         !clipTags.length && (
           <div>These results contain no tags. Please tag them!</div>
         )
       )}
-    </AvailableTags>
+    </TagListContainer>
   );
 }
 
@@ -128,7 +128,7 @@ export function SidebarContent(props) {
       <Search />
       <SelectedTags />
       <Suspense fallback={null}>
-        <TagList />
+        <AvailableTags />
       </Suspense>
     </>
   );

@@ -90,7 +90,12 @@ function ClipPage(props) {
   const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
 
   useEffect(() => {
-    console.log("Getting clip");
+    console.log(`Setting clip ${_id} as selected`);
+    setSelectedClipIds((clips) => [_id]); // replace selected clips
+  }, [_id, setSelectedClipIds]);
+
+  useEffect(() => {
+    console.log(`Getting clip ${_id}`);
     axios
       .post(url("api", "clip"), {
         query: { _id },
@@ -102,11 +107,6 @@ function ClipPage(props) {
         setClip(c);
       });
   }, [_id]);
-
-  useEffect(() => {
-    console.log("Setting clip as selected");
-    setSelectedClipIds((clips) => [_id]); // replace selected clips
-  }, [_id, setSelectedClipIds]);
 
   return (
     <ClipPageContent className={classNames("clip-page-content")}>

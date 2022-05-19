@@ -6,12 +6,16 @@ less goo
 
 What the fuck
 
-## To Do:
+# To Do:
 
 - [x] Disable links until all clips are unselected
 - [x] Add death.png and reisir.png to navbar
 - [x] Make \<Sidebar\> reusable, remove the content and make it render children
 - [ ] Update the page when tagging
+- [ ] Rename Atoms and Selectors to use the state naming convention
+- [ ] Move Selectors to parent components and flow data through component tree
+- [ ] Add tags to url parameters
+- [ ] Implement pagination client side
 - [ ] Sort tags on clip page alphabetically
 - [ ] Make right click on an unselected clip select it when no clips are selected
 - [ ] Do not trigger contextmenu outside of grid
