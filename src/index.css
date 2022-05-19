@@ -20,9 +20,8 @@ html,
 body,
 #app,
 #content {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
 }
 
 #app {
@@ -30,15 +29,13 @@ body,
 }
 
 #navigation {
-  width: 100vw;
+  width: 100%;
   line-height: var(--header-height);
   height: var(--header-height);
 }
 
 #content {
   position: relative;
-  display: flex;
-  flex-flow: row nowrap;
   padding-top: var(--header-height);
 }
 
@@ -71,7 +68,6 @@ ol {
 /*
  * Global tag highlighting 
  */
-
 .highlight-tags .included {
   background-color: var(--included-color);
 }

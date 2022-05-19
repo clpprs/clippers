@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import styled from "styled-components";
 
@@ -33,13 +33,13 @@ export function ContextMenu(props) {
       // this sometimes happens when clips are
       // selected and you click out of the menu
       if (menuRef.current == null) {
-        console.log(`menuRef is null, closing menu`);
         return setIsVisible(false);
       }
       // Only hide if user clicks outside of the context menu
       if (
         !menuRef.current.contains(event.target) &&
-        !event.target.classList.contains("Mui-focused")
+        !event.target.classList.contains("Mui-focused") &&
+        !event.target.classList.contains("MuiAutocomplete-option")
       ) {
         setIsVisible(false);
       }
@@ -68,7 +68,9 @@ export function ContextMenu(props) {
       ref={menuRef}
       className={classNames("p-2", "w-96")}
     >
-      <TaggingField className="context-menu-item" />
+      <Suspense fallback={null}>
+        <TaggingField className="context-menu-item" />
+      </Suspense>
     </ContextMenuContainer>
   );
 }

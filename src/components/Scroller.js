@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import classNames from "classnames";
 
@@ -8,10 +8,12 @@ const DIV = styled.div`
   overflow-y: scroll;
 `;
 
-export const Scroller = (props) => (
-  <DIV className={classNames(props.className, "scroller")}>
-    {props.children}
-  </DIV>
-);
+export const Scroller = (props) => {
+  return (
+    <DIV className={classNames(props.className, "scroller")}>
+      {props.children}
+    </DIV>
+  );
+};
 
 export default Scroller;

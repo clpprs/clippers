@@ -32,19 +32,15 @@ const ClipMetadata = styled.div`
   }
 `;
 
-function Metadata({ clip, ...props }) {
-  const { tags = [] } = clip;
-
-  return (
-    <ClipMetadata className={classNames("clip-metadata")}>
-      <div className="tag-list">
-        {tags.map((tag) => (
-          <Tag name={tag} key={tag} />
-        ))}
-      </div>
-    </ClipMetadata>
-  );
-}
+const Metadata = React.memo(({ tags = [], ...props }) => (
+  <ClipMetadata className={classNames("clip-metadata")}>
+    <div className="tag-list">
+      {tags.map((tag) => (
+        <Tag name={tag} key={tag} />
+      ))}
+    </div>
+  </ClipMetadata>
+));
 
 const ClipContainer = styled.div`
   --card-width: 1rem;
@@ -54,7 +50,7 @@ const ClipContainer = styled.div`
   box-sizing: border-box;
   margin: var(--card-width);
   padding: 0rem;
-  background-color: transparent;
+  background-color: black;
 
   &:not(.selected):hover {
     background-color: var(--card-background);
@@ -73,19 +69,20 @@ const ClipContainer = styled.div`
   }
 `;
 
-export function Clip({ clip, clickable, className, ...props }) {
-  const ConditionalLink = ({ clickable, children }) =>
-    clickable ? <a href={`/clip/${clip._id}`}>{children}</a> : children;
+const ConditionalLink = ({ url, clickable, children }) =>
+  clickable ? <a href={url}>{children}</a> : children;
+
+export const Clip = React.memo(function (props) {
+  const { _id, anime, episode, index, tags, clickable, className } = props;
 
   return (
-    <ClipContainer className={classNames("clip", className)} id={clip._id}>
-      <ConditionalLink clickable={clickable}>
+    <ClipContainer className={classNames("clip", className)} id={_id}>
+      <ConditionalLink url={`/clip/${_id}`} clickable={clickable}>
         <div className="clip-video-container">
           <video
             muted
             loop
             draggable="false"
-            {...props}
             className="clip-video"
             onMouseEnter={(event) => event.target.play()}
             onMouseOut={(event) => {
@@ -93,14 +90,17 @@ export function Clip({ clip, clickable, className, ...props }) {
               event.target.currentTime = 0;
             }}
           >
-            <source src={url(clip)} type="video/mp4"></source>
+            <source
+              src={url({ anime, episode, index })}
+              type="video/mp4"
+            ></source>
             Clip file not found
           </video>
         </div>
       </ConditionalLink>
-      <Metadata clip={clip} />
+      <Metadata tags={tags} />
     </ClipContainer>
   );
-}
+});
 
 export default Clip;

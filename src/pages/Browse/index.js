@@ -1,28 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 
-import Sidebar from "../../components/Sidebar";
+// Components
 import SelectableClips from "./SelectableClips";
 import SidebarContent from "./SidebarContent";
-
-const BrowseContent = styled.div`
-  overflow-y: scroll;
-  width: 100%;
-  height: 100%;
-
-  &::after {
-    display: block;
-    height: 16rem;
-    width: 100%;
-    // Scryfall reference
-    content: "This search is finished. Now the real work can begin.";
-    line-height: 16rem;
-    text-align: center;
-    font-style: italic;
-    font-size: 0.8rem;
-    opacity: 0.25;
-  }
-`;
+import BrowseContent from "./ContentWrapper";
+// Containers
+import { Sidebar } from "../../components";
 
 export function Browse(props) {
   return (
@@ -30,7 +13,7 @@ export function Browse(props) {
       <Sidebar>
         <SidebarContent />
       </Sidebar>
-      <BrowseContent>
+      <BrowseContent id="browse">
         <SelectableClips />
       </BrowseContent>
     </>

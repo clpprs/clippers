@@ -101,16 +101,14 @@ export function ClipPage(props) {
   }, [setAnimes]);
 
   return (
-    <Scroller>
-      <AnimePageContent className={classNames("clip-page-content")}>
-        <h1 className={classNames("text-2xl", "mb-8")}>Available animes</h1>
-        <div id="available-anime-list">
-          {animes.map((anime, index) => (
-            <Anime key={index} anime={anime} />
-          ))}
-        </div>
-      </AnimePageContent>
-    </Scroller>
+    <AnimePageContent className={classNames("clip-page-content")}>
+      <h1 className={classNames("text-2xl", "mb-8")}>Available animes</h1>
+      <div id="available-anime-list">
+        {animes.map((anime, index) => (
+          <Anime key={index} anime={anime} />
+        ))}
+      </div>
+    </AnimePageContent>
   );
 }
 

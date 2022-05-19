@@ -3,10 +3,12 @@ import styled from "styled-components";
 import classNames from "classnames";
 
 const SidebarContainer = styled.div`
+  position: fixed;
+  padding: 0.5rem;
+
   display: flex;
   flex-flow: column nowrap;
   gap: 0.5rem;
-  padding: 0.5rem;
 
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);

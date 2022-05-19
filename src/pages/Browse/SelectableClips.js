@@ -7,22 +7,18 @@ import Clips from "./Clips";
 import { Loader, ContextMenu } from "../../components";
 import Selecto from "./Selecto";
 
-const Container = styled.div``;
-
 export function SelectableClips(props) {
   const containerID = "selectable-container";
 
   return (
     <>
-      <Container id={containerID} className={classNames("no-select")}>
+      <div id={containerID} className={classNames("no-select")}>
         <Suspense fallback={<Loader />}>
           <Clips />
         </Suspense>
-      </Container>
+      </div>
       <Selecto containerID={containerID} />
-      <Suspense fallback={null}>
-        <ContextMenu />
-      </Suspense>
+      <ContextMenu />
     </>
   );
 }
