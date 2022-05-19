@@ -11,7 +11,8 @@ What the fuck
 - [x] Disable links until all clips are unselected
 - [x] Add death.png and reisir.png to navbar
 - [x] Make \<Sidebar\> reusable, remove the content and make it render children
-- [ ] Update the page when tagging
+- [x] Update the page when tagging
+- [ ] Fix page scrolling to top when updating
 - [ ] Rename Atoms and Selectors to use the state naming convention
 - [ ] Move Selectors to parent components and flow data through component tree
 - [ ] Add tags to url parameters

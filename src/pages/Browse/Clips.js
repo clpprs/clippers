@@ -7,7 +7,6 @@ import { Clip } from "../../components";
 // State
 import { clipsAtom } from "../../state";
 import { useRecoilValue } from "recoil";
-import config from "../../config";
 
 const ClipsContainer = styled.div`
   display: grid;
@@ -18,14 +17,8 @@ const ClipsContainer = styled.div`
   padding: 0;
 `;
 
-function padArray(array, length, fill) {
-  return length > array.length
-    ? array.concat(Array(length - array.length).fill(fill))
-    : array;
-}
 export function Clips(props) {
-  const clips = padArray(useRecoilValue(clipsAtom), config.limit, {});
-  // const clips = padArray([], config.limit, {});
+  const clips = useRecoilValue(clipsAtom);
 
   return (
     <ClipsContainer id="clips-container">
