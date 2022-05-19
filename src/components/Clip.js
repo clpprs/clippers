@@ -50,7 +50,7 @@ const ClipContainer = styled.div`
   box-sizing: border-box;
   margin: var(--card-width);
   padding: 0rem;
-  background-color: black;
+  background-color: transparent;
 
   &:not(.selected):hover {
     background-color: var(--card-background);
