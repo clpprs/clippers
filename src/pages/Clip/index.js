@@ -17,7 +17,7 @@ import { url } from "../../config";
 
 // State
 import { useSetRecoilState } from "recoil";
-import { selectedClipIdsAtom } from "../../state";
+import { selectedClipIdsState } from "../../state";
 
 const ClipPageContent = styled.div`
   width: 100%;
@@ -87,7 +87,7 @@ const BackButton = styled.a`
 function ClipPage(props) {
   const { _id } = useParams();
   const [clip, setClip] = useState({});
-  const setSelectedClipIds = useSetRecoilState(selectedClipIdsAtom);
+  const setSelectedClipIds = useSetRecoilState(selectedClipIdsState);
 
   useEffect(() => {
     console.log(`Setting clip ${_id} as selected`);

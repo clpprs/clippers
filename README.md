@@ -13,7 +13,7 @@ What the fuck
 - [x] Make \<Sidebar\> reusable, remove the content and make it render children
 - [x] Update the page when tagging
 - [ ] Fix page scrolling to top when updating
-- [ ] Rename Atoms and Selectors to use the state naming convention
+- [x] Rename Atoms and Selectors to use the state naming convention
 - [ ] Move Selectors to parent components and flow data through component tree
 - [ ] Add tags to url parameters
 - [ ] Implement pagination client side

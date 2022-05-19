@@ -10,9 +10,9 @@ import Chip from "@mui/material/Chip";
 // State
 import { useRecoilRefresher_UNSTABLE, useRecoilValue } from "recoil";
 import {
-  allTagsAtom,
-  selectedClipIdsAtom,
-  selectedClipsAtom,
+  allTagsState,
+  selectedClipIdsState,
+  selectedClipsState,
   sharedTagsAtom,
   clipsQuery,
 } from "../state";
@@ -30,12 +30,12 @@ const Container = styled.div`
 
 export function TaggingField(props) {
   // Recoil state
-  const selectedClipIds = useRecoilValue(selectedClipIdsAtom);
-  const allTags = useRecoilValue(allTagsAtom);
+  const selectedClipIds = useRecoilValue(selectedClipIdsState);
+  const allTags = useRecoilValue(allTagsState);
   const sharedTags = useRecoilValue(sharedTagsAtom);
 
   // UNSTABLE lol
-  const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsAtom);
+  const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsState);
   const refreshClipsQuery = useRecoilRefresher_UNSTABLE(clipsQuery);
 
   const { fallback } = props;

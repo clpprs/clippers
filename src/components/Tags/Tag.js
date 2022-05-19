@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 // Components
 import TagButton from "./TagButton";
-import { selectedTagsAtom } from "../../state";
+import { selectedTagsState } from "../../state";
 import { useRecoilState } from "recoil";
 
 /**
@@ -50,7 +50,7 @@ import { useRecoilState } from "recoil";
  *
  */
 export function Tag(props) {
-  const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsAtom);
+  const [selectedTags, setSelectedTags] = useRecoilState(selectedTagsState);
 
   const { include, exclude } = props;
   let { tag, name, count, add, remove, toggle, button } = {

@@ -13,7 +13,7 @@ import axios from "axios";
 /**
  * All available tags
  */
-const allTagsAtom = atom({
+const allTagsState = atom({
   key: "allTags",
   default: placeholdertaglist,
 });
@@ -21,7 +21,7 @@ const allTagsAtom = atom({
 /**
  * List of selected tag objects `{ name: "tagName", include: Boolean }`
  */
-const selectedTagsAtom = atom({
+const selectedTagsState = atom({
   key: "selectedTags",
   default: [],
 });
@@ -34,7 +34,7 @@ const clipsQuery = selector({
   default: [],
   get: async ({ get }) => {
     const { data } = await axios.post(url("api", "clip"), {
-      query: makeQuery(get(selectedTagsAtom)),
+      query: makeQuery(get(selectedTagsState)),
       opts: { sort: { index: 1 }, limit },
     });
     return data;
@@ -44,7 +44,7 @@ const clipsQuery = selector({
 /**
  * List of clips from the query
  */
-const clipsAtom = selector({
+const clipsState = selector({
   key: "clips",
   default: [],
   get: async ({ get }) => {
@@ -57,7 +57,7 @@ const clipsAtom = selector({
 /**
  * tagCounts from the query metadata
  */
-const clipTagsAtom = selector({
+const clipTagsState = selector({
   key: "clipTags",
   default: placeholdertaglist,
   get: ({ get }) => {
@@ -67,19 +67,19 @@ const clipTagsAtom = selector({
 });
 
 // clip._id's selected with Selecto
-const selectedClipIdsAtom = atom({
+const selectedClipIdsState = atom({
   key: "selectedClipIds",
   default: [],
 });
 
 // selected clip data objects from the API
-const selectedClipsAtom = selector({
+const selectedClipsState = selector({
   key: "selectedClips",
   default: [],
   get: async ({ get }) => {
     const { results } = (
       await axios.post(url("api", "clip"), {
-        query: { _id: { $in: get(selectedClipIdsAtom) } },
+        query: { _id: { $in: get(selectedClipIdsState) } },
         opts: { sort: { index: 1 } },
       })
     ).data;
@@ -92,18 +92,18 @@ const sharedTagsAtom = selector({
   key: "sharedtags",
   default: [],
   get: async ({ get }) => {
-    const clips = get(selectedClipsAtom);
+    const clips = get(selectedClipsState);
     return getSharedTags(clips);
   },
 });
 
 export {
-  clipsAtom,
+  clipsState,
   clipsQuery,
-  selectedTagsAtom,
-  clipTagsAtom,
-  allTagsAtom,
-  selectedClipIdsAtom,
-  selectedClipsAtom,
+  selectedTagsState,
+  clipTagsState,
+  allTagsState,
+  selectedClipIdsState,
+  selectedClipsState,
   sharedTagsAtom,
 };

@@ -7,11 +7,11 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 // State
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { selectedTagsAtom } from "../../state";
+import { selectedTagsState } from "../../state";
 
 function TagButton(props) {
-  const setSelectedTags = useSetRecoilState(selectedTagsAtom);
-  const selectedTags = useRecoilValue(selectedTagsAtom);
+  const setSelectedTags = useSetRecoilState(selectedTagsState);
+  const selectedTags = useRecoilValue(selectedTagsState);
 
   const toggleTag = (name, include = null) => {
     setSelectedTags((tags) => {

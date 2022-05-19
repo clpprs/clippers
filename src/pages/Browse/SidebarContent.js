@@ -7,7 +7,7 @@ import { Search, Tag } from "../../components";
 
 // State
 import { useRecoilValue } from "recoil";
-import { clipTagsAtom, selectedTagsAtom } from "../../state";
+import { clipTagsState, selectedTagsState } from "../../state";
 
 const Subtitle = styled.span`
   width: 100%;
@@ -37,7 +37,7 @@ const SelectedTagList = styled.div`
 `;
 
 function SelectedTags(props) {
-  const selectedTags = useRecoilValue(selectedTagsAtom);
+  const selectedTags = useRecoilValue(selectedTagsState);
 
   const [excluded, included] = selectedTags.reduce(
     (output, tag) => {
@@ -90,8 +90,8 @@ const AvailableTagListContainer = styled.div`
 `;
 
 function AvailableTags(props) {
-  const clipTags = useRecoilValue(clipTagsAtom);
-  const selectedTags = useRecoilValue(selectedTagsAtom);
+  const clipTags = useRecoilValue(clipTagsState);
+  const selectedTags = useRecoilValue(selectedTagsState);
 
   // Remove selected tags from the taglist
   const selectedTagNames = selectedTags.map((tag) => tag.name);

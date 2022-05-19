@@ -6,7 +6,7 @@ import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 // State
 import { useRecoilValue } from "recoil";
-import { allTagsAtom, selectedTagsAtom } from "../state";
+import { allTagsState, selectedTagsState } from "../state";
 
 // Custom components
 import { Tag } from "./Tags";
@@ -22,8 +22,8 @@ const StyledAutocomplete = styled(Autocomplete)`
 
 export function Search(props) {
   // Recoil state
-  const taglist = useRecoilValue(allTagsAtom);
-  const selectedTags = useRecoilValue(selectedTagsAtom);
+  const taglist = useRecoilValue(allTagsState);
+  const selectedTags = useRecoilValue(selectedTagsState);
   const selectedTagnames = Array.isArray(selectedTags)
     ? selectedTags.map((t) => t.name)
     : [];

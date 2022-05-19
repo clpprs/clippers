@@ -7,7 +7,7 @@ import Selecto from "react-selecto";
 import KeyController from "keycon";
 
 // State
-import { selectedClipIdsAtom } from "../../state";
+import { selectedClipIdsState } from "../../state";
 import { useRecoilState } from "recoil";
 
 // Link disabler event handler
@@ -15,7 +15,7 @@ const prevent = (e) => e.preventDefault();
 
 export function SelectoWrapper(props) {
   const [selectedClipIds, setSelectedClipIds] =
-    useRecoilState(selectedClipIdsAtom);
+    useRecoilState(selectedClipIdsState);
   const [shiftDown, setShiftDown] = useState(false);
   const [linksAreClickable, setLinksAreClickable] = useState(true);
 

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Clip } from "../../components";
 
 // State
-import { clipsAtom } from "../../state";
+import { clipsState } from "../../state";
 import { useRecoilValue } from "recoil";
 
 const ClipsContainer = styled.div`
@@ -18,7 +18,7 @@ const ClipsContainer = styled.div`
 `;
 
 export function Clips(props) {
-  const clips = useRecoilValue(clipsAtom);
+  const clips = useRecoilValue(clipsState);
 
   return (
     <ClipsContainer id="clips-container">
