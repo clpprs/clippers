@@ -4,18 +4,21 @@ import React from "react";
 import { RecoilRoot } from "recoil";
 
 // Router
-import Router from "./router";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // Components
 import Navbar from "../components/Navbar";
 
+// Content
+import Content from "./content";
+
 export function App(props) {
   return (
     <RecoilRoot>
-      <Navbar id="navigation" />
-      <div id="content">
-        <Router />
-      </div>
+      <Router>
+        <Navbar id="navigation" />
+        <Content />
+      </Router>
     </RecoilRoot>
   );
 }

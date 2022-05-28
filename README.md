@@ -14,7 +14,8 @@ What the fuck
 - [x] Update the page when tagging
 - [ ] Fix page scrolling to top when updating
 - [x] Rename Atoms and Selectors to use the state naming convention
-- [ ] Move Selectors to parent components and flow data through component tree
+- [x] Move Selectors to parent components and flow data through component tree
+  - This appearst to be unnecessary
 - [ ] Add tags to url parameters
 - [ ] Implement pagination client side
 - [ ] Sort tags on clip page alphabetically
