@@ -64,24 +64,6 @@ export function Tag(props) {
   const isSelected = !!thisTag;
   const isIncluded = thisTag?.include;
 
-  // console.log({ name, isSelected });
-
-  // could clean up in a function
-  button =
-    button === true && !add && !toggle
-      ? { name }
-      : button === true && (add || toggle)
-      ? { name, include: false }
-      : include
-      ? { name, include: true }
-      : exclude
-      ? { name, include: false }
-      : button == null
-      ? false
-      : typeof button === "object"
-      ? { name, ...button }
-      : false;
-
   const removeTag = (name) =>
     setSelectedTags((tags) => tags.filter((t) => t.name !== name));
 
@@ -90,7 +72,7 @@ export function Tag(props) {
 
   const toggleTag = (name, include = true) => {
     setSelectedTags((tags) =>
-      tags.map((tag) => (tag.name === name ? { ...tag, include } : tag))
+        tags.map((tag) => (tag.name === name ? { ...tag, include } : tag))
     );
   };
 
@@ -99,6 +81,16 @@ export function Tag(props) {
     addTag({ name, include });
     toggleTag(name, include);
   };
+
+  // could clean up in a function
+  button = (() => {
+    if (!button) return false;
+    if (typeof button === "object") return { name, ...button };
+    if (exclude || toggle) return { name, include: false };
+    if (include) return { name, include: true };
+    if (!toggle) return { name };
+    return false;
+  })();
 
   // could clean up in a function
   const onClick =
