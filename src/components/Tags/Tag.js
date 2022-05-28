@@ -82,7 +82,6 @@ export function Tag(props) {
     toggleTag(name, include);
   };
 
-  // could clean up in a function
   button = (() => {
     if (!button) return false;
     if (typeof button === "object") return { name, ...button };
@@ -92,19 +91,15 @@ export function Tag(props) {
     return false;
   })();
 
-  // could clean up in a function
-  const onClick =
-    props.onClick || add
-      ? () => setSelectedTag({ name })
-      : remove
-      ? () => setSelectedTag({ name, remove: true })
-      : toggle
-      ? () =>
-          setSelectedTag({
-            name,
-            remove: isSelected,
-          })
-      : undefined;
+  const onClick = props.onClick
+    ? props.onClick
+    : add || remove || toggle
+    ? () =>
+        setSelectedTag({
+          name,
+          remove: remove ? true : toggle ? isSelected : false,
+        })
+    : undefined;
 
   return (
     <div

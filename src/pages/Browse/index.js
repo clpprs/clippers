@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 
 export function Browse(props) {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get("tags"));
+  // console.log(searchParams.get("tags"));
 
   return (
     <>
