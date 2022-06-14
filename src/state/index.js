@@ -35,7 +35,7 @@ const clipsQuery = selector({
   get: async ({ get }) => {
     const { data } = await axios.post(url("api", "clip"), {
       query: makeQuery(get(selectedTagsState)),
-      opts: { sort: { index: 1 }, limit },
+      opts: { sort: { weightedIndex: 1 }, limit },
     });
     return data;
   },
