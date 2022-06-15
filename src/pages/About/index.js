@@ -5,6 +5,7 @@ import classNames from "classnames";
 // Images
 import drip from "../../images/drip.jpg";
 import hachi from "../../images/hachi.webp";
+import residence from "../../images/residence.png";
 
 const Flexer = styled.div`
   padding: 4rem 0;
@@ -34,12 +35,36 @@ const Flexer = styled.div`
     text-decoration-style: dotted;
     padding: 0 0.25rem;
   }
+
+  img {
+    transition: all 0.25s ease-in-out;
+    max-width: min-content;
+    position: relative;
+  }
+
+  & #hachi {
+    position: absolute;
+    top: 5%;
+    left: 45%;
+  }
+
+  & #residence:hover #hachi {
+    top: -20%;
+  }
+
+  & #residence {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export function About(props) {
   return (
     <Flexer className="flexer">
-      <img src={hachi} style={{ maxWidth: "min-content" }} />
+      <div id="residence" style={{ position: "relative" }}>
+        <img src={hachi} id="hachi" />
+        <img src={residence} />
+      </div>
       <p>
         Clippers is a
         <a
@@ -69,9 +94,9 @@ export function About(props) {
       <h4>Tagging clips</h4>
       <p>
         Search for clips without the bakemonogatari tag (click the - on a tag to
-        exclude it). To add tags, hold shift, click to select clips, then right
-        click to bring up the menu. The tags will be added to all selected
-        clips. You can also add tags on the individual clip pages.
+        exclude it). To add tags, hold shift, click to select clips, then use
+        the sidebars tagging menu to remove or add tags. All tag edits will
+        apply to all selected clips.
       </p>
       <p>
         You can also hold shift and drag to select multiple clips easily.
