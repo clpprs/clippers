@@ -9,15 +9,16 @@ import BrowseContent from "./ContentWrapper";
 import { Sidebar } from "../../components";
 
 export function Browse(props) {
+  const clipsContainerID = "clips-container";
   return (
     <>
       <Sidebar>
         <Suspense fallback={null}>
-          <SidebarContent />
+          <SidebarContent clipsContainerID={clipsContainerID} />
         </Suspense>
       </Sidebar>
       <BrowseContent id="browse">
-        <SelectableClips />
+        <SelectableClips clipsContainerID={clipsContainerID} />
       </BrowseContent>
     </>
   );

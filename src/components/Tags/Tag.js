@@ -115,6 +115,8 @@ export function Tag(props) {
         onClick && "has-action",
         onClick && "cursor-pointer"
       )}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
       onClick={onClick}
       style={props.style}
     >

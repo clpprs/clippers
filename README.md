@@ -17,7 +17,7 @@ What the fuck
 - [x] Move Selectors to parent components and flow data through component tree
   - This appearst to be unnecessary
 - [ ] Add tags to url parameters
-- [ ] Use sidebar for tag adding etc. get rid of context menu
+- [x] Use sidebar for tag adding etc. get rid of context menu
 - [ ] Implement pagination client side
 - [ ] Sort tags on clip page alphabetically
 - [ ] Make right click on an unselected clip select it when no clips are selected
@@ -25,14 +25,14 @@ What the fuck
 - [x] Make browse grid size and wrap better with min-width and probably a max-width too
 - [x] Sidebar subtitle positioning when changing from exclude to include
 - [ ] Include tags, episode and index in download="" filename
-- [ ] Re-process the clips without auto-cropping black bars out
+- [x] Re-process the clips without auto-cropping
 - [ ] Style headings better
 - [ ] Thumbnails
   - https://usefulangle.com/post/287/html-video-lazy-load
 - [ ] Consider different fonts
 - [x] Fix margins in context menu
 - [ ] ZIP downloads with https://github.com/Touffy/client-zip
-- [ ] Hover over tags in sidebar to highlight videos that match
+- [x] Hover over tags in sidebar to highlight videos that match
 - [ ] Page titles, maybe useEffect() ?
 - [ ] Use onMouseDown to remove the dragging thing on videos ?
 

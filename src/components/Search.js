@@ -15,7 +15,7 @@ import classNames from "classnames";
 import styled from "styled-components";
 
 const StyledAutocomplete = styled(Autocomplete)`
-  background-color: var(--card-background);
+  background-color: var(--light-background) !important;
   outline: none;
   border: none;
   width: 100%;
@@ -28,10 +28,14 @@ const StyledInput = styled.input`
   padding-left: 0.25rem;
   width: 100%;
   height: 100%;
+
+  &::placeholder {
+    color: var(--text-color) !important;
+  }
 `;
 
 const StyledPaper = styled(Paper)`
-  background-color: #0d1321 !important;
+  background-color: var(--header-background) !important;
   color: var(--tag-color) !important;
   border-radius: 0 !important;
   scrollbar-width: thin !important;

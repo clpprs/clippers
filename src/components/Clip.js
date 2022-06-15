@@ -65,8 +65,8 @@ const ClipContainer = styled.div`
   }
 
   &.selected {
-    margin: calc(var(--card-width) - 4px);
-    border: 4px dashed var(--highlight);
+    outline: var(--highlight) dashed 4px;
+    outline-offset: 4px;
   }
 `;
 

@@ -17,6 +17,15 @@ const ClipsContainer = styled.div`
   padding: 0;
   gap: 0rem;
 
+  &.highlight-present .clip:not(.highlight) video {
+    filter: saturate(2) blur(100px);
+  }
+
+  &.highlight-present .clip.highlight video {
+    z-index: 999; /* Raise highglighted videos above the blur */
+    position: relative;
+  }
+
   &.selection-present .clip:not(.selected, :hover) {
     filter: grayscale(1);
   }
@@ -28,7 +37,7 @@ export function Clips(props) {
 
   return (
     <ClipsContainer
-      id="clips-container"
+      id={props.clipsContainerID}
       className={selectedClipIds.length ? "selection-present" : ""}
     >
       {clips.map((clip) => (

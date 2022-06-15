@@ -6,13 +6,13 @@ import Clips from "./Clips";
 import { Loader } from "../../components";
 import Selecto from "./Selecto";
 
-export function SelectableClips(props) {
+export function SelectableClips({ clipsContainerID }) {
   const containerID = "selectable-container";
   return (
     <>
       <div id={containerID} className={classNames("no-select")}>
         <Suspense fallback={<Loader />}>
-          <Clips />
+          <Clips clipsContainerID={clipsContainerID} />
         </Suspense>
       </div>
       <Selecto containerID={containerID} />

@@ -19,6 +19,7 @@ import {
   allTagsState,
   sharedTagsState,
   clipsQuery,
+  clipsState,
 } from "../../state";
 
 const Subtitle = styled.span`
@@ -36,7 +37,7 @@ const SidebarContentContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export function SidebarContent(props) {
+export function SidebarContent({ clipsContainerID }) {
   const [selectedClips, setSelectedClipIds] =
     useRecoilState(selectedClipsState);
 
@@ -47,7 +48,7 @@ export function SidebarContent(props) {
           <Subtitle>Search tags</Subtitle>
           <Search />
           <SelectedTags />
-          <AvailableTags />
+          <AvailableTags clipsContainerID={clipsContainerID} />
         </>
       ) : (
         <TaggingMenu selectedClips={selectedClips} />
@@ -181,7 +182,6 @@ const TagListContainer = styled.div``;
 const AvailableTagListContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  gap: 0.25rem;
 
   & .tag .tag-button {
     opacity: 0;
@@ -189,6 +189,7 @@ const AvailableTagListContainer = styled.div`
 
   & .tag {
     color: var(--tag-color);
+    padding: 0.125rem 0;
   }
 
   & .tag:hover {
@@ -203,12 +204,34 @@ const AvailableTagListContainer = styled.div`
 function AvailableTags(props) {
   const clipTags = useRecoilValue(clipTagsState);
   const selectedTags = useRecoilValue(selectedTagsState);
+  const clips = useRecoilValue(clipsState);
+
+  const { clipsContainerID } = props;
 
   // Remove selected tags from the taglist
   const selectedTagNames = selectedTags.map((tag) => tag.name);
   const availableTags = clipTags.filter(
     (tag) => !selectedTagNames.includes(tag.name)
   );
+
+  const highlightClipsWithTagName = (tag) => {
+    document
+      .getElementById(clipsContainerID)
+      .classList.add("highlight-present");
+    for (const clip of clips) {
+      if (clip.tags.includes(tag))
+        document.getElementById(clip._id).classList.add("highlight");
+    }
+  };
+  const removeHighlight = (tag) => {
+    document
+      .getElementById(clipsContainerID)
+      .classList.remove("highlight-present");
+    for (const clip of clips) {
+      if (clip.tags.includes(tag))
+        document.getElementById(clip._id).classList.remove("highlight");
+    }
+  };
 
   return (
     <TagListContainer>
@@ -220,7 +243,16 @@ function AvailableTags(props) {
             className={classNames("sidebar-taglist")}
           >
             {availableTags.map(({ name, count }) => (
-              <Tag name={name} key={name} count={count} button add exclude />
+              <Tag
+                name={name}
+                key={name}
+                count={count}
+                onMouseEnter={(e) => highlightClipsWithTagName(name)}
+                onMouseLeave={(e) => removeHighlight(name)}
+                button
+                add
+                exclude
+              />
             ))}
           </AvailableTagListContainer>
         </>

@@ -2,26 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* palette
-  0d1321
-  1d2d44
-  3e5c76
-  748cab
-  f0ebd8
+/* residence palette
+  
+  #1c1c1c
+  #FEE739
+
+  #a339fe
+  #7228b2
+
+  #398afe
+  #2861b2
+  #fe3965
+
+  #8afe39
+  #61b228
+  
 */
 
 :root {
   --sidebar-width: 18rem;
   --header-height: 2.75rem;
-  --app-background: #1d2d44;
-  --card-background: #3e5c76;
-  --context-menu-background: #0d1321;
-  --header-background: #0d1321;
-  --highlight: #748cab;
-  --included-color: #5e80ad;
-  --excluded-color: #3e5c76;
-  --text-color: #f0ebd8;
-  --tag-color: #d4d0be;
+  --app-background: #1c1c1c;
+  --header-background: #1c1c1c;
+  --light-background: #262626;
+  --card-background: #2861b2;
+  --light-card-background: #398afe;
+  --highlight: #fee739;
+  --included-color: #a339fe;
+  --excluded-color: #7228b2;
+  --text-color: #f0f0f0;
+  --tag-color: #f0f0f0;
 }
 
 * {
