@@ -106,7 +106,7 @@ function TaggingMenu({ selectedClips }) {
         {sharedTags.map((tag) => (
           <Tag
             tag={tag}
-            key={tag.name}
+            key={tag.name || tag}
             className="included selected"
             onClick={(e) => handleRemoveTag(tag)}
           />

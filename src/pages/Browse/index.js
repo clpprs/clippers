@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useRef } from "react";
 
 // Components
 import SelectableClips from "./SelectableClips";
@@ -10,6 +10,7 @@ import { Sidebar } from "../../components";
 
 export function Browse(props) {
   const clipsContainerID = "clips-container";
+
   return (
     <>
       <Sidebar>
