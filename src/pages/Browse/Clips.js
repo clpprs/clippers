@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Clip } from "../../components";
 
 // State
-import { clipsState } from "../../state";
+import { clipsState, selectedClipIdsState } from "../../state";
 import { useRecoilValue } from "recoil";
 
 const ClipsContainer = styled.div`
@@ -16,13 +16,21 @@ const ClipsContainer = styled.div`
   height: 100%;
   padding: 0;
   gap: 0rem;
+
+  &.selection-present .clip:not(.selected, :hover) {
+    filter: grayscale(1);
+  }
 `;
 
 export function Clips(props) {
   const clips = useRecoilValue(clipsState);
+  const selectedClipIds = useRecoilValue(selectedClipIdsState);
 
   return (
-    <ClipsContainer id="clips-container">
+    <ClipsContainer
+      id="clips-container"
+      className={selectedClipIds.length ? "selection-present" : ""}
+    >
       {clips.map((clip) => (
         <Clip {...clip} key={clip._id} clickable />
       ))}

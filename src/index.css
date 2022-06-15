@@ -24,6 +24,10 @@
   --tag-color: #d4d0be;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* 
  * App containers etc
  */

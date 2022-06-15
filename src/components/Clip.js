@@ -10,7 +10,7 @@ const ClipMetadata = styled.div`
   transition: all 0.2s;
   overflow: hidden;
   position: absolute;
-  z-index: 9000;
+  z-index: 9999;
   width: 100%;
   top: 100%;
   left: 0;
@@ -46,10 +46,11 @@ const ClipContainer = styled.div`
   transition: all 0.2s;
   display: block;
   position: relative;
-  box-sizing: border-box;
   margin: var(--card-width);
   padding: 0rem;
   background-color: transparent;
+
+  border-color: transparent;
 
   &:not(.selected):hover {
     background-color: var(--card-background);
@@ -64,7 +65,8 @@ const ClipContainer = styled.div`
   }
 
   &.selected {
-    opacity: 0.5;
+    margin: calc(var(--card-width) - 4px);
+    border: 4px dashed var(--highlight);
   }
 `;
 
