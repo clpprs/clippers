@@ -3,7 +3,7 @@ import classNames from "classnames";
 import styled from "styled-components";
 
 // Components
-import { Autocomplete } from "@mui/material";
+import { IconButton, Autocomplete, Paper } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
 
@@ -22,9 +22,49 @@ import axios from "axios";
 import { url } from "../config";
 
 const Container = styled.div`
+  width: 100%;
   & #tag-field {
     width: 100%;
     order: -1;
+  }
+`;
+
+const StyledAutocomplete = styled(Autocomplete)`
+  background-color: var(--card-background);
+  outline: none;
+  border: none;
+  width: 100%;
+  position: relative;
+`;
+
+const StyledInput = styled.input`
+  background-color: inherit;
+  outline: none;
+  padding-left: 0.25rem;
+  width: 100%;
+  height: 100%;
+`;
+
+const StyledPaper = styled(Paper)`
+  background-color: #0d1321 !important;
+  color: var(--tag-color) !important;
+  border-radius: 0 !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--highlight) transparent !important;
+
+  & .tag:hover {
+    color: var(--highlight) !important;
+  }
+`;
+
+const StyledList = styled.ul`
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  gap: 0.5rem !important;
+  padding-left: 0.75rem !important;
+
+  & .list-option:hover {
+    color: var(--highlight);
   }
 `;
 
@@ -73,10 +113,8 @@ export function TaggingField(props) {
   };
 
   return (
-    <Container
-      className={classNames(props.className, "tagfield-container", "w-full")}
-    >
-      <Autocomplete
+    <Container className={classNames(props.className, "tagfield-container")}>
+      <StyledAutocomplete
         id="tag-field"
         multiple
         disableCloseOnSelect
@@ -91,22 +129,21 @@ export function TaggingField(props) {
             placeholder="Add tags..."
           />
         )}
-        renderOption={(props, option, { selected }) => (
-          <li
-            {...props}
-            style={{
-              display: availableTags.includes(option) ? "block" : "none",
-            }}
-            onClick={(e) => {
-              // console.log(option, selected);
-              if (!selected) handleAddTag(option);
-              else handleRemoveTag(option);
-              props.onClick(e);
-            }}
-          >
-            {option}
-          </li>
-        )}
+        renderOption={(props, option, { selected }) =>
+          availableTags.includes(option) && (
+            <li
+              {...props}
+              className="list-option"
+              onClick={(e) => {
+                if (!selected) handleAddTag(option);
+                else handleRemoveTag(option);
+                props.onClick(e);
+              }}
+            >
+              {option}
+            </li>
+          )
+        }
         renderTags={(tagValue, getTagProps) =>
           tagValue.map((option, index) => {
             const tagProps = getTagProps({ index });
@@ -122,6 +159,8 @@ export function TaggingField(props) {
             );
           })
         }
+        PaperComponent={StyledPaper}
+        ListboxComponent={StyledList}
       />
     </Container>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // MUI
-import { IconButton, Autocomplete } from "@mui/material";
+import { IconButton, Autocomplete, Paper } from "@mui/material";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 // State
@@ -15,10 +15,41 @@ import classNames from "classnames";
 import styled from "styled-components";
 
 const StyledAutocomplete = styled(Autocomplete)`
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--card-background);
   outline: none;
   border: none;
+  width: 100%;
+  position: relative;
 `;
+
+const StyledInput = styled.input`
+  background-color: inherit;
+  outline: none;
+  padding-left: 0.25rem;
+  width: 100%;
+  height: 100%;
+`;
+
+const StyledPaper = styled(Paper)`
+  background-color: #0d1321 !important;
+  color: var(--tag-color) !important;
+  border-radius: 0 !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--highlight) transparent !important;
+
+  & .tag:hover {
+    color: var(--highlight) !important;
+  }
+`;
+
+const StyledList = styled.ul`
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  gap: 0.5rem !important;
+  padding-left: 0.75rem !important;
+`;
+
+const StyledOption = styled.div``;
 
 export function Search(props) {
   // Recoil state
@@ -37,28 +68,22 @@ export function Search(props) {
       <StyledAutocomplete
         id="tag-search"
         autoHighlight
-        className={classNames("box-border", "w-full", "relative")}
         options={taglist}
         value={value}
         inputValue={inputValue}
         renderOption={(props, option) =>
           !selectedTagnames.includes(option) && (
-            <div
-              {...props}
-              className={classNames("mui-tag-container", "w-full")}
-              style={{ padding: "0 0.25rem" }}
-            >
-              <Tag name={option} key={option} add exclude className="w-full" />
-            </div>
+            <StyledOption {...props} className="mui-tag-container">
+              <Tag name={option} key={option} add exclude />
+            </StyledOption>
           )
         }
         renderInput={(params) => (
           <div
-            className="flex h-8 w-full rounded pl-2 bg-neutral-50 items-center"
+            className="flex h-8 w-full rounded pl-2 items-center"
             ref={params.InputProps.ref}
           >
-            <input
-              className="w-full h-full pl-1"
+            <StyledInput
               placeholder="Search tags..."
               type="text"
               {...params.inputProps}
@@ -68,6 +93,8 @@ export function Search(props) {
             </IconButton>
           </div>
         )}
+        PaperComponent={StyledPaper}
+        ListboxComponent={StyledList}
         onChange={(e, value) => {
           setValue(null);
           setInputValue(inputValue);

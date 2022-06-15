@@ -15,8 +15,7 @@ const Nav = styled.nav`
   top: 0;
   z-index: 9999;
 
-  background-color: black;
-  color: white;
+  background-color: var(--header-background);
 
   vertical-align: middle;
   letter-spacing: 0.05em;
@@ -29,8 +28,8 @@ const Nav = styled.nav`
   & a:hover {
     text-decoration: underline;
     text-decoration-style: dotted;
-    color: var(--link-highlight-color);
-    text-decoration-color: var(--link-highlight-color);
+    color: var(--highlight);
+    text-decoration-color: var(--highlight);
   }
 `;
 
@@ -39,10 +38,6 @@ const Logo = styled.div`
 
   & * {
     height: inherit;
-  }
-
-  & img:hover {
-    filter: hue-rotate(180deg) contrast(125%) brightness(0.75);
   }
 `;
 
@@ -78,6 +73,7 @@ export function Navbar(props) {
           <img src={hachi} />
         </a>
       </Logo>
+      <a href="/browse">BROWSE</a>
       <a href="/anime">ANIME</a>
       <a href="/about">ABOUT</a>
       <RightAligned>

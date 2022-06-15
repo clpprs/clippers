@@ -72,7 +72,7 @@ export function Tag(props) {
 
   const toggleTag = (name, include = true) => {
     setSelectedTags((tags) =>
-        tags.map((tag) => (tag.name === name ? { ...tag, include } : tag))
+      tags.map((tag) => (tag.name === name ? { ...tag, include } : tag))
     );
   };
 
@@ -116,6 +116,7 @@ export function Tag(props) {
         onClick && "cursor-pointer"
       )}
       onClick={onClick}
+      style={props.style}
     >
       <span className="tag-name">
         {`${name}${!Number.parseInt(count) ? "" : ` (${count})`}`}

@@ -29,7 +29,7 @@ const Flexer = styled.div`
   }
 
   a {
-    color: var(--link-highlight-color);
+    color: var(--highlight);
     text-decoration: underline;
     text-decoration-style: dotted;
     padding: 0 0.25rem;

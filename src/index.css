@@ -2,14 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* palette
+  0d1321
+  1d2d44
+  3e5c76
+  748cab
+  f0ebd8
+*/
+
 :root {
   --sidebar-width: 18rem;
   --header-height: 2.75rem;
-  --app-background: #fff;
-  --card-background: black;
-  --link-highlight-color: slateblue;
-  --included-color: #00deff;
-  --excluded-color: #ff66f7;
+  --app-background: #1d2d44;
+  --card-background: #3e5c76;
+  --context-menu-background: #0d1321;
+  --header-background: #0d1321;
+  --highlight: #748cab;
+  --included-color: #5e80ad;
+  --excluded-color: #3e5c76;
+  --text-color: #f0ebd8;
+  --tag-color: #d4d0be;
 }
 
 /* 
@@ -24,6 +36,7 @@ body,
   width: 100%;
   overflow-x: hidden;
   max-width: 100%;
+  color: #f0ebd8;
 }
 
 #app {
@@ -90,22 +103,6 @@ ol {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-/* Force video container to be 16:9 aspect ratio */
-.clip-video-container {
-  width: 100%;
-  position: relative;
-  aspect-ratio: 16/9;
-}
-
-/* Center video inside video container */
-.clip-video-container video {
-  position: relative;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 /* Force no transitions in search bar because MUI sucks */

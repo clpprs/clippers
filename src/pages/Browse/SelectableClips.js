@@ -16,7 +16,7 @@ export function SelectableClips(props) {
         </Suspense>
       </div>
       <Selecto containerID={containerID} />
-      <ContextMenu />
+      <ContextMenu containerID={containerID} />
     </>
   );
 }

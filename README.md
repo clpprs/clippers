@@ -17,6 +17,7 @@ What the fuck
 - [x] Move Selectors to parent components and flow data through component tree
   - This appearst to be unnecessary
 - [ ] Add tags to url parameters
+- [ ] Use sidebar for tag adding etc. get rid of context menu
 - [ ] Implement pagination client side
 - [ ] Sort tags on clip page alphabetically
 - [ ] Make right click on an unselected clip select it when no clips are selected

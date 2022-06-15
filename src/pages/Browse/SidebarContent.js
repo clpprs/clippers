@@ -12,26 +12,23 @@ import { clipTagsState, selectedTagsState } from "../../state";
 const Subtitle = styled.span`
   width: 100%;
   font-size: 0.75rem;
-  margin-bottom: -0.25rem;
+  margin-bottom: 0;
   margin-top: 0.5rem;
-
-  &:first-of-type {
-    margin-top: 0;
-  }
 `;
 
 const SelectedTagList = styled.div`
-  padding: 0 0.5rem;
   display: flex;
   flex-flow: row wrap;
   gap: 0.25rem;
 
   & .tag {
-    padding: 0 0.25rem;
+    padding: 0 0.5rem 0.2rem 0.5rem;
     white-space: pre-wrap;
   }
 
   & .tag .tag-button {
+    top: 0.125rem;
+    position: relative;
     padding-left: 0.25rem;
   }
 `;
@@ -72,9 +69,7 @@ function SelectedTags(props) {
   );
 }
 
-const TagListContainer = styled.div`
-  padding: 0 0.5rem;
-`;
+const TagListContainer = styled.div``;
 
 const AvailableTagListContainer = styled.div`
   display: flex;
@@ -84,6 +79,15 @@ const AvailableTagListContainer = styled.div`
   & .tag .tag-button {
     opacity: 0;
   }
+
+  & .tag {
+    color: var(--tag-color);
+  }
+
+  & .tag:hover {
+    color: var(--highlight);
+  }
+
   & .tag:hover .tag-button {
     opacity: 1;
   }
@@ -109,7 +113,7 @@ function AvailableTags(props) {
             className={classNames("sidebar-taglist")}
           >
             {availableTags.map(({ name, count }) => (
-              <Tag name={name} key={name} count={count} button add />
+              <Tag name={name} key={name} count={count} button add exclude />
             ))}
           </AvailableTagListContainer>
         </>
@@ -122,15 +126,32 @@ function AvailableTags(props) {
   );
 }
 
+function SearchContainer(props) {
+  return (
+    <div>
+      <Subtitle>Search</Subtitle>
+      <Search />
+    </div>
+  );
+}
+
+const SidebarContentContainer = styled.div`
+  padding: 0 0.5rem;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+`;
+
 export function SidebarContent(props) {
   return (
-    <>
-      <Search />
+    <SidebarContentContainer>
+      <SearchContainer />
       <SelectedTags />
       <Suspense fallback={null}>
         <AvailableTags />
       </Suspense>
-    </>
+    </SidebarContentContainer>
   );
 }
 

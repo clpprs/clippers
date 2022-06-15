@@ -6,7 +6,7 @@ import styled from "styled-components";
 import TaggingField from "./TaggingField";
 
 const ContextMenuContainer = styled.div`
-  background-color: #fff;
+  background-color: var(--context-menu-background);
   border-radius: 0.25rem;
   z-index: 9999;
 `;
@@ -46,12 +46,13 @@ export function ContextMenu(props) {
     }
 
     // Bind event listeners
-    document.addEventListener("contextmenu", handleContextEvent);
+    const container = document.getElementById(props.containerID);
+    container.addEventListener("contextmenu", handleContextEvent);
     document.addEventListener("click", handleClick);
 
     // Return cleanup function
     return function cleanup() {
-      document.removeEventListener("contextmenu", handleContextEvent);
+      container.removeEventListener("contextmenu", handleContextEvent);
       document.removeEventListener("click", handleClick);
     };
   }, [isVisible, setCordinates]);

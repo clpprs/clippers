@@ -17,28 +17,27 @@ const ClipMetadata = styled.div`
   color: white;
   height: 0;
   background-color: transparent;
+`;
 
-  & .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 1rem;
-    padding-bottom: var(--card-width);
-  }
+const TagList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1rem;
+  padding-bottom: var(--card-width);
+`;
 
-  & .tag {
-    flex-grow: 0;
-    width: auto;
-  }
+const StyledTag = styled(Tag)`
+  padding: 0.1rem 0.5rem;
 `;
 
 const Metadata = React.memo(({ tags = [], ...props }) => (
   <ClipMetadata className={classNames("clip-metadata")}>
-    <div className="tag-list">
+    <TagList className="tag-list">
       {tags.map((tag) => (
-        <Tag name={tag} key={tag} />
+        <StyledTag name={tag} key={tag} />
       ))}
-    </div>
+    </TagList>
   </ClipMetadata>
 ));
 
@@ -69,6 +68,22 @@ const ClipContainer = styled.div`
   }
 `;
 
+const ClipVideoContainer = styled.div`
+  /* force clip video to 16:9 */
+  width: 100%;
+  position: relative;
+  aspect-ratio: 16/9;
+
+  /* center video inside container */
+  & video {
+    position: relative;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
+
 const ConditionalLink = ({ url, clickable, children }) =>
   clickable ? <a href={url}>{children}</a> : children;
 
@@ -78,7 +93,7 @@ export const Clip = React.memo(function (props) {
   return (
     <ClipContainer className={classNames("clip", className)} id={_id}>
       <ConditionalLink url={`/clip/${_id}`} clickable={clickable}>
-        <div className="clip-video-container">
+        <ClipVideoContainer className="clip-video-container">
           <video
             muted
             loop
@@ -96,7 +111,7 @@ export const Clip = React.memo(function (props) {
             ></source>
             Clip file not found
           </video>
-        </div>
+        </ClipVideoContainer>
       </ConditionalLink>
       <Metadata tags={tags} />
     </ClipContainer>
