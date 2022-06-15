@@ -88,7 +88,7 @@ const selectedClipsState = selector({
 });
 
 // tags shared by currently selected clips
-const sharedTagsAtom = selector({
+const sharedTagsState = selector({
   key: "sharedtags",
   default: [],
   get: async ({ get }) => {
@@ -105,5 +105,5 @@ export {
   allTagsState,
   selectedClipIdsState,
   selectedClipsState,
-  sharedTagsAtom,
+  sharedTagsState,
 };

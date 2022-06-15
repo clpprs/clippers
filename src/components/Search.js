@@ -51,9 +51,10 @@ const StyledList = styled.ul`
 
 const StyledOption = styled.div``;
 
-export function Search(props) {
+export function Search({ availableTags, onChange, ...props }) {
   // Recoil state
-  const taglist = useRecoilValue(allTagsState);
+  const allTags = useRecoilValue(allTagsState);
+  const taglist = availableTags || allTags;
   const selectedTags = useRecoilValue(selectedTagsState);
   const selectedTagnames = Array.isArray(selectedTags)
     ? selectedTags.map((t) => t.name)
@@ -74,7 +75,12 @@ export function Search(props) {
         renderOption={(props, option) =>
           !selectedTagnames.includes(option) && (
             <StyledOption {...props} className="mui-tag-container">
-              <Tag name={option} key={option} add exclude />
+              <Tag
+                name={option}
+                key={option}
+                add={!onChange}
+                exclude={!onChange}
+              />
             </StyledOption>
           )
         }
@@ -96,6 +102,7 @@ export function Search(props) {
         PaperComponent={StyledPaper}
         ListboxComponent={StyledList}
         onChange={(e, value) => {
+          if (onChange) onChange(e, value);
           setValue(null);
           setInputValue(inputValue);
         }}

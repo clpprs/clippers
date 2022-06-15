@@ -3,7 +3,7 @@ import classNames from "classnames";
 import styled from "styled-components";
 
 // Components
-import { IconButton, Autocomplete, Paper } from "@mui/material";
+import { Autocomplete, Paper } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Chip from "@mui/material/Chip";
 
@@ -13,7 +13,7 @@ import {
   allTagsState,
   selectedClipIdsState,
   selectedClipsState,
-  sharedTagsAtom,
+  sharedTagsState,
   clipsQuery,
 } from "../state";
 
@@ -35,14 +35,6 @@ const StyledAutocomplete = styled(Autocomplete)`
   border: none;
   width: 100%;
   position: relative;
-`;
-
-const StyledInput = styled.input`
-  background-color: inherit;
-  outline: none;
-  padding-left: 0.25rem;
-  width: 100%;
-  height: 100%;
 `;
 
 const StyledPaper = styled(Paper)`
@@ -72,7 +64,7 @@ export function TaggingField(props) {
   // Recoil state
   const selectedClipIds = useRecoilValue(selectedClipIdsState);
   const allTags = useRecoilValue(allTagsState);
-  const sharedTags = useRecoilValue(sharedTagsAtom);
+  const sharedTags = useRecoilValue(sharedTagsState);
 
   // UNSTABLE lol
   const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsState);

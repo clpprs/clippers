@@ -1,13 +1,25 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import styled from "styled-components";
 import classNames from "classnames";
 
 // Components
 import { Search, Tag } from "../../components";
+import { addTag, removeTag } from "../../helpers/tagging";
 
 // State
-import { useRecoilValue } from "recoil";
-import { clipTagsState, selectedTagsState } from "../../state";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useRecoilRefresher_UNSTABLE,
+} from "recoil";
+import {
+  clipTagsState,
+  selectedClipsState,
+  selectedTagsState,
+  allTagsState,
+  sharedTagsState,
+  clipsQuery,
+} from "../../state";
 
 const Subtitle = styled.span`
   width: 100%;
@@ -15,6 +27,101 @@ const Subtitle = styled.span`
   margin-bottom: 0;
   margin-top: 0.5rem;
 `;
+
+const SidebarContentContainer = styled.div`
+  padding: 0 0.5rem;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+`;
+
+export function SidebarContent(props) {
+  const [selectedClips, setSelectedClipIds] =
+    useRecoilState(selectedClipsState);
+
+  return (
+    <SidebarContentContainer>
+      {!selectedClips.length ? (
+        <>
+          <Subtitle>Search tags</Subtitle>
+          <Search />
+          <SelectedTags />
+          <AvailableTags />
+        </>
+      ) : (
+        <TaggingMenu selectedClips={selectedClips} />
+      )}
+    </SidebarContentContainer>
+  );
+}
+
+export default SidebarContent;
+
+const SelectedClipsList = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+`;
+
+function TaggingMenu({ selectedClips }) {
+  // Recoil state
+  const allTags = useRecoilValue(allTagsState);
+  const sharedTags = useRecoilValue(sharedTagsState);
+
+  const availableTags = selectedClips.length
+    ? allTags.filter((tag) => !sharedTags.includes(tag))
+    : [];
+
+  // UNSTABLE lol
+  const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsState);
+  const refreshClipsQuery = useRecoilRefresher_UNSTABLE(clipsQuery);
+
+  const handleAddTag = (tag) => {
+    addTag(tag, selectedClips).then((data) => {
+      refreshSelectedClips();
+      refreshClipsQuery();
+    });
+  };
+
+  const handleRemoveTag = (tag) => {
+    removeTag(tag, selectedClips).then((data) => {
+      refreshSelectedClips();
+      refreshClipsQuery();
+    });
+  };
+
+  return (
+    <>
+      <Subtitle>Add tags</Subtitle>
+      <Search
+        availableTags={availableTags}
+        onChange={(e, value) => {
+          handleAddTag(value);
+        }}
+      />
+      <Subtitle>Current tags</Subtitle>
+      <SelectedTagList className="highlight-tags">
+        {sharedTags.map((tag) => (
+          <Tag
+            tag={tag}
+            key={tag.name}
+            className="included selected"
+            onClick={(e) => handleRemoveTag(tag)}
+          />
+        ))}
+      </SelectedTagList>
+      <Subtitle>Selected clips</Subtitle>
+      <SelectedClipsList>
+        {selectedClips.map((clip) => (
+          <span key={clip._id}>{`${clip._id.substring(0, 4)}-${clip.episode}-${
+            clip.index
+          }`}</span>
+        ))}
+      </SelectedClipsList>
+    </>
+  );
+}
 
 const SelectedTagList = styled.div`
   display: flex;
@@ -125,34 +232,3 @@ function AvailableTags(props) {
     </TagListContainer>
   );
 }
-
-function SearchContainer(props) {
-  return (
-    <div>
-      <Subtitle>Search</Subtitle>
-      <Search />
-    </div>
-  );
-}
-
-const SidebarContentContainer = styled.div`
-  padding: 0 0.5rem;
-  padding-top: 0.5rem;
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 0.5rem;
-`;
-
-export function SidebarContent(props) {
-  return (
-    <SidebarContentContainer>
-      <SearchContainer />
-      <SelectedTags />
-      <Suspense fallback={null}>
-        <AvailableTags />
-      </Suspense>
-    </SidebarContentContainer>
-  );
-}
-
-export default SidebarContent;

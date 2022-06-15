@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 // Components
 import Clips from "./Clips";
-import { Loader, ContextMenu } from "../../components";
+import { Loader } from "../../components";
 import Selecto from "./Selecto";
 
 export function SelectableClips(props) {
@@ -16,7 +16,6 @@ export function SelectableClips(props) {
         </Suspense>
       </div>
       <Selecto containerID={containerID} />
-      <ContextMenu containerID={containerID} />
     </>
   );
 }
