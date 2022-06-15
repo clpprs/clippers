@@ -29,6 +29,10 @@ const tags = [
   "oshino ougi",
   "ononoki yotsugi",
   "hachikuji mayoi",
+  "needs-merge",
+  "post-episode",
+  "opening",
+  "ending",
 ];
 
 export default tags;
