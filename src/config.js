@@ -4,15 +4,15 @@ const config = {
   domain: "amv.tools",
   api: "gaen",
   files: "hachikuji",
+  thumbnail: ({ anime, episode, index }) => {
+    return `${config.url("files")}/${anime}/${episode}/${index}.jpg`;
+  },
+  video: ({ anime, episode, index }) => {
+    return `${config.url("files")}/${anime}/${episode}/${index}.mp4`;
+  },
   url: (service, page = "") => {
     // Dev
     // if (service === "api") return `http://localhost:80/${!!page && page}`;
-
-    // If provided a clip object
-    if (typeof service === "object")
-      return `${config.protocol}${config.files}.${config.domain}/${
-        service.anime
-      }/${service.episode}/${service.index}.mp4${page && "?download=1"}`;
 
     return `${config.protocol}${service ? config?.[service] + "." : ""}${
       config.domain

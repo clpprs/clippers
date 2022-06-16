@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 
-import { url } from "../config";
+import { url, video, thumbnail } from "../config";
 import { Tag } from "./Tags/Tag";
 
 import styled from "styled-components";
@@ -84,6 +84,16 @@ const ClipVideoContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  & .thumbnail {
+    position: absolute;
+    width: 100%;
+    top: 0;
+  }
+
+  &.loaded .thumbnail {
+    opacity: 0;
+  }
 `;
 
 const ConditionalLink = ({ url, clickable, children }) =>
@@ -92,27 +102,43 @@ const ConditionalLink = ({ url, clickable, children }) =>
 export const Clip = React.memo(function (props) {
   const { _id, anime, episode, index, tags, clickable, className } = props;
 
+  const [loaded, setLoaded] = useState(false);
+
+  const onMouseEnter = (e) => e.currentTarget.querySelector("video").play();
+  const onMouseOut = (e) => {
+    e.currentTarget.querySelector("video").pause();
+    e.currentTarget.querySelector("video").currentTime = 0;
+  };
+
   return (
-    <ClipContainer className={classNames("clip", className)} id={_id}>
+    <ClipContainer
+      className={classNames("clip", className)}
+      id={_id}
+      onMouseEnter={onMouseEnter}
+      onMouseOut={onMouseOut}
+    >
       <ConditionalLink url={`/clip/${_id}`} clickable={clickable}>
-        <ClipVideoContainer className="clip-video-container">
+        <ClipVideoContainer
+          className={classNames("clip-video-container", loaded && "loaded")}
+        >
           <video
             muted
             loop
             draggable="false"
             className="clip-video"
-            onMouseEnter={(event) => event.target.play()}
-            onMouseOut={(event) => {
-              event.target.pause();
-              event.target.currentTime = 0;
-            }}
+            preload="none"
+            onLoadedData={(e) => setLoaded(true)}
           >
             <source
-              src={url({ anime, episode, index })}
+              src={video({ anime, episode, index })}
               type="video/mp4"
             ></source>
             Clip file not found
           </video>
+          <img
+            className="thumbnail"
+            src={thumbnail({ anime, episode, index })}
+          />
         </ClipVideoContainer>
       </ConditionalLink>
       <Metadata tags={tags} />

@@ -13,7 +13,7 @@ import { Loader, TaggingField } from "../../components";
 
 // Networking
 import axios from "axios";
-import { url } from "../../config";
+import { url, video } from "../../config";
 
 // State
 import { useSetRecoilState } from "recoil";
@@ -40,7 +40,7 @@ function Video(props) {
   return (
     <div id={_id} className={props.className}>
       <video loop controls>
-        <source src={url(props)} type="video/mp4"></source>
+        <source src={video(props)} type="video/mp4"></source>
         Clip file not found
       </video>
     </div>

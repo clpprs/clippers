@@ -19,13 +19,12 @@ const ClipsContainer = styled.div`
   padding: 0;
   gap: 0rem;
 
-  &.highlight-present .clip:not(.highlight) video {
-    filter: saturate(2) blur(100px);
+  &.highlight-present .clip:not(.highlight) {
+    filter: saturate(3) blur(100px);
   }
 
-  &.highlight-present .clip.highlight video {
-    z-index: 999; /* Raise highglighted videos above the blur */
-    position: relative;
+  &.highlight-present .clip.highlight {
+    z-index: 999; /* Raise highglighted clips above the blur */
   }
 
   &.selection-present .clip:not(.selected, :hover) {
