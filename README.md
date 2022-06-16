@@ -1,12 +1,20 @@
 # CLIPPERS
 
-less goo
+https://clippers.amv.tools/ front end
+
+# DEVELOPMENT
+
+1. install `npm i`
+2. run dev server `npm start`
 
 # STATE
 
-What the fuck
+Global state with Recoil. No idea how it works but it works
 
 # To Do:
+
+- [ ] Reorganization
+- [ ] Documentation
 
 - [x] Disable links until all clips are unselected
 - [x] Add death.png and reisir.png to navbar
