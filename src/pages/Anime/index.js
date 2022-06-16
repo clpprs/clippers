@@ -31,7 +31,7 @@ const AnimeContainer = styled.a`
     display: block;
     position: absolute;
     width: calc(100% - (var(--padding) * 2));
-    background-color: white;
+    background-color: var(--app-background);
     text-align: center;
     z-index: 1;
     top: -1rem;
