@@ -17,13 +17,13 @@ const AnimeContainer = styled.a`
   height: 20rem;
   padding: var(--padding);
   border-radius: 0.25rem;
-  border: 1px solid lightgray;
+  border: 1px solid darkgray;
   position: relative;
   transition: var(--transition);
 
   &:hover {
     --padding: 0.5rem;
-    border-color: darkgray;
+    border-color: lightgray;
   }
 
   & .anime-title {
@@ -74,7 +74,6 @@ const AnimePageContent = styled.div`
 
   & > * {
     max-width: 62rem;
-    margin-bottom: 1rem;
   }
 
   & #available-anime-list {
@@ -102,8 +101,8 @@ export function ClipPage(props) {
 
   return (
     <AnimePageContent className={classNames("clip-page-content")}>
-      <h1 className={classNames("text-2xl", "mb-8")}>Available animes</h1>
-      <div id="available-anime-list">
+      <h1 className={classNames("text-2xl", "mb-16")}>Available anime</h1>
+      <div id="available-anime-list" className={classNames("mb-16")}>
         {animes.map((anime, index) => (
           <Anime key={index} anime={anime} />
         ))}
