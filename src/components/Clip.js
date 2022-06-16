@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
-import { url, video, thumbnail } from "../config";
+import { video, thumbnail } from "../config";
 import { Tag } from "./Tags/Tag";
 
 import styled from "styled-components";
 
+// const curve = "cubic-bezier(0.87, 0, 0.13, 1)";
+const duration = "0.3s";
+const curve = "cubic-bezier(0.22, 1, 0.36, 1)";
+
 const ClipMetadata = styled.div`
-  transition: all 0.2s;
+  transition: all ${duration} ${curve};
   overflow: hidden;
   position: absolute;
   z-index: 9999;
   width: 100%;
+  height: 0;
   top: 100%;
   left: 0;
   color: white;
-  height: 0;
   background-color: transparent;
 `;
 
@@ -43,7 +47,12 @@ const Metadata = React.memo(({ tags = [], ...props }) => (
 
 const ClipContainer = styled.div`
   --card-width: 1rem;
-  transition: all 0.2s;
+
+  transition-property: margin, padding;
+  transition-duration: ${duration};
+  /* transition-timing-function: ease-in-out; */
+  transition-timing-function: ${curve};
+
   display: block;
   position: relative;
   margin: var(--card-width);
@@ -60,6 +69,9 @@ const ClipContainer = styled.div`
 
   &:not(.selected):hover .clip-metadata {
     height: auto;
+    top: 100%;
+    width: 100%;
+    left: 0;
     padding: 0 var(--card-width);
     background-color: var(--card-background);
   }
