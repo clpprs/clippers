@@ -40,7 +40,6 @@ const tags = [
   "forest",
   "city",
   "araragi residence",
-  "eye focus",
 ].sort();
 
 export default tags;
