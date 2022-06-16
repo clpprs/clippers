@@ -119,7 +119,12 @@ function ClipPage(props) {
           </Suspense>
         </TaggingContainer>
         <ClipActionButtonContainer>
-          <a href={url(clip, true)} target="_blank" rel="noreferrer" download>
+          <a
+            href={`${video(clip)}?download=1`}
+            target="_blank"
+            rel="noreferrer"
+            download
+          >
             <MdFileDownload />
           </a>
         </ClipActionButtonContainer>
