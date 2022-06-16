@@ -56,6 +56,10 @@ const Flexer = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  li.done {
+    text-decoration: line-through;
+  }
 `;
 
 export function About(props) {
@@ -93,10 +97,9 @@ export function About(props) {
 
       <h4>Tagging clips</h4>
       <p>
-        Search for clips without the bakemonogatari tag (click the - on a tag to
-        exclude it). To add tags, hold shift, click to select clips, then use
-        the sidebars tagging menu to remove or add tags. All tag edits will
-        apply to all selected clips.
+        Search for clips with the <em>tagme</em> tag. To add tags, hold shift,
+        click to select clips, then use the sidebars tagging menu to remove or
+        add tags. All tag edits will apply to all selected clips.
       </p>
       <p>
         You can also hold shift and drag to select multiple clips easily.
@@ -105,16 +108,16 @@ export function About(props) {
         of the video thumbnail.
       </p>
       <p>
-        Once you feel like the clip(s) have all the tags they need, add the
-        bakemonogatari tag.
+        Once you feel like the clip(s) have all the tags they need, add the{" "}
+        <em>bakemonogatari</em> tag and remove the <em>tagme</em> tag.
       </p>
 
       <div className={classNames("spacer", "py-6")}></div>
       <h3>Clippers roadmap</h3>
       <ol>
         <li>Closed beta testing</li>
-        <li>Update the browse page when tags are changed</li>
-        <li>Load thumbnails before full videos</li>
+        <li className="done">Update the browse page when tags are changed</li>
+        <li className="done">Load thumbnails before full videos</li>
         <li>Bulk download</li>
         <li>New tag suggestions</li>
         <li>Add timecode data to clips</li>

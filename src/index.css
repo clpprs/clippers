@@ -108,6 +108,14 @@ ol {
 }
 
 /* 
+ * Global styles
+ */
+
+em {
+  color: var(--card-background);
+}
+
+/* 
  * Global fixes
  */
 
