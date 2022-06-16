@@ -10,6 +10,7 @@ import { BiArrowBack } from "react-icons/bi";
 // Components
 import classNames from "classnames";
 import { Loader, TaggingField } from "../../components";
+import setTitle from "../../helpers/setTitle";
 
 // Networking
 import axios from "axios";
@@ -88,6 +89,11 @@ function ClipPage(props) {
   const { _id } = useParams();
   const [clip, setClip] = useState({});
   const setSelectedClipIds = useSetRecoilState(selectedClipIdsState);
+
+  // Set page title
+  useEffect(() => {
+    setTitle(_id);
+  }, [_id]);
 
   useEffect(() => {
     console.log(`Setting clip ${_id} as selected`);

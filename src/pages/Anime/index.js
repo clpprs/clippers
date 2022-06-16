@@ -8,6 +8,7 @@ import Scroller from "../../components/Scroller";
 // Networking
 import axios from "axios";
 import { url } from "../../config";
+import setTitle from "../../helpers/setTitle";
 
 const AnimeContainer = styled.a`
   --padding: 1rem;
@@ -85,6 +86,10 @@ const AnimePageContent = styled.div`
 
 export function ClipPage(props) {
   const [animes, setAnimes] = useState([]);
+
+  useEffect(() => {
+    setTitle("Anime");
+  }, []);
 
   useEffect(() => {
     console.log("Getting anime");

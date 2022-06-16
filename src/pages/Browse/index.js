@@ -1,4 +1,4 @@
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useEffect } from "react";
 
 // Components
 import SelectableClips from "./SelectableClips";
@@ -7,9 +7,14 @@ import BrowseContent from "./ContentWrapper";
 
 // Containers
 import { Sidebar } from "../../components";
+import setTitle from "../../helpers/setTitle";
 
 export function Browse(props) {
   const clipsContainerID = "clips-container";
+
+  useEffect(() => {
+    setTitle("Browse");
+  }, []);
 
   return (
     <>

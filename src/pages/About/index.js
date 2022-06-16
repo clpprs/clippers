@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import classNames from "classnames";
 
@@ -6,6 +6,7 @@ import classNames from "classnames";
 import drip from "../../images/drip.jpg";
 import hachi from "../../images/hachi.webp";
 import residence from "../../images/residence.png";
+import setTitle from "../../helpers/setTitle";
 
 const Flexer = styled.div`
   padding: 4rem 0;
@@ -63,6 +64,10 @@ const Flexer = styled.div`
 `;
 
 export function About(props) {
+  useEffect(() => {
+    setTitle("About");
+  }, []);
+
   return (
     <Flexer className="flexer">
       <div id="residence" style={{ position: "relative" }}>
