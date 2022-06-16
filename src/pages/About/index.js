@@ -101,12 +101,7 @@ export function About(props) {
         click to select clips, then use the sidebars tagging menu to remove or
         add tags. All tag edits will apply to all selected clips.
       </p>
-      <p>
-        You can also hold shift and drag to select multiple clips easily.
-        Firefox doesn't seem to respect the HTML draggable attribute nor the CSS
-        user-select property on videos, so the drag should be initiated outside
-        of the video thumbnail.
-      </p>
+      <p>You can also hold shift and drag to select multiple clips easily.</p>
       <p>
         Once you feel like the clip(s) have all the tags they need, add the{" "}
         <em>bakemonogatari</em> tag and remove the <em>tagme</em> tag.

@@ -17,23 +17,21 @@ Global state with Recoil. No idea how it works but it works
 - [ ] Documentation
 - [ ] Add tags to url parameters
 - [ ] Implement pagination client side
-- [ ] Sort tags on clip page alphabetically
-- [ ] Make right click on an unselected clip select it when no clips are selected
-- [ ] Do not trigger contextmenu outside of grid
-- [ ] Include tags, episode and index in download="" filename
 - [ ] Style headings better
-- [ ] Consider different fonts
 - [ ] ZIP downloads with https://github.com/Touffy/client-zip
 - [ ] Page titles, maybe useEffect() ?
-- [ ] Use onMouseDown to remove the dragging thing on videos ?
+- [x] Use onMouseDown to remove the dragging thing on videos ?
+- [x] Include tags, episode and index in download="" filename
+  - Doesn't work :/
+- [x] Fix page scrolling to top when updating
+- [ ] Make page scroll to the actual spot where it was, save scroll value on click or in cleanup
 - [x] Thumbnails
   - https://usefulangle.com/post/287/html-video-lazy-load
+- [x] Consider different fonts
 - [x] Disable links until all clips are unselected
 - [x] Add death.png and reisir.png to navbar
 - [x] Make \<Sidebar\> reusable, remove the content and make it render children
 - [x] Update the page when tagging
-- [x] Fix page scrolling to top when updating
-- [ ] Fix page scrolling to the actual spot where the scroll was, save scroll value on click or in cleanup
 - [x] Rename Atoms and Selectors to use the state naming convention
 - [x] Move Selectors to parent components and flow data through component tree
   - This appearst to be unnecessary

@@ -131,6 +131,7 @@ export const Clip = React.memo(function (props) {
     >
       <ConditionalLink url={`/clip/${_id}`} clickable={clickable}>
         <ClipVideoContainer
+          onMouseDown={(e) => e.preventDefault()}
           className={classNames("clip-video-container", loaded && "loaded")}
         >
           <video
