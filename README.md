@@ -18,6 +18,7 @@ Global state with Recoil. No idea how it works but it works
 - [ ] Add tags to url parameters
 - [ ] Implement pagination client side
 - [ ] ZIP downloads with https://github.com/Touffy/client-zip
+- [ ] Re-encode episode 2
 - [x] Page titles, maybe useEffect() ?
 - [x] Use onMouseDown to remove the dragging thing on videos ?
 - [x] Include tags, episode and index in download="" filename

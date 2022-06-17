@@ -58,8 +58,9 @@ const StyledOption = styled.div``;
 export function Search({ availableTags, onChange, ...props }) {
   // Recoil state
   const allTags = useRecoilValue(allTagsState);
-  const taglist = availableTags || allTags;
   const selectedTags = useRecoilValue(selectedTagsState);
+
+  const taglist = availableTags || allTags;
   const selectedTagnames = Array.isArray(selectedTags)
     ? selectedTags.map((t) => t.name)
     : [];
@@ -77,7 +78,7 @@ export function Search({ availableTags, onChange, ...props }) {
         value={value}
         inputValue={inputValue}
         renderOption={(props, option) =>
-          !selectedTagnames.includes(option) && (
+          (availableTags || !selectedTagnames.includes(option)) && (
             <StyledOption {...props} className="mui-tag-container">
               <Tag
                 name={option}
