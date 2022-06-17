@@ -28,6 +28,7 @@ const tags = [
   "hachikuji mayoi",
   "needs merge",
   "post episode",
+  "duplicate",
   "op",
   "ed",
   "letterbox",
@@ -40,6 +41,9 @@ const tags = [
   "forest",
   "city",
   "araragi residence",
+  "staple staple",
+  "senjougahara residence",
+  "kanbaru residence",
 ].sort();
 
 export default tags;
