@@ -118,6 +118,8 @@ export function About(props) {
         <li>Closed beta testing</li>
         <li className="done">Update the browse page when tags are changed</li>
         <li className="done">Load thumbnails before full videos</li>
+        <li className="done">Upload entirety of bakemonogatari</li>
+        <li>Tag entirety of bakemonogatari</li>
         <li>Bulk download</li>
         <li>New tag suggestions</li>
         <li>Add timecode data to clips</li>
