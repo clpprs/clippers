@@ -126,8 +126,8 @@ export const Clip = React.memo(function (props) {
     <ClipContainer
       className={classNames("clip", className)}
       id={_id}
-      onMouseEnter={onMouseEnter}
-      onMouseOut={onMouseOut}
+      // onMouseEnter={onMouseEnter}
+      // onMouseOut={onMouseOut}
     >
       <ConditionalLink url={`/clip/${_id}`} clickable={clickable}>
         <ClipVideoContainer
@@ -137,6 +137,7 @@ export const Clip = React.memo(function (props) {
           <video
             muted
             loop
+            autoPlay
             draggable="false"
             className="clip-video"
             preload="none"

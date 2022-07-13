@@ -14,12 +14,13 @@ import {
 } from "recoil";
 import {
   clipTagsState,
-  selectedClipsState,
+  selectedClipIdsState,
   selectedTagsState,
   allTagsState,
   sharedTagsState,
   clipsQuery,
   clipsState,
+  selectedClipsState,
 } from "../../state";
 
 const Subtitle = styled.span`
@@ -38,12 +39,14 @@ const SidebarContentContainer = styled.div`
 `;
 
 export function SidebarContent({ clipsContainerID }) {
-  const [selectedClips, setSelectedClipIds] =
-    useRecoilState(selectedClipsState);
+  const [selectedClipIds, setSelectedClipIds] =
+    useRecoilState(selectedClipIdsState);
+
+  const [selectedClips, setSelectedClips] = useRecoilState(selectedClipsState);
 
   return (
     <SidebarContentContainer>
-      {!selectedClips.length ? (
+      {!selectedClipIds.length ? (
         <>
           <Subtitle>Search tags</Subtitle>
           <Search />
@@ -51,7 +54,10 @@ export function SidebarContent({ clipsContainerID }) {
           <AvailableTags clipsContainerID={clipsContainerID} />
         </>
       ) : (
-        <TaggingMenu selectedClips={selectedClips} />
+        <TaggingMenu
+          selectedClips={selectedClips}
+          selectedClipIds={selectedClipIds}
+        />
       )}
     </SidebarContentContainer>
   );
@@ -65,7 +71,7 @@ const SelectedClipsList = styled.div`
   gap: 0.5rem;
 `;
 
-function TaggingMenu({ selectedClips }) {
+function TaggingMenu({ selectedClips, selectedClipIds }) {
   // Recoil state
   const allTags = useRecoilValue(allTagsState);
   const sharedTags = useRecoilValue(sharedTagsState);
@@ -75,18 +81,19 @@ function TaggingMenu({ selectedClips }) {
     : [];
 
   // UNSTABLE lol
-  const refreshSelectedClips = useRecoilRefresher_UNSTABLE(selectedClipsState);
+  const refreshSelectedClips =
+    useRecoilRefresher_UNSTABLE(selectedClipIdsState);
   const refreshClipsQuery = useRecoilRefresher_UNSTABLE(clipsQuery);
 
   const handleAddTag = (tag) => {
-    addTag(tag, selectedClips).then((data) => {
+    addTag(tag, selectedClipIds).then((data) => {
       refreshSelectedClips();
       refreshClipsQuery();
     });
   };
 
   const handleRemoveTag = (tag) => {
-    removeTag(tag, selectedClips).then((data) => {
+    removeTag(tag, selectedClipIds).then((data) => {
       refreshSelectedClips();
       refreshClipsQuery();
     });

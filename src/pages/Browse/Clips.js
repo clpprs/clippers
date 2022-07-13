@@ -28,7 +28,7 @@ const ClipsContainer = styled.div`
   }
 
   &.selection-present .clip:not(.selected, :hover) {
-    filter: grayscale(1);
+    /* filter: grayscale(1); */
   }
 `;
 
